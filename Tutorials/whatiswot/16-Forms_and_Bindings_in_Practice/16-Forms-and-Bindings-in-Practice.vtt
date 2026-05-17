@@ -115,81 +115,87 @@ milliliters remaining.
 00:03:17.935 --> 00:03:25.337 
 What's important here is that the WoT operation " subscribeevent" naturally maps to MQTT's publish subscribe model.
 
-00:03:25.337 --> 00:03:39.772 
-The Consumer didn't need to know it was MQTT — it simply performed a "subscribeevent" operation, and the form told
+00:03:25.337 --> 00:03:32.334 
+The Consumer didn't need to know it was MQTT — it simply performed a " subscribeevent" operation, and the form
 
-00:03:39.772 --> 00:03:46.073 
+00:03:32.334 --> 00:03:34.521 
+told it exactly how to do that:
+
+00:03:34.521 --> 00:03:39.774 
+connect to this broker, subscribe to this topic and expect a plain text response.
+
+00:03:39.774 --> 00:03:46.075 
  Modbus is a traditional industrial protocol widely used in automation and control systems.
 
-00:03:46.073 --> 00:03:54.518 
+00:03:46.075 --> 00:03:54.520 
 While it predates modern web technologies, WoT protocol bindings make it possible to expose Modbus-based devices through a standardized Thing
 
-00:03:54.518 --> 00:03:55.386 
+00:03:54.520 --> 00:03:55.387 
 Description.
 
-00:03:55.386 --> 00:04:03.177 
+00:03:55.387 --> 00:04:03.179 
 This allows legacy industrial equipment to be integrated into modern web-based systems, without changing the underlying protocol.
 
-00:04:03.177 --> 00:04:08.501 
+00:04:03.179 --> 00:04:08.502 
  Let's trace how the Consumer translates this form into a Modbus message.
 
-00:04:08.501 --> 00:04:13.129 
+00:04:08.502 --> 00:04:13.130 
 The "base" URI gives it the device address and port 502.
 
-00:04:13.129 --> 00:04:18.461 
+00:04:13.130 --> 00:04:18.462 
 The 1 at the end is the Unit ID — the Modbus device identifier on the bus.
 
-00:04:18.461 --> 00:04:23.259 
+00:04:18.462 --> 00:04:23.260 
 The " href" value "10003" is the register address.
 
-00:04:23.259 --> 00:04:30.645 
+00:04:23.260 --> 00:04:30.646 
 The " modv:function" field says "HoldingRegister", which can be read or written to, and are typically used to store sensor
 
-00:04:30.645 --> 00:04:32.560 
+00:04:30.646 --> 00:04:32.562 
 values like a water level.
 
-00:04:32.560 --> 00:04:39.774 
+00:04:32.562 --> 00:04:39.776 
 The "contentType" is set to "application octet-stream", which means the expected response is a sequence of bytes.
 
-00:04:39.774 --> 00:04:43.385 
+00:04:39.776 --> 00:04:43.386 
 Putting this all together, the Consumer sends its request.
 
-00:04:43.385 --> 00:04:52.370 
+00:04:43.386 --> 00:04:52.371 
  The Consumer receives those two bytes and interprets them as a 16-bit big-endian integer. Because the Thing Description specifies
 
-00:04:52.370 --> 00:05:00.696 
+00:04:52.371 --> 00:05:00.698 
 that "waterLevel" is an integer, the WoT runtime automatically turns this into the number 300— the water level in milliliters.
 
-00:05:00.696 --> 00:05:04.433 
+00:05:00.698 --> 00:05:04.435 
  This is WoT's value fully on display.
 
-00:05:04.433 --> 00:05:12.284 
+00:05:04.435 --> 00:05:12.286 
 A Consumer that only knows about " readproperty" operations and Thing Descriptions, just read a binary Modbus register, without needing
 
-00:05:12.284 --> 00:05:17.220 
+00:05:12.286 --> 00:05:17.221 
 to know anything about function codes, register addresses, or byte encoding.
 
-00:05:17.220 --> 00:05:25.342 
+00:05:17.221 --> 00:05:25.344 
 All of that knowledge lived in the form, expressed through "modv:function", " href", and the base URI.
 
-00:05:25.342 --> 00:05:30.146 
+00:05:25.344 --> 00:05:30.147 
 The form is the bridge between the abstracted WoT operations and the protocol.
 
-00:05:31.980 --> 00:05:33.398 
+00:05:31.981 --> 00:05:33.399 
 To summarize:
 
-00:05:33.398 --> 00:05:37.499 
+00:05:33.399 --> 00:05:37.500 
 - Bindings define how interactions are executed over the network
 
-00:05:37.499 --> 00:05:41.152 
+00:05:37.500 --> 00:05:41.153 
 - They are expressed using "forms" in the Thing Description
 
-00:05:41.152 --> 00:05:44.580 
+00:05:41.153 --> 00:05:44.582 
 - Different protocols fit different interaction patterns
 
-00:05:44.580 --> 00:05:48.909 
+00:05:44.582 --> 00:05:48.910 
 - WoT unifies them under a single, consistent interaction model
 
-00:05:48.909 --> 00:05:54.892 
+00:05:48.910 --> 00:05:54.894 
  You can proceed to the next tutorial by clicking on the card or the video description.
 
