@@ -30,261 +30,72 @@ By the end of this video, you'll understand how the Consumer knows where to send
 00:01:04.229 --> 00:01:06.755 
 use, and how to encode the data.
 
-00:01:06.755 --> 00:01:13.548 
+00:01:06.755 --> 00:01:13.569 
  A form describes a way to interact with an affordance over a specific protocol. It can be thought of
 
-00:01:13.548 --> 00:01:20.503 
-as a simple instruction to the Consumer: "To perform this type of operation, on this affordance, send a request, in
+00:01:13.569 --> 00:01:20.567 
+as a simple instruction to the Consumer:"To perform this type of operation, on this affordance, send a request, in this
 
-00:01:20.503 --> 00:01:25.331 
-this way, to this address." Now let's break down the key parts of a form.
+00:01:20.567 --> 00:01:25.621 
+way, to this address." Now let's break down the key parts of a form.
 
-00:01:25.331 --> 00:01:30.133 
+00:01:25.621 --> 00:01:30.423 
 Each form can declare one or more operations, using the "op" field.
 
-00:01:30.133 --> 00:01:38.934 
+00:01:30.423 --> 00:01:39.224 
 Operations describe what semantic actions the Consumer can perform — for example: reading or writing a property, invoking an action,
 
-00:01:38.934 --> 00:01:40.634 
+00:01:39.224 --> 00:01:40.924 
 or subscribing to an event.
 
-00:01:40.634 --> 00:01:46.949 
+00:01:40.924 --> 00:01:47.239 
 These operation types are defined by the WoT specification and are independent of any specific protocol.
 
-00:01:46.949 --> 00:01:50.349 
+00:01:47.239 --> 00:01:50.638 
 You can find a full list on the TD specification.
 
-00:01:50.349 --> 00:01:56.002 
+00:01:50.638 --> 00:01:56.292 
 If the "op" field is omitted, default operations are inferred based on the affordance type.
 
-00:01:56.002 --> 00:02:03.409 
+00:01:56.292 --> 00:02:03.699 
 For example, forms of a readable property are assumed to include the "readproperty" operation unless stated otherwise.
 
-00:02:03.409 --> 00:02:07.859 
+00:02:03.699 --> 00:02:08.113 
  The most important field in a form is " href".
 
-00:02:07.859 --> 00:02:14.331 
-The "href" is a URI that tells the client where to interact with the Thing and which protocol to use.
+00:02:08.113 --> 00:02:13.966 
+The " href" is a URI that tells the client where to interact with the Thing and which protocol to
 
-00:02:14.331 --> 00:02:18.393 
+00:02:13.966 --> 00:02:14.834 
+use.
+
+00:02:14.834 --> 00:02:18.896 
 The protocol is inferred directly from the URI scheme.
 
-00:02:18.393 --> 00:02:26.572 
+00:02:18.896 --> 00:02:27.075 
  This design allows the Thing Description concept to stay protocol-agnostic while still enabling concrete protocol-level interactions.
 
-00:02:26.572 --> 00:02:33.209 
+00:02:27.075 --> 00:02:33.712 
 A single affordance can expose multiple forms as well, offering the same interaction over different protocols.
 
-00:02:33.209 --> 00:02:39.579 
+00:02:33.712 --> 00:02:40.082 
  Forms also specify a "contentType", which tells the client how the payload is encoded.
 
-00:02:39.579 --> 00:02:44.115 
+00:02:40.082 --> 00:02:44.618 
 Common examples include JSON, CBOR and plain text formats.
 
-00:02:44.115 --> 00:02:49.859 
+00:02:44.618 --> 00:02:50.362 
  This ensures that both the Thing and the Consumer agree on how data is serialized and parsed.
 
-00:02:49.859 --> 00:02:57.971 
+00:02:50.362 --> 00:02:58.474 
 If no content type is specified, protocol-specific defaults may apply, but explicitly declaring them improves interoperability.
 
-00:02:57.971 --> 00:03:07.647 
+00:02:58.474 --> 00:03:09.737 
  While WoT aims to stay protocol-independent, forms allow protocol-specific extensions when needed. These are expressed through additional fields defined
 
-00:03:07.647 --> 00:03:10.203 
+00:03:09.737 --> 00:03:12.244 
 in protocol binding specifications.
 
-00:03:10.203 --> 00:03:17.462 
- Now that we understand the structure of forms, let's see how protocol bindings work in practice.
-
-00:03:17.462 --> 00:03:23.509 
-When you want to write a Consumer application, you don't need any prior knowledge about the protocol being used.
-
-00:03:23.509 --> 00:03:31.078 
-Instead, the Consumer reads the Thing Description, looks at the available forms, and selects one it understands.
-
-00:03:31.078 --> 00:03:36.061 
- Let's walk through four protocols using our smart coffee machine example.
-
-00:03:36.061 --> 00:03:41.888 
-For each one, we'll trace exactly how a WoT operation relates to real network traffic.
-
-00:03:41.888 --> 00:03:51.994 
- First, we want the Consumer to perform the " readProperty" operation on "coffeeBeansLeft" so we can get the remaining
-
-00:03:51.994 --> 00:03:57.600 
- To achieve this, the Consumer reads the form and translates it into a network request.
-
-00:03:57.600 --> 00:04:02.475 
-The " href" tells it the address and that HTTP is the protocol.
-
-00:04:02.475 --> 00:04:10.132 
-Then the "htv:methodName" field says to use a " GET" request and the "contentType" tells it to expect a JSON
-
-00:04:10.132 --> 00:04:11.042 
-in return.
-
-00:04:11.042 --> 00:04:13.820 
-So the Consumer sends the following request:
-
-00:04:13.820 --> 00:04:19.206 
- The Thing receives this, reads its internal sensor, and responds:
-
-00:04:19.206 --> 00:04:28.029 
- The Consumer parses the JSON body and now has the "coffeeBeansLeft" value of 320 grams. Notice how each field
-
-00:04:28.029 --> 00:04:34.044 
-in the form had a direct counterpart in the request — the WoT form is essentially a declarative description of
-
-00:04:34.044 --> 00:04:35.890 
-the HTTP request.
-
-00:04:35.890 --> 00:04:40.017 
- Now the Consumer wants to invoke the "brewCoffee" action.
-
-00:04:40.017 --> 00:04:46.874 
- The Consumer reads this form just like before — but now " href" starts with " coap", so it
-
-00:04:46.874 --> 00:04:49.878 
-knows to use CoAP instead of HTTP.
-
-00:04:49.878 --> 00:04:53.601 
-The "cov:method" field says "POST".
-
-00:04:53.601 --> 00:05:01.031 
-The contentType is "application cbor", so this time the Consumer encodes the action input for a medium sized coffee in
-
-00:05:01.031 --> 00:05:01.973 
-CBOR.
-
-00:05:01.973 --> 00:05:05.522 
- The resulting CoAP message looks something like this:
-
-00:05:05.522 --> 00:05:13.827 
- The Thing receives the message and sends back a CoAP response with code "2.04 Changed", confirming the action was
-
-00:05:13.827 --> 00:05:14.644 
-accepted.
-
-00:05:14.644 --> 00:05:22.560 
-From the Consumer's perspective, this was identical to invoking the HTTP action — it performed an " invokeaction" operation and
-
-00:05:22.560 --> 00:05:24.177 
-got a success response.
-
-00:05:24.177 --> 00:05:31.834 
- The fact that it used CoAP instead of HTTP, or CBOR instead of JSON, was determined entirely by what
-
-00:05:31.834 --> 00:05:33.154 
-was written in the form.
-
-00:05:33.154 --> 00:05:37.707 
- For the "lowOnWater" event, the form looks like this:
-
-00:05:37.707 --> 00:05:44.132 
-The " op" field is " subscribeevent", which tells the Consumer it needs to listen rather than request.
-
-00:05:44.132 --> 00:05:51.759 
-The href points to an MQTT broker and includes the topic "lowOnWater" — that the
- Consumer should subscribe to.
-
-00:05:51.759 --> 00:05:57.110 
- Now the Consumer is registered and waiting.
-
-00:05:57.110 --> 00:06:03.198 
-On the Thing side, when the water level drops below the threshold, it publishes to the same topic:
-
-00:06:03.198 --> 00:06:06.516 
- The broker forwards this to the Consumer.
-
-00:06:06.516 --> 00:06:14.918 
- The Consumer receives the message, parses the text as declared by "contentType", and now has the event data: 50
-
-00:06:14.918 --> 00:06:16.333 
-milliliters remaining.
-
-00:06:16.333 --> 00:06:24.015 
-What's important here is that the WoT operation " subscribeevent" naturally maps to MQTT's publish subscribe model.
-
-00:06:24.015 --> 00:06:38.450 
-The Consumer didn't need to know it was MQTT — it simply performed a "subscribeevent" operation, and the form told
-
-00:06:38.450 --> 00:06:44.752 
- Modbus is a traditional industrial protocol widely used in automation and control systems.
-
-00:06:44.752 --> 00:06:53.197 
-While it predates modern web technologies, WoT protocol bindings make it possible to expose Modbus-based devices through a standardized Thing
-
-00:06:53.197 --> 00:06:54.064 
-Description.
-
-00:06:54.064 --> 00:07:01.856 
-This allows legacy industrial equipment to be integrated into modern web-based systems, without changing the underlying protocol.
-
-00:07:01.856 --> 00:07:07.179 
- Let's trace how the Consumer translates this form into a Modbus message.
-
-00:07:07.179 --> 00:07:11.807 
-The "base" URI gives it the device address and port 502.
-
-00:07:11.807 --> 00:07:17.139 
-The 1 at the end is the Unit ID — the Modbus device identifier on the bus.
-
-00:07:17.139 --> 00:07:22.286 
-The " href" value "10003" is the register address.
-
-00:07:22.286 --> 00:07:30.839 
-The "modv:function" field says "HoldingRegister", which can be read or written to, and are typically used to store sensor values
-
-00:07:30.839 --> 00:07:32.129 
-like a water level.
-
-00:07:32.129 --> 00:07:39.343 
-The "contentType" is set to "application octet-stream", which means the expected response is a sequence of bytes.
-
-00:07:39.343 --> 00:07:42.954 
-Putting this all together, the Consumer sends its request.
-
-00:07:42.954 --> 00:07:51.939 
- The Consumer receives those two bytes and interprets them as a 16-bit big-endian integer. Because the Thing Description specifies
-
-00:07:51.939 --> 00:08:00.265 
-that "waterLevel" is an integer, the WoT runtime automatically turns this into the number 300— the water level in milliliters.
-
-00:08:00.265 --> 00:08:04.002 
- This is WoT's value fully on display.
-
-00:08:04.002 --> 00:08:11.853 
-A Consumer that only knows about " readproperty" operations and Thing Descriptions, just read a binary Modbus register, without needing
-
-00:08:11.853 --> 00:08:16.789 
-to know anything about function codes, register addresses, or byte encoding.
-
-00:08:16.789 --> 00:08:24.602 
-All of that knowledge lived in the form, expressed through "modv:function", "href", and the base URI.
-
-00:08:24.602 --> 00:08:29.406 
-The form is the bridge between the abstracted WoT operations and the protocol.
-
-00:08:29.406 --> 00:08:32.615 
- To summarize:
-
-00:08:32.615 --> 00:08:36.716 
-- Bindings define how interactions are executed over the network
-
-00:08:36.716 --> 00:08:40.368 
-- They are expressed using "forms" in the Thing Description
-
-00:08:40.368 --> 00:08:43.797 
-- Different protocols fit different interaction patterns
-
-00:08:43.797 --> 00:08:48.126 
-- WoT unifies them under a single, consistent interaction model
-
-00:08:48.126 --> 00:08:55.405 
-That wraps up this tutorial. In the next video, we’ll dive deeper into 
-protocol bindings and learn exactly how to
-
-00:08:55.405 --> 00:08:57.629 
-interact with a Thing over 
-the network.
+00:03:12.244 --> 00:03:18.227 
+ You can proceed to the next tutorial by clicking on the card or the video description.
 
