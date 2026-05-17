@@ -5,6 +5,26 @@ This readme contains the links to minutes, presentation files and the recordings
 
 Note: Presentation files use the pattern `YEAR-MONTH-WoTCG-EVENTNAME-PRESENTERNAME.FILETYPE`.
 
+## Meetup 33
+
+- Name: Interoperable Cyber-Physical Multi-Agent Systems Through WoT
+- Presenter(s): Roman Binkert
+- Date: 24 April 2026
+- [Presenter Slides](./33/2026-04-WoTCG-Meetup33-WoMaT-Binkert.pdf)
+- Intro Slides: [Google Slides](https://docs.google.com/presentation/d/19i_sRMWO3mKbv_SeGMMOaegaxYLIgY-acfMxwdVD-Jo/edit?usp=sharing) | [PDF](./33/2026-04-WoTCG-Meetup33-AguzziKorkan.pdf)
+- [Video](https://youtu.be/xMIHykB_ebg)
+- [Minutes](./33/2026-04-24-minutes.md)
+
+## Meetup 32
+
+- Name: From WoT to Chain: Enabling Zero-Trust Oracles for Blockchain IoT Applications
+- Presenter(s): Ivan Dimitry Ribeiro Zyrianoff
+- Date: 15 December 2025
+- [Presenter Slides](./32/2025-12-WoTCG-Meetup32-Zonia-Ivan.pdf)
+- Intro Slides: [Google Slides](https://docs.google.com/presentation/d/1bYQHcKImeMGR2CT3MWXJwDegtzpbZq5AKTssvVhR5Ww/edit?usp=sharing) | [PDF](./32/2025-12-WoTCG-Meetup32-AguzziKorkan.pdf)
+- [Video](https://youtu.be/-ZJ3A0txXD8)
+- [Minutes](./32/2025-12-15-minutes.md)
+
 ## Meetup 31
 
 - Name: Managing Device Descriptions with the Thing Model Catalog
@@ -13,7 +33,7 @@ Note: Presentation files use the pattern `YEAR-MONTH-WoTCG-EVENTNAME-PRESENTERNA
 - [Presenter Slides](./31/2025_12_04-WoTCG-Meetup31-TMC-Siemens.pdf)
 - Intro Slides: [Google Slides](https://docs.google.com/presentation/d/1CP2MG7h40Y6WSnGVpnGJnmURlpPJz-PBZ2XLd53MGPE/edit?usp=sharing) | [PDF](./31/2025-12-WoTCG-Meetup31-AguzziKorkan.pdf)
 - [Video](https://youtu.be/CuZo1NGshiI)
-- [Minutes](./30/2025-11-20-minutes.md)
+- [Minutes](./31/2025-12-04-minutes.md)
 
 ## Meetup 30
 

@@ -99,7 +99,7 @@ Putting comments inside JSON documents is not valid in contrast to most of the p
 Commas should not be used at the final name-value pair - that is why the left example of [Figure 5](#fig-json-js) is not valid. This is more difficult to see if you are using it inside of a Javascript editor rather than a JSON editor.
 
 <figure id="fig-json-js">
-  <img src={useBaseUrl('/img/4-JSON-In-Practice/json-js.png"')} alt="Trailing comma example in JSON vs JavaScript" />
+  <img src={useBaseUrl('/img/4-JSON-In-Practice/json-js.png')} alt="Trailing comma example in JSON vs JavaScript" />
   <figcaption><strong>Figure 5.</strong> Trailing comma example in JSON vs JavaScript.</figcaption>
 </figure>
 

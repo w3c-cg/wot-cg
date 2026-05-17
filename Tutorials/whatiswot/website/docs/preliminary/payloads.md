@@ -87,27 +87,42 @@ Here, you can see an example of a TD in JSON format. We will go into the details
 
 ```json showLineNumbers
 {
-     "@context": "https://www.w3.org/2022/wot/td/v1.1",
-     "title": "MyLampThing",
-                …
-     "security": "basic_sc",
-      "properties": {
-           "status": {
-                "type": "string", "forms": [{"href": "https://mylamp.example.com/status"}]
-            }
-     },
-     "actions": {
-          "toggle": {
-               "forms": [{"href": "https://mylamp.example.com/toggle"}]
-          }
-     },
-     "events":{
-          "overheating":{
-               "data": {"type": "string"},
-               "forms": [{
-                    "href": "https://mylamp.example.com/oh", "subprotocol": "longpoll" }]
-          }
-     }
+  "@context": "https://www.w3.org/2022/wot/td/v1.1",
+  "title": "MyLampThing",
+  …
+  "security": "basic_sc",
+  "properties": {
+    "status": {
+      "type": "string",
+      "forms": [
+        {
+          "href": "https://mylamp.example.com/status"
+        }
+      ]
+    }
+  },
+  "actions": {
+    "toggle": {
+      "forms": [
+        {
+          "href": "https://mylamp.example.com/toggle"
+        }
+      ]
+    }
+  },
+  "events": {
+    "overheating": {
+      "data": {
+        "type": "string"
+      },
+      "forms": [
+        {
+          "href": "https://mylamp.example.com/oh",
+          "subprotocol": "longpoll"
+        }
+      ]
+    }
+  }
 }
 ```
 

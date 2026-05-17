@@ -114,6 +114,12 @@ const sidebars = {
               id: "wot/td/introduction",
               label: "Introduction",
             },
+            {
+              type: "doc",
+              id: "wot/td/interaction-affordances",
+              label: "Interaction Affordances",
+            },
+
           ],
         }
         // {

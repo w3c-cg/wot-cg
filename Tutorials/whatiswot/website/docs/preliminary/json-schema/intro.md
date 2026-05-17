@@ -43,11 +43,11 @@ For instance, a basic JSON Schema like "type": "array" specifies that it accepts
 - boolean
 - null
 
-During the validation process on the receiver's end, this schema ensures that the incoming data conforms to the specified structure. [Figure 2](#fig-json-schema-validation) serves as an example of how such validation can be implemented in JavaScript:
+During the validation process on the receiver's end, this schema ensures that the incoming data conforms to the specified structure. [Figure 2](#fig-json-schema-validation) serves as an example of how such validation can be implemented in C#:
 
 <figure id="fig-json-schema-validation">
   <img src={useBaseUrl('/img/5-JSON-Schema/js-schema.png')} alt="JSON Schema overview"/>
-  <figcaption><strong>Figure 2.</strong> JSON Schema validation using JavaScript.</figcaption>
+  <figcaption><strong>Figure 2.</strong> JSON Schema validation using C#.</figcaption>
 </figure>
 
 It can look different in other programming languages.

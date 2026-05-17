@@ -25,7 +25,7 @@ Throughout this tutorial, we will mainly focus on validation with the JavaScript
 
 Here are some of the most popular validators in different programming languages.
 
-However, numerous other validators exist. For further information, you can check out the JSON Schema website (<https://json-schema.org/implementations.html#validator-rust>).
+However, numerous other validators exist. For further information, you can check out the JSON Schema website (<https://json-schema.org/tools>).
 
 ### json-everything
 
@@ -66,7 +66,7 @@ The library takes a schema for your JSON data and validates your data according 
 <img src={useBaseUrl('/img/8-JSON-Schema-3/basic-validation.png')} alt="Basic Validation Flow" />
 <figcaption><strong>Figure 1.</strong> Basic validation flow.</figcaption> </figure>
 
-## Javascript AJV
+## JavaScript AJV
 
 So, let’s start with AJV! It is a JavaScript library.
 

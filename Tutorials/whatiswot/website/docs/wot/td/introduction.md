@@ -25,8 +25,12 @@ Thing Descriptions are written using the JSON-LD format, making it readable by b
 
 ```json
 {
-    "@context": ["https://www.w3.org/2022/wot/td/v1.1"
-               {"schema":"https://schema.org/"}], 
+    "@context": [
+        "https://www.w3.org/2022/wot/td/v1.1",
+        {
+            "schema": "https://schema.org/"
+        }
+    ], 
     "id": "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
     "title": "Smart Coffee Machine",
     "description" : "Remote controllable coffee machine",
@@ -99,7 +103,7 @@ To add keywords that are not part of the TD standard, Semantic Annotations can b
 Here, we annotate using `schema.org` to add the name of the manufacturer, which is not part of the core TD specification.
 
 ```json
-    {
+{
     "@context": [
         "https://www.w3.org/2022/wot/td/v1.1",
         {
