@@ -20,6 +20,14 @@ jobs:
           node-version: 18
           cache: npm
           cache-dependency-path: Tutorials/whatiswot/website/package-lock.json
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: Generate video archive data
+        run: python scripts/generate-video-archive.py
       - name: Install dependencies
         run: cd Tutorials/whatiswot/website && npm ci
       - name: Build website

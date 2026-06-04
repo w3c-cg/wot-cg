@@ -1,0 +1,162 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.status {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  color: var(--ifm-color-secondary-darkest);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ifm-card-background-color);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.thumbnailLink {
+  display: block;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.thumbnailWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  overflow: hidden;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.thumbnailLink:hover .thumbnail {
+  opacity: 0.8;
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.thumbnailLink:hover .playOverlay {
+  opacity: 1;
+}
+
+.cardBody {
+  padding: 1.2rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.85rem;
+  align-self: flex-start;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 0.4rem;
+}
+
+.cardTitle a {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.cardTitle a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.date {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ifm-color-secondary-darkest);
+  margin-bottom: 0.75rem;
+}
+
+.speakers {
+  list-style: none;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.speaker {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+}
+
+.organisation {
+  font-weight: 400;
+  color: var(--ifm-color-secondary-darkest);
+}
+
+.descriptionWrapper {
+  margin-top: 0;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--ifm-color-secondary-darkest);
+  line-height: 1.55;
+  margin: 0 0 0.4rem;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.toggleButton:hover {
+  text-decoration: underline;
+}

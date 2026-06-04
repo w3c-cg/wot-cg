@@ -1,0 +1,29 @@
+name: Validate Video YAML
+
+on:
+  push:
+    paths:
+      - "Meetups/**/metadata.yaml"
+      - "scripts/validate-video-yaml.py"
+  pull_request:
+    paths:
+      - "Meetups/**/metadata.yaml"
+      - "scripts/validate-video-yaml.py"
+
+jobs:
+  validate:
+    name: Validate metadata.yaml files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Validate all metadata.yaml files
+        run: python scripts/validate-video-yaml.py

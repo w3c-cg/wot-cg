@@ -1,0 +1,32 @@
+[
+  {
+    "meetup": 33,
+    "title": "Interoperable Cyber-Physical Multi-Agent Systems Through WoT",
+    "date": "24-04-2026",
+    "youtube_url": "https://www.youtube.com/watch?v=xMIHykB_ebg",
+    "youtube_id": "xMIHykB_ebg",
+    "thumbnail": "https://img.youtube.com/vi/xMIHykB_ebg/maxresdefault.jpg",
+    "speakers": [
+      {
+        "name": "Roman Binkert",
+        "organisation": "TU Munich"
+      }
+    ],
+    "description": "In this session, Roman Binkert talks about Interoperable Cyber-Physical Multi-Agent Systems Through W3C Web of Things. He introduces a framework for bridging the gap between Multi-Agent Systems (MAS) and the physical world using Web of Things (WoT) standards. He shows how Thing Descriptions (TDs) can serve as a standardized interface for autonomous agents, mapping AgentSpeak logic directly to Interaction Affordances (Properties, Actions, and Events)."
+  },
+  {
+    "meetup": 32,
+    "title": "From WoT to Chain: Enabling Zero-Trust Oracles for Blockchain IoT Applications",
+    "date": "15-12-2025",
+    "youtube_url": "https://www.youtube.com/watch?v=-ZJ3A0txXD8",
+    "youtube_id": "-ZJ3A0txXD8",
+    "thumbnail": "https://img.youtube.com/vi/-ZJ3A0txXD8/maxresdefault.jpg",
+    "speakers": [
+      {
+        "name": "Ivan Zyrianoff",
+        "organisation": "University of Bologna"
+      }
+    ],
+    "description": "In this meetup, we welcome Ivan Dimitry Ribeiro Zyrianoff from the University of Bologna. He presents ZONIA, a zero-trust decentralized oracle network that improves data integrity and interoperability in IoT systems by bridging with the blockchain. He focuses on the WoT integration and showcases experiments on parametric insurance using IoT sensor data."
+  }
+]

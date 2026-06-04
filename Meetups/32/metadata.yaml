@@ -1,0 +1,8 @@
+meetup: 32
+title: "From WoT to Chain: Enabling Zero-Trust Oracles for Blockchain IoT Applications"
+date: "15-12-2025"
+youtube_url: "https://www.youtube.com/watch?v=-ZJ3A0txXD8"
+speakers:
+  - name: "Ivan Zyrianoff"
+    organisation: "University of Bologna"
+description: "In this meetup, we welcome Ivan Dimitry Ribeiro Zyrianoff from the University of Bologna. He presents ZONIA, a zero-trust decentralized oracle network that improves data integrity and interoperability in IoT systems by bridging with the blockchain. He focuses on the WoT integration and showcases experiments on parametric insurance using IoT sensor data."

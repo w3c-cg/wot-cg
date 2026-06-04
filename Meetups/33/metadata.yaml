@@ -1,0 +1,8 @@
+meetup: 33
+title: "Interoperable Cyber-Physical Multi-Agent Systems Through WoT"
+date: "24-04-2026"
+youtube_url: "https://www.youtube.com/watch?v=xMIHykB_ebg"
+speakers:
+  - name: "Roman Binkert"
+    organisation: "TU Munich"
+description: "In this session, Roman Binkert talks about Interoperable Cyber-Physical Multi-Agent Systems Through W3C Web of Things. He introduces a framework for bridging the gap between Multi-Agent Systems (MAS) and the physical world using Web of Things (WoT) standards. He shows how Thing Descriptions (TDs) can serve as a standardized interface for autonomous agents, mapping AgentSpeak logic directly to Interaction Affordances (Properties, Actions, and Events)."
