@@ -18,7 +18,7 @@ In the previous section, we showed mostly primitive types of JSON. In this secti
 
 ## Structured Types
 
-### JSON Array
+### JSON Arrays
 
 In JSON, each value in an array is called an item.
 Arrays with items of different types are also allowed.

@@ -1,7 +1,0 @@
-[build]
-  command = "pip install pyyaml && python scripts/generate-video-archive.py && cd Tutorials/whatiswot/website && npm ci && npm run build"
-  publish = "Tutorials/whatiswot/website/build"
-
-[build.environment]
-  NODE_VERSION = "18"
-  baseurl = "/"
