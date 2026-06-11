@@ -1,0 +1,39 @@
+name: Update Meetups README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Meetups/**/metadata.yaml"
+
+jobs:
+  update-readme:
+    name: Regenerate Meetups/Readme.md
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: Tutorials/whatiswot/website/package-lock.json
+
+      - name: Install dependencies
+        run: cd Tutorials/whatiswot/website && npm ci
+
+      - name: Update Meetups README
+        run: cd Tutorials/whatiswot/website && npm run update-readme
+
+      - name: Commit updated README
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add Meetups/Readme.md
+          git diff --cached --exit-code || git commit -m "chore: update Meetups/Readme.md from metadata.yaml"
+          git push

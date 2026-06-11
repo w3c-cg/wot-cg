@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - "Meetups/**/metadata.yaml"
-      - "scripts/validate-video-yaml.py"
+      - "scripts/validate-video-yaml.js"
   pull_request:
     paths:
       - "Meetups/**/metadata.yaml"
-      - "scripts/validate-video-yaml.py"
+      - "scripts/validate-video-yaml.js"
 
 jobs:
   validate:
@@ -17,13 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-node@v3
         with:
-          python-version: "3.x"
+          node-version: 18
+          cache: npm
+          cache-dependency-path: Tutorials/whatiswot/website/package-lock.json
 
-      - name: Install PyYAML
-        run: pip install pyyaml
+      - name: Install dependencies
+        run: cd Tutorials/whatiswot/website && npm ci
 
       - name: Validate all metadata.yaml files
-        run: python scripts/validate-video-yaml.py
+        run: cd Tutorials/whatiswot/website && npm run validate-videos

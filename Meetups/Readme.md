@@ -8,7 +8,7 @@ Note: Presentation files use the pattern `YEAR-MONTH-WoTCG-EVENTNAME-PRESENTERNA
 ## Meetup 33
 
 - Name: Interoperable Cyber-Physical Multi-Agent Systems Through WoT
-- Presenter(s): Roman Binkert
+- Presenter(s): Roman Binkert - TU Munich
 - Date: 24 April 2026
 - [Presenter Slides](./33/2026-04-WoTCG-Meetup33-WoMaT-Binkert.pdf)
 - Intro Slides: [Google Slides](https://docs.google.com/presentation/d/19i_sRMWO3mKbv_SeGMMOaegaxYLIgY-acfMxwdVD-Jo/edit?usp=sharing) | [PDF](./33/2026-04-WoTCG-Meetup33-AguzziKorkan.pdf)
