@@ -119,6 +119,11 @@ const sidebars = {
               id: "wot/td/interaction-affordances",
               label: "Interaction Affordances",
             },
+            {
+              type: "doc",
+              id: "wot/td/forms-and-bindings",
+              label: "Forms and Bindings",
+            },
 
           ],
         }

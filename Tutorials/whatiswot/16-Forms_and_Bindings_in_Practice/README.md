@@ -97,10 +97,10 @@ The Thing receives this, reads its internal sensor, and responds:
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-Payload: { "value": 320 }
+Payload: { 320 }
 ```
 
-The Consumer parses the JSON body and now has the `coffeeBeansLeft` value of 320 grams. Notice how each field in the form had a direct counterpart in the request - the WoT form is essentially a declarative description of the HTTP request.
+The Consumer parses the JSON body - a single number, exactly as the coffeeBeansLeft data schema ("type": "number") declared - and now has the value of 320 grams. The form told it how to fetch; the data schema told it what shape to expect.
 
 #### CoAP
 
@@ -168,8 +168,10 @@ For the lowOnWater event, the form looks like this:
     },
     "forms": [
       {
-        "href": "mqtt://broker.example.com/coffee/events/lowOnWater",
+        "href": "mqtt://broker.example.com:1883",
         "op": "subscribeevent",
+        "mqv:filter": "coffee/events/lowOnWater",
+        "mqv:qos": "1",
         "contentType": "text/plain"
       }
     ]
@@ -177,7 +179,7 @@ For the lowOnWater event, the form looks like this:
 }
 ```
 
-The `op` field is `subscribeevent`, which tells the Consumer it needs to listen rather than request. The href points to an MQTT broker and includes the topic - `coffee/events/lowOnWater` - that the Consumer should subscribe to. So the Consumer connects to the broker and sends:
+The `op` field is `subscribeevent`, which tells the Consumer it needs to listen rather than request. The `href` points to the MQTT broker, and the `mqv:filter` term gives the topic filter - `coffee/events/lowOnWater` - that the Consumer should subscribe to. The `mqv:qos` term requests QoS level 1, MQTT's at-least-once delivery. So the Consumer connects to the broker and sends:
 
 ```mqtt
 SUBSCRIBE
@@ -203,9 +205,12 @@ Payload: 50
 ```
 
 The broker forwards this to the Consumer. The Consumer receives the message, parses the text as declared by `contentType`, and now has the event data: 50 milliliters remaining.
-What's important here is that the WoT operation `subscribeevent` naturally maps to MQTT's publish/subscribe model. The Consumer didn't need to know it was MQTT - it simply performed a `subscribeevent` operation, and the form told it exactly how to do that: connect to this broker, subscribe to this topic and expect a plain text response.
+
+What's important here is that the WoT operation `subscribeevent` naturally maps to MQTT's publish/subscribe model. The Consumer didn't need to know it was MQTT - it simply performed a `subscribeevent` operation, and the form told it exactly how to do that: connect to this broker, subscribe to this topic filter at the requested QoS, and expect a plain text response.
 
 #### Modbus
+
+We've now seen three protocols applied to different affordances of our coffee machine. Let's see how we'd adapt it to a completely different kind of protocol: Modbus.
 
 Modbus is a traditional industrial protocol widely used in automation and control systems. While it predates modern web technologies, WoT protocol bindings make it possible to expose Modbus-based devices through a standardized Thing Description. This allows legacy industrial equipment to be integrated into modern web-based systems, without changing the underlying protocol.
 
@@ -230,7 +235,7 @@ Modbus is a traditional industrial protocol widely used in automation and contro
 ...
 ```
 
-Let's trace how the Consumer translates this form into a Modbus message. The `base` URI gives it the device address and port 502. The /1/ at the end is the Unit ID - the Modbus device identifier on the bus. The `href` value `10003` is the register address. The `modv:function` field says `HoldingRegister`, which can be read or written to, and are typically used to store sensor values like a water level. The `contentType` is set to `application/octet-stream`, which means the expected response is a sequence of bytes. Putting this all together, the Consumer sends:
+Let's trace how the Consumer translates this form into a Modbus message. The `base` URI gives it the device address and port 502. The number /1/ at the end is the Unit ID - the Modbus device identifier on the bus. The `href` value `10003` is the register address. The `modv:function` field says `HoldingRegister`, identifying the type of register being addressed - Holding Registers can be both read and written, and are typically used to store sensor values like a water level. Combined with the `readproperty` operation declared in `op`, the Consumer knows to read that register, which Modbus carries out as the Read Holding Registers function. The `contentType` is set to `application/octet-stream`, which means the expected response is a sequence of bytes. Putting this all together, the Consumer sends:
 
 ```modbus
 Unit ID:        0x01     (from /1/ in base URI)
@@ -249,7 +254,7 @@ Data:           0x01 0x12C  (= 300 decimal)
 
 The Consumer receives those two bytes and interprets them as a 16-bit big-endian integer: 0x012C = 300. Because the Thing Description specifies that `waterLevel` is an integer, the WoT runtime automatically turns this into the number 300 - the water level in milliliters.
 
-This is WoT's value fully on display. A Consumer that only knows about `readproperty` operations and Thing Descriptions just read a binary Modbus register, without needing to know anything about function codes, register addresses, or byte encoding. All of that knowledge lived in the form, expressed through `modv:function`, `href`, and the base URI. The form is the bridge between the abstracted WoT operations and the protocol.
+This is WoT's value fully on display. A developer writing a Consumer application only needs to work with `readproperty` operations and Thing Descriptions - the protocol binding underneath handles the Modbus function codes, register addresses, and byte encoding on their behalf. All of that knowledge lives in the form, expressed through `modv:function`, `href`, and the base URI. The form is the bridge between the abstracted WoT operations and the protocol.
 
 ### Summary
 
