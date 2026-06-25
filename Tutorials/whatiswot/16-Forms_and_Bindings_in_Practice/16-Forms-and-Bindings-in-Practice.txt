@@ -4,13 +4,13 @@ In the previous tutorial, we explored the basics of WoT forms and bindings.
 
  Now that we understand their structure, let's see how protocol bindings work in practice.
 
-When you want to write a Consumer application, you don't need any prior knowledge about the protocol being used.
+ When you want to write a Consumer application, you don't need any prior knowledge about the protocol being used.
 Instead, the Consumer reads the Thing Description, looks at the available forms, and selects one it understands.
 
  Let's walk through four protocols using our smart coffee machine example.
-For each one, we'll trace exactly how a WoT operation relates to real network traffic.
+For each one, we'll trace exactly how a WoT operation relates to real network messages.
 
- First, we want the Consumer to perform the " readProperty" operation on "coffeeBeansLeft" so we can get the remaining amount of coffee beans.
+ First, we want the Consumer to perform the " readproperty" operation on "coffeeBeansLeft" so we can get the remaining amount of coffee beans.
 
  To achieve this, the Consumer reads the form and translates it into a network request.
 
@@ -44,11 +44,12 @@ From the Consumer's perspective, this was identical to invoking the HTTP action 
 
 The " op" field is " subscribeevent", which tells the Consumer it needs to listen rather than request.
 
-The href points to the MQTT broker, and the `mqv filter` term gives the topic filter - lowOnWater - that the Consumer should subscribe to.
+The href points to the MQTT broker, and the `mqv filter` term gives the topic 
+filter - lowOnWater - that the Consumer should subscribe to.
 
-The mqv qos term requests QoS level 1, MQTT's at-least-once delivery.
+The mqv:qos term tells the Consumer that the Thing publishes these events at QoS level 1, MQTT's at-least-once delivery.
 
- Now the Consumer is registered and waiting.
+ So the Consumer connects to the broker and sends:
 
 On the Thing side, when the water level drops below the threshold, it publishes to the same topic:
 
@@ -72,10 +73,9 @@ The "base" URI gives it the device address and port 502.
 
 The number 1 at the end is the Unit ID — the Modbus device identifier on the bus.
 
-The " href" value "10003" is the register address.
+The " href" value "40003" is the register address.
 
-The " modv:function" field says "HoldingRegister",
-, identifying the type of register being addressed - Holding Registers can be both read and written, and are typically used to store sensor values like a water level. Combined with the ` readproperty ` operation declared in ` op `, the Consumer knows to read that register, which Modbus carries out as the Read Holding Registers function.
+The " modv:function" field says "readHoldingRegisters", identifying the type of register being addressed - Holding Registers can be both read and written, and are typically used to store sensor values like a water level. Combined with the ` readproperty ` operation declared in ` op `, the Consumer knows to read that register, which Modbus carries out as the Read Holding Registers function.
 
 The "contentType" is set to "application octet-stream", which means the expected response is a sequence of bytes.
 
