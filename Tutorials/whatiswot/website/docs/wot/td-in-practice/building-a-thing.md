@@ -15,7 +15,7 @@ In this tutorial, you'll build a working smart coffee machine — the same examp
 
 We'll show you two ways to build it, running side by side:
 
-- **node-wot** — the official W3C implementation of the WoT standard, built by the Eclipse Thingweb team. It takes care of generating the Thing Description, exposing your affordances over HTTP, and handling all the WoT interaction patterns automatically — so you can focus on your application logic instead of networking details.
+- **node-wot** — a reference implementation of the [WoT Scripting API](/docs/wot/building-blocks#scripting-api), provided by the Eclipse Thingweb project. It takes care of generating the Thing Description, exposing your affordances over HTTP, and handling all the WoT interaction patterns automatically — so you can focus on your application logic instead of networking details.
 - **Express.js** — a popular Node.js web framework that many developers already know. We'll build the same Thing manually alongside it, so you can see exactly what node-wot is doing under the hood and understand why it is worth using.
 
 ---
@@ -35,6 +35,10 @@ Multi-protocol support and the `lowOnWater` event will be added in the next tuto
 ---
 
 ## Part 1: Setting Up Your Project
+
+:::note OS differences
+This tutorial assumes a Unix-like shell (macOS, Linux, or Windows Git Bash) for terminal commands such as `mkdir` and `cd`. Windows PowerShell users will need to adapt these to their equivalents (for example `New-Item -ItemType Directory` and `Set-Location`).
+:::
 
 Create a new folder for your project and initialize it:
 
@@ -169,7 +173,6 @@ const { HttpServer } = require("@node-wot/binding-http");
 
 let coffeeBeansLeft = 320; // grams
 let waterLevel = 1000;     // milliliters
-let isBrewing = false;
 
 const servient = new Servient();
 servient.addServer(new HttpServer({ port: 8080 }));
@@ -182,16 +185,17 @@ servient.start().then((WoT) => {
   </TabItem>
   <TabItem value="express" label="Express.js">
 
-With Express we create an app instance and enable JSON body parsing so incoming request bodies are automatically parsed. Our state variables sit at the top alongside it.
+With Express we create an app instance and enable JSON body parsing so incoming request bodies are automatically parsed. Our state variables sit at the top alongside it, together with the `PORT` we'll expose the Thing on.
 
 ```javascript
 const express = require("express");
 const app = express();
 app.use(express.json());
 
+const PORT = 8080;
+
 let coffeeBeansLeft = 320; // grams
 let waterLevel = 1000;     // milliliters
-let isBrewing = false;
 ```
 
   </TabItem>
@@ -274,13 +278,13 @@ const thingDescription = {
       "title": "Remaining Coffee Beans",
       "type": "number", "minimum": 0, "maximum": 500,
       "readOnly": true, "observable": false,
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/properties/coffeeBeansLeft", "contentType": "application/json", "op": "readproperty" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/coffeeBeansLeft`, "contentType": "application/json", "op": "readproperty" }]
     },
     "waterLevel": {
       "title": "Water Level",
       "type": "number", "minimum": 0, "maximum": 1000,
       "readOnly": true, "observable": false,
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/properties/waterLevel", "contentType": "application/json", "op": "readproperty" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
   },
   "actions": {
@@ -288,7 +292,7 @@ const thingDescription = {
       "title": "Brew Coffee",
       "input": { "type": "object", "properties": { "size": { "type": "string", "enum": ["small","medium","large"] } }, "required": ["size"] },
       "output": { "type": "object", "properties": { "success": { "type": "boolean" }, "message": { "type": "string" } } },
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/actions/brewCoffee", "contentType": "application/json", "op": "invokeaction" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/actions/brewCoffee`, "contentType": "application/json", "op": "invokeaction" }]
     }
   }
 };
@@ -306,7 +310,7 @@ Now we connect our internal state to the affordances. Each handler is a function
 <Tabs>
   <TabItem value="nodewot" label="node-wot" default>
 
-`setPropertyReadHandler` runs when a Consumer reads the property — it simply returns the current value. `setActionHandler` runs when a Consumer invokes the action — it receives the input, checks the machine's state, and returns a `{success, message}` object.
+`setPropertyReadHandler` runs when a Consumer reads the property — it simply returns the current value. `setActionHandler` runs when a Consumer invokes the action — it receives the input, checks the machine's state, and returns a `{success, message}` object. To keep things simple, brewing happens instantly here; a real machine would take time, but handling that delay is a topic for a later tutorial.
 
 ```javascript
 thing.setPropertyReadHandler("coffeeBeansLeft", async () => coffeeBeansLeft);
@@ -319,11 +323,6 @@ thing.setActionHandler("brewCoffee", async (params) => {
   const beanUsage  = { small: 8,   medium: 12,  large: 16  };
   const waterUsage = { small: 120, medium: 180, large: 240 };
 
-  if (isBrewing) {
-    console.log("Brew rejected: machine is already brewing");
-    return { success: false, message: "already brewing" };
-  }
-
   if (coffeeBeansLeft < beanUsage[size]) {
     console.log(`Brew rejected: not enough beans (${coffeeBeansLeft}g left, need ${beanUsage[size]}g)`);
     return { success: false, message: "Not enough coffee beans" };
@@ -334,16 +333,10 @@ thing.setActionHandler("brewCoffee", async (params) => {
     return { success: false, message: "Not enough water" };
   }
 
-  isBrewing        = true;
   coffeeBeansLeft -= beanUsage[size];
   waterLevel      -= waterUsage[size];
 
   console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}ml`);
-
-  setTimeout(() => {
-    isBrewing = false;
-    console.log("Brewing complete!");
-  }, 3000);
 
   return { success: true, message: `Brewing a ${size} coffee` };
 });
@@ -352,7 +345,7 @@ thing.setActionHandler("brewCoffee", async (params) => {
   </TabItem>
   <TabItem value="express" label="Express.js">
 
-With Express we write explicit routes. The properties are `GET` routes that return values directly. The action is a `POST` that reads the body, validates the input, and returns a `{success, message}` JSON object — mirroring what the node-wot handler returns. We use a shared `handleBrew()` helper so the logic stays in one place.
+With Express we write explicit routes. The properties are `GET` routes that return values directly. The action is a `POST` that reads the body, validates the input, and returns a `{success, message}` JSON object — mirroring what the node-wot handler returns. We use a shared `handleBrew()` helper so the logic stays in one place. To keep things simple, brewing happens instantly here; a real machine would take time, but handling that delay is a topic for a later tutorial.
 
 ```javascript
 app.get("/smart-coffee-machine/properties/coffeeBeansLeft", (req, res) => {
@@ -366,11 +359,6 @@ app.get("/smart-coffee-machine/properties/waterLevel", (req, res) => {
 function handleBrew(size) {
   const beanUsage  = { small: 8,   medium: 12,  large: 16  };
   const waterUsage = { small: 120, medium: 180, large: 240 };
-
-  if (isBrewing) {
-    console.log("Brew rejected: machine is already brewing");
-    return { success: false, message: "already brewing" };
-  }
 
   if (!["small", "medium", "large"].includes(size)) {
     return { success: false, message: "Invalid size" };
@@ -386,16 +374,10 @@ function handleBrew(size) {
     return { success: false, message: "Not enough water" };
   }
 
-  isBrewing        = true;
   coffeeBeansLeft -= beanUsage[size];
   waterLevel      -= waterUsage[size];
 
   console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}ml`);
-
-  setTimeout(() => {
-    isBrewing = false;
-    console.log("Brewing complete!");
-  }, 3000);
 
   return { success: true, message: `Brewing a ${size} coffee` };
 }
@@ -431,9 +413,9 @@ thing.expose().then(() => {
 `app.listen()` starts the Express server. The TD is already being served at the root route we set up in Step 2.
 
 ```javascript
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.log("Thing exposed on:");
-  console.log("  HTTP → http://localhost:8080/smart-coffee-machine");
+  console.log(`  HTTP → http://localhost:${PORT}/smart-coffee-machine`);
 });
 ```
 
@@ -454,7 +436,6 @@ const { HttpServer } = require("@node-wot/binding-http");
 
 let coffeeBeansLeft = 320;
 let waterLevel = 1000;
-let isBrewing = false;
 
 const servient = new Servient();
 servient.addServer(new HttpServer({ port: 8080 }));
@@ -516,11 +497,6 @@ servient.start().then((WoT) => {
       const beanUsage  = { small: 8,   medium: 12,  large: 16  };
       const waterUsage = { small: 120, medium: 180, large: 240 };
 
-      if (isBrewing) {
-        console.log("Brew rejected: machine is already brewing");
-        return { success: false, message: "already brewing" };
-      }
-
       if (coffeeBeansLeft < beanUsage[size]) {
         console.log(`Brew rejected: not enough beans (${coffeeBeansLeft}g left, need ${beanUsage[size]}g)`);
         return { success: false, message: "Not enough coffee beans" };
@@ -531,16 +507,10 @@ servient.start().then((WoT) => {
         return { success: false, message: "Not enough water" };
       }
 
-      isBrewing        = true;
       coffeeBeansLeft -= beanUsage[size];
       waterLevel      -= waterUsage[size];
 
       console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}ml`);
-
-      setTimeout(() => {
-        isBrewing = false;
-        console.log("Brewing complete!");
-      }, 3000);
 
       return { success: true, message: `Brewing a ${size} coffee` };
     });
@@ -562,9 +532,10 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+const PORT = 8080;
+
 let coffeeBeansLeft = 320;
 let waterLevel = 1000;
-let isBrewing = false;
 
 const thingDescription = {
   "@context": "https://www.w3.org/2022/wot/td/v1.1",
@@ -578,13 +549,13 @@ const thingDescription = {
       "title": "Remaining Coffee Beans",
       "type": "number", "minimum": 0, "maximum": 500,
       "readOnly": true, "observable": false,
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/properties/coffeeBeansLeft", "contentType": "application/json", "op": "readproperty" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/coffeeBeansLeft`, "contentType": "application/json", "op": "readproperty" }]
     },
     "waterLevel": {
       "title": "Water Level",
       "type": "number", "minimum": 0, "maximum": 1000,
       "readOnly": true, "observable": false,
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/properties/waterLevel", "contentType": "application/json", "op": "readproperty" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
   },
   "actions": {
@@ -592,7 +563,7 @@ const thingDescription = {
       "title": "Brew Coffee",
       "input": { "type": "object", "properties": { "size": { "type": "string", "enum": ["small","medium","large"] } }, "required": ["size"] },
       "output": { "type": "object", "properties": { "success": { "type": "boolean" }, "message": { "type": "string" } } },
-      "forms": [{ "href": "http://localhost:8080/smart-coffee-machine/actions/brewCoffee", "contentType": "application/json", "op": "invokeaction" }]
+      "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/actions/brewCoffee`, "contentType": "application/json", "op": "invokeaction" }]
     }
   }
 };
@@ -600,11 +571,6 @@ const thingDescription = {
 function handleBrew(size) {
   const beanUsage  = { small: 8,   medium: 12,  large: 16  };
   const waterUsage = { small: 120, medium: 180, large: 240 };
-
-  if (isBrewing) {
-    console.log("Brew rejected: machine is already brewing");
-    return { success: false, message: "already brewing" };
-  }
 
   if (!["small", "medium", "large"].includes(size)) {
     return { success: false, message: "Invalid size" };
@@ -620,16 +586,10 @@ function handleBrew(size) {
     return { success: false, message: "Not enough water" };
   }
 
-  isBrewing        = true;
   coffeeBeansLeft -= beanUsage[size];
   waterLevel      -= waterUsage[size];
 
   console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}ml`);
-
-  setTimeout(() => {
-    isBrewing = false;
-    console.log("Brewing complete!");
-  }, 3000);
 
   return { success: true, message: `Brewing a ${size} coffee` };
 }
@@ -641,9 +601,9 @@ app.post("/smart-coffee-machine/actions/brewCoffee", (req, res) => {
   res.json(handleBrew(req.body.size));
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.log("Thing exposed on:");
-  console.log("  HTTP → http://localhost:8080/smart-coffee-machine");
+  console.log(`  HTTP → http://localhost:${PORT}/smart-coffee-machine`);
 });
 ```
 
@@ -670,6 +630,10 @@ Thing exposed on:
 
 :::note OS differences
 The `curl` commands below work on macOS, Linux, and Windows Git Bash. On Windows PowerShell, use `Invoke-WebRequest` or append `| Select-Object -Expand Content` to get raw JSON output.
+:::
+
+:::tip GUI alternatives
+If you'd rather not use the command line, GUI HTTP clients like [Postman](https://www.postman.com/), [Bruno](https://www.usebruno.com/), or [Insomnia](https://insomnia.rest/) work just as well — just send the same requests shown below through their interface instead.
 :::
 
 ```bash
@@ -720,7 +684,7 @@ Verify the state changed by reading the properties again — beans should now be
 
 ## Part 5: Your First Consumer
 
-So far we've been using `curl` to interact with the Thing manually. In a real WoT system, a Consumer is an application that fetches the TD and uses it to drive all interactions — no hardcoded URLs or protocol details. The TD URL is the only entry point it needs.
+So far we've been using `curl` to interact with the Thing manually. In a real WoT system, a Consumer is an application that fetches the TD and uses it to drive all interactions — no hardcoded URLs or protocol details. The TD or its URL is the only entry point it needs.
 
 Create a new file called `consumer.js` in the same project folder.
 
@@ -737,8 +701,8 @@ const { HttpClientFactory } = require("@node-wot/binding-http");
 const readline = require("readline");
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-function ask(question) {
-  return new Promise((resolve) => rl.question(question, resolve));
+function ask(prompt) {
+  return new Promise((resolve) => rl.question(prompt, resolve));
 }
 
 const servient = new Servient();
@@ -758,8 +722,8 @@ The fetch-based Consumer needs no special setup — `fetch` is built into modern
 const readline = require("readline");
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-function ask(question) {
-  return new Promise((resolve) => rl.question(question, resolve));
+function ask(prompt) {
+  return new Promise((resolve) => rl.question(prompt, resolve));
 }
 
 const TD_URL = "http://localhost:8080/smart-coffee-machine";
@@ -842,14 +806,11 @@ while (true) {
       console.log("  ❌ Not enough water to brew. Please refill the machine.\n");
     } else if (output.message.includes("Not enough coffee beans")) {
       console.log("  ❌ Not enough coffee beans. Please refill the machine.\n");
-    } else if (output.message.includes("already brewing")) {
-      console.log("  ⏳ The machine is already brewing, please wait.\n");
     } else {
       console.log(`  ❌ Could not brew: ${output.message}\n`);
     }
   } else {
     console.log(`  ✅ ${output.message}`);
-    await new Promise((res) => setTimeout(res, 500));
 
     const currentWater = await (await thing.readProperty("waterLevel")).value();
     const currentBeans = await (await thing.readProperty("coffeeBeansLeft")).value();
@@ -891,14 +852,11 @@ while (true) {
       console.log("  ❌ Not enough water to brew. Please refill the machine.\n");
     } else if (output.message.includes("Not enough coffee beans")) {
       console.log("  ❌ Not enough coffee beans. Please refill the machine.\n");
-    } else if (output.message.includes("already brewing")) {
-      console.log("  ⏳ The machine is already brewing, please wait.\n");
     } else {
       console.log(`  ❌ Could not brew: ${output.message}\n`);
     }
   } else {
     console.log(`  ✅ ${output.message}`);
-    await new Promise((res) => setTimeout(res, 500));
 
     const currentWater = await (await fetch(waterForm.href)).json();
     const currentBeans = await (await fetch(beansForm.href)).json();
@@ -926,8 +884,8 @@ const { HttpClientFactory } = require("@node-wot/binding-http");
 const readline = require("readline");
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-function ask(question) {
-  return new Promise((resolve) => rl.question(question, resolve));
+function ask(prompt) {
+  return new Promise((resolve) => rl.question(prompt, resolve));
 }
 
 const servient = new Servient();
@@ -966,14 +924,11 @@ servient.start().then(async (WoT) => {
         console.log("  ❌ Not enough water to brew. Please refill the machine.\n");
       } else if (output.message.includes("Not enough coffee beans")) {
         console.log("  ❌ Not enough coffee beans. Please refill the machine.\n");
-      } else if (output.message.includes("already brewing")) {
-        console.log("  ⏳ The machine is already brewing, please wait.\n");
       } else {
         console.log(`  ❌ Could not brew: ${output.message}\n`);
       }
     } else {
       console.log(`  ✅ ${output.message}`);
-      await new Promise((res) => setTimeout(res, 500));
 
       const currentWater = await (await thing.readProperty("waterLevel")).value();
       const currentBeans = await (await thing.readProperty("coffeeBeansLeft")).value();
@@ -993,8 +948,8 @@ servient.start().then(async (WoT) => {
 const readline = require("readline");
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-function ask(question) {
-  return new Promise((resolve) => rl.question(question, resolve));
+function ask(prompt) {
+  return new Promise((resolve) => rl.question(prompt, resolve));
 }
 
 const TD_URL = "http://localhost:8080/smart-coffee-machine";
@@ -1037,14 +992,11 @@ async function run() {
         console.log("  ❌ Not enough water to brew. Please refill the machine.\n");
       } else if (output.message.includes("Not enough coffee beans")) {
         console.log("  ❌ Not enough coffee beans. Please refill the machine.\n");
-      } else if (output.message.includes("already brewing")) {
-        console.log("  ⏳ The machine is already brewing, please wait.\n");
       } else {
         console.log(`  ❌ Could not brew: ${output.message}\n`);
       }
     } else {
       console.log(`  ✅ ${output.message}`);
-      await new Promise((res) => setTimeout(res, 500));
 
       const currentWater = await (await fetch(waterForm.href)).json();
       const currentBeans = await (await fetch(beansForm.href)).json();
