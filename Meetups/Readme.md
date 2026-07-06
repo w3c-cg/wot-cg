@@ -5,6 +5,16 @@ This readme contains the links to minutes, presentation files and the recordings
 
 Note: Presentation files use the pattern `YEAR-MONTH-WoTCG-EVENTNAME-PRESENTERNAME.FILETYPE`.
 
+## Meetup 35
+
+- Name: Agent Integrations Are Documents: Driving Systems from Thing Descriptions
+- Presenter(s): Sherif Abdelwahab
+- Date: 02 July 2026
+- [Presenter Slides](./35/2026-07-WoTCG-Meetup35-thingctx-sherif.pdf)
+- Intro Slides: [Google Slides](https://docs.google.com/presentation/d/1Ksfj5pzlSc-Zb1_0ZUpB_nJCtITGfojJmBsJUoxKp_s/edit?usp=sharing) | [PDF](./35/2026-07-WoTCG-Meetup35-AguzziKorkan.pdf)
+- [Video](https://youtu.be/3QdxP7ydAB0)
+- [Minutes](./35/2026-07-02-minutes.md)
+
 ## Meetup 34
 
 - Name: Quick onboarding of devices to Prosys Forge using OPC UA WoT Connectivity
