@@ -121,6 +121,18 @@ const sidebars = {
             },
 
           ],
+        },
+        {
+          type: "category",
+          label: "Thing Description in Practice",
+          collapsed: false,
+          items: [
+            {
+              type: "doc",
+              id: "wot/td-in-practice/communicating-over-multiple-protocols",
+              label: "Communicating with a Thing over Multiple Protocols",
+            }
+          ],
         }
         // {
         //   type: "doc",
