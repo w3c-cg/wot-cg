@@ -3,10 +3,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const yaml = require('../Tutorials/whatiswot/website/node_modules/js-yaml');
+const yaml = require('js-yaml');
 
-const REQUIRED_FIELDS = ['meetup', 'title', 'date', 'speakers', 'youtube_url', 'presenter_slides', 'intro_slides', 'minutes'];
+const REQUIRED_FIELDS = ['meetup', 'title', 'date', 'speakers', 'youtube_url', 'intro_slides', 'minutes', 'w3c_event_link'];
 const YOUTUBE_RE = /^https?:\/\/(www\.)?youtube\.com\/watch\?v=[\w-]+|^https?:\/\/youtu\.be\/[\w-]+/;
+const W3C_EVENT_RE = /^https:\/\/www\.w3\.org\/events\/meetings\/[\w-]+\//;
+const HTTP_RE = /^https?:\/\/\S+$/;
 const DATE_RE = /^\d{2}-\d{2}-\d{4}$/;
 
 function validate(filePath) {
@@ -36,15 +38,33 @@ function validate(filePath) {
     else if (!data.title.trim()) errors.push("'title' must not be empty");
   }
 
-  if ('date' in data && !DATE_RE.test(String(data.date))) {
-    errors.push(`'date' must be in DD-MM-YYYY format, got: '${data.date}'`);
+  if ('date' in data) {
+    const date = String(data.date);
+    if (!DATE_RE.test(date)) {
+      errors.push(`'date' must be in DD-MM-YYYY format, got: '${date}'`);
+    } else {
+      // The regex only counts digits, so "45-99-2026" would pass.
+      const [d, m] = date.split('-').map(n => parseInt(n, 10));
+      if (m < 1 || m > 12) errors.push(`'date' has an invalid month: '${date}'`);
+      if (d < 1 || d > 31) errors.push(`'date' has an invalid day: '${date}'`);
+    }
   }
 
-  if ('youtube_url' in data) {
+  // null means the meetup was not recorded. The key itself is still required
+  // so nobody forgets to add the video.
+  if ('youtube_url' in data && data.youtube_url !== null) {
     if (typeof data.youtube_url !== 'string') {
-      errors.push("'youtube_url' must be a string");
+      errors.push("'youtube_url' must be a YouTube URL, or null if the meetup was not recorded");
     } else if (!YOUTUBE_RE.test(data.youtube_url)) {
-      errors.push(`'youtube_url' must be a valid YouTube URL, got: '${data.youtube_url}'`);
+      errors.push(`'youtube_url' must be a valid YouTube URL (or null if not recorded), got: '${data.youtube_url}'`);
+    }
+  }
+
+  if ('w3c_event_link' in data) {
+    if (typeof data.w3c_event_link !== 'string') {
+      errors.push("'w3c_event_link' must be a string");
+    } else if (!W3C_EVENT_RE.test(data.w3c_event_link)) {
+      errors.push(`'w3c_event_link' must be a w3.org event URL (https://www.w3.org/events/meetings/<id>/), got: '${data.w3c_event_link}'`);
     }
   }
 
@@ -55,6 +75,8 @@ function validate(filePath) {
       data.speakers.forEach((s, i) => {
         if (!s || typeof s !== 'object') errors.push(`speakers[${i}] must be a mapping`);
         else if (!s.name || !String(s.name).trim()) errors.push(`speakers[${i}] missing required field 'name'`);
+        else if ('bio' in s && (typeof s.bio !== 'string' || !s.bio.trim()))
+          errors.push(`speakers[${i}].bio must be a non-empty string`);
       });
     }
   }
@@ -64,8 +86,20 @@ function validate(filePath) {
       errors.push("'presenter_slides' must be a non-empty list");
     } else {
       data.presenter_slides.forEach((s, i) => {
-        if (!s || typeof s !== 'object') errors.push(`presenter_slides[${i}] must be a mapping`);
-        else if (!s.file || !String(s.file).trim()) errors.push(`presenter_slides[${i}] missing required field 'file'`);
+        if (!s || typeof s !== 'object') { errors.push(`presenter_slides[${i}] must be a mapping`); return; }
+
+        // Needs at least one of the two, otherwise it links to nothing.
+        const hasFile = s.file && String(s.file).trim();
+        const hasUrl = s.url && String(s.url).trim();
+        if (!hasFile && !hasUrl) {
+          errors.push(`presenter_slides[${i}] needs a 'file' (local PDF) or a 'url' (online version)`);
+        }
+        if (hasUrl && !HTTP_RE.test(String(s.url))) {
+          errors.push(`presenter_slides[${i}].url must be an http(s) URL, got: '${s.url}'`);
+        }
+        if (data.presenter_slides.length > 1 && !s.label) {
+          errors.push(`presenter_slides[${i}] missing 'label' (required to distinguish multiple presenter slide files)`);
+        }
       });
     }
   }
@@ -84,7 +118,7 @@ function validate(filePath) {
   if ('minutes' in data && typeof data.minutes !== 'string')
     errors.push("'minutes' must be a string filename");
   if ('thumbnail' in data && typeof data.thumbnail !== 'string')
-    errors.push("'thumbnail' must be a string URL");
+    errors.push("'thumbnail' must be a string filename (an image file checked into this meetup's folder)");
   if ('description' in data && typeof data.description !== 'string')
     errors.push("'description' must be a string");
 

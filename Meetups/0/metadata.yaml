@@ -1,0 +1,21 @@
+meetup: 0
+title: "wot-rust and \"How to build a Community\""
+date: "22-09-2022"
+youtube_url: null  # this meetup was not recorded
+w3c_event_link: "https://www.w3.org/events/meetings/05b36b01-51bf-4885-88ea-eac638159f71/"
+thumbnail: "W3C_WoT_Meetup_0-1.png"
+speakers:
+  - name: "Luca Barbato"
+    organisation: "Luminem"
+  - name: "Philipp-Alexander Blum"
+    organisation: "Bind Systems"
+presenter_slides:
+  - file: "2022-09-WoTCG-Meetup0-wot_rust-Barbato.pdf"
+    label: "Luca Barbato"
+    url: "https://docs.google.com/presentation/d/17Uod5HT5Se_XMt0cE-X12ud-DdwrzoAnDEovT4JFZx8/edit?usp=sharing"
+  - label: "Philipp-Alexander Blum"
+    url: "https://github.com/bind-systems/wot-cg-0-how-to-build-a-community/blob/master/assets/wot-cg-0-how-to-build-a-community.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1u8OlKdJnq4bqRTtJ4lP2rwVph_Vl_fuvxYi2iZy9sz8/edit?usp=sharing"
+  pdf: "2022-09-WoTCG-Meetup0-AguzziKorkan.pdf"
+minutes: "2022-09-22-minutes.md"

@@ -1,0 +1,19 @@
+meetup: 31
+title: "Managing Device Descriptions with the Thing Model Catalog"
+date: "04-12-2025"
+youtube_url: "https://youtu.be/CuZo1NGshiI"
+w3c_event_link: "https://www.w3.org/events/meetings/7c3a1c29-fb69-464a-b14c-fbaaad597c37/"
+thumbnail: "W3C_WoT_Meetup_31.png"
+speakers:
+  - name: "Ege Korkan"
+presenter_slides:
+  - file: "2025_12_04-WoTCG-Meetup31-TMC-Siemens.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1CP2MG7h40Y6WSnGVpnGJnmURlpPJz-PBZ2XLd53MGPE/edit?usp=sharing"
+  pdf: "2025-12-WoTCG-Meetup31-AguzziKorkan.pdf"
+minutes: "2025-12-04-minutes.md"
+description: >-
+  In this meetup, Ege Korkan from Siemens introduces the Thing Model Catalog, an open-source
+  project to manage Thing Models of devices from different authors, manufacturers and
+  products. He explains the motivation behind, different ways to use it and launch a new
+  event for the community participants.

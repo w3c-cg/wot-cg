@@ -22,13 +22,13 @@ jobs:
         with:
           node-version: 18
           cache: npm
-          cache-dependency-path: Tutorials/whatiswot/website/package-lock.json
+          cache-dependency-path: scripts/package-lock.json
 
       - name: Install dependencies
-        run: cd Tutorials/whatiswot/website && npm ci
+        run: cd scripts && npm ci
 
       - name: Update Meetups README
-        run: cd Tutorials/whatiswot/website && npm run update-readme
+        run: cd scripts && npm run update-readme
 
       - name: Commit updated README
         run: |

@@ -1,0 +1,24 @@
+meetup: 20
+title: "How Siemens Technology Streamlines Building Onboarding with the Web of Things"
+date: "28-10-2024"
+youtube_url: "https://youtu.be/vRdX5ItQHX0"
+w3c_event_link: "https://www.w3.org/events/meetings/351c4285-805d-460e-a865-fb58085bd49a/"
+thumbnail: "W3C_WoT_Meetup_20.png"
+speakers:
+  - name: "Ondrej Tomcik"
+    organisation: "Siemens"
+presenter_slides:
+  - file: "2024-10-WoTCG-Meetup20-Siemens_Smart_Edge_Connector.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1VixI7ySscHwSAILhx-7cw3nohhnLHSqCxFoCJLJTLzU/edit?usp=sharing"
+  pdf: "2024-10-WoTCG-Meetup20-AguzziKorkan.pdf"
+minutes: "2024-10-28-minutes.md"
+description: >-
+  In this meetup, we welcome Ondrej Tomcik from Siemens. Every building presents unique
+  challenges, particularly when it comes to provisioning devices such as fire alarms, smart
+  meters, and various sensors. The complexity increases when field devices come from
+  multiple vendors, leading to potential time and cost inefficiencies. Siemens addresses
+  this by leveraging the Web of Things (WoT) standard across both ends: generating Thing
+  Models for Siemens-manufactured devices and enabling south-bound connectivity systems to
+  seamlessly integrate and extract data from diverse devices. Watch this session to explore
+  how Siemens simplifies device provisioning and maximizes the benefits of WoT!

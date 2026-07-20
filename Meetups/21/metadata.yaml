@@ -1,0 +1,27 @@
+meetup: 21
+title: "Web of Things for every thing"
+date: "14-11-2024"
+youtube_url: "https://youtu.be/PpY2TsSIRG4"
+w3c_event_link: "https://www.w3.org/events/meetings/27ccdd67-4ad6-476b-bdc2-b1b48da1995b/"
+thumbnail: "W3C_WoT_Meetup_21.png"
+speakers:
+  - name: "Christian Paul"
+presenter_slides:
+  - file: "2024-11-WoTCG-Meetup21-WoT_for_every_thing.pdf"
+    label: "Standard"
+  - file: "2024-11-WoTCG-Meetup21-WoT_for_every_thing-no_background.pdf"
+    label: "No Background"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1d4ZZTDzFkLquJyc3O6qypwSfNRZkpdYG6b7yQ_7PXOI/edit?usp=sharing"
+  pdf: "2024-11-WoTCG-Meetup21-AguzziKorkan.pdf"
+minutes: "2024-11-14-minutes.md"
+description: >-
+  In this meetup, we welcome Christian Paul (GitLab | LinkedIn). Discover how easy it is to
+  build, test and prototype with the Web of Things paradigm. This meetup introduces two new
+  tools for you to use: "WoT Wrench" and "WoT Anything." WoT Wrench is a web app that
+  simplifies debugging and interacting with Things. Meanwhile, WoT Anything serves as a
+  versatile JavaScript server that closely implements WoT standards with a twist - allowing
+  multiple Things to share properties, actions, and events. This approach enables flexible
+  API integration beyond traditional one-to-one device mapping. Christian will demonstrate
+  how virtual Things and API integrations broaden the definition of what can qualify as an
+  IoT device.

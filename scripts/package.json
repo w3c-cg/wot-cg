@@ -1,0 +1,12 @@
+{
+  "name": "wot-cg-meetup-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "validate-videos": "node validate-video-yaml.js",
+    "update-readme": "node update-meetups-readme.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

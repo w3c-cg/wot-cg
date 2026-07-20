@@ -1,0 +1,16 @@
+meetup: 1
+title: "Digital Twins with Eclipse Ditto and Web of Things"
+date: "13-10-2022"
+youtube_url: null  # this meetup was not recorded
+w3c_event_link: "https://www.w3.org/events/meetings/c8802811-42b9-4089-a823-8671e3c3a227/"
+thumbnail: "W3C_WoT_Meetup_1.png"
+speakers:
+  - name: "Thomas Jaeckle"
+    organisation: "Bosch.io"
+presenter_slides:
+  - file: "2022-10-WoTCG-Meetup1-EclipseDitto-and-WoT-Jaeckle.pdf"
+    url: "https://www.eclipse.org/ditto/slides/2022_10_ditto-and-wot/"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1iOCkNmtA10AuDTyHKswk26siCU2AAGNOzQsUm15BQYw/edit?usp=sharing"
+  pdf: "2022-10-WoTCG-Meetup1-AguzziKorkan.pdf"
+minutes: "2022-10-13-minutes.md"

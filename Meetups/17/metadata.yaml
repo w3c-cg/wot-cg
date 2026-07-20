@@ -1,0 +1,26 @@
+meetup: 17
+title: "Integrating the Web of Things with Solid: Architecture, Benefits, and Real-World Application"
+date: "16-05-2024"
+youtube_url: "https://www.youtube.com/watch?v=x6vnqo4j1tA"
+w3c_event_link: "https://www.w3.org/events/meetings/97420d36-f1d1-47cf-ab35-701c6b8b4cc1/"
+thumbnail: "W3C_WoT_Meetup_17.png"
+speakers:
+  - name: "Michael Freund"
+    organisation: "Fraunhofer ISS"
+presenter_slides:
+  - file: "2024-05-WoTCG-Meetup17-WoT_and_Solid-Freund.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1qUbYJ6OEp_SSnnXiSUqQJjdpONAfnGh6wE9NhfYsLDY/edit?usp=sharing"
+  pdf: "2024-05-WoTCG-Meetup17-AguzziKorkan.pdf"
+minutes: "2024-05-16-minutes.md"
+description: >-
+  The Web of Things enables seamless communication across heterogeneous Internet of Things
+  devices using different communication protocols via a semantic interface description known
+  as a Thing Description. At the same time, Solid servers provide a robust solution for
+  long-term storage and secure sharing of data in the cloud. By combining these technologies
+  through a semantic middleware at the edge, we can leverage the strengths of both in one
+  network architecture. At this meetup, we welcome Michael Freund from Fraunhofer IIS. He
+  highlights the features of the semantic middleware and show how the combined power of the
+  Web of Things and Solid enables easier application development. In addition, he provides
+  insights into a real-world deployment of the architecture at Munich Airport, including
+  implemented applications.

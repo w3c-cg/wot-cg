@@ -1,0 +1,23 @@
+meetup: 4
+title: "Delegated Device Authorization in the Web of Things"
+date: "23-02-2023"
+youtube_url: "https://youtu.be/WcCUyn9RUqw"
+w3c_event_link: "https://www.w3.org/events/meetings/d29a941e-0bc3-4a2c-abaa-1f711a0ea9a2/"
+thumbnail: "W3C_WoT_Meetup_4.png"
+speakers:
+  - name: "Jan Romann"
+    organisation: "University of Bremen"
+presenter_slides:
+  - file: "2023-02-WoTCG-Meetup4-Romann.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1BxWkEPw0off4qOSyS6hsb3kVlJAGX1EU1dQGqdPLYds/edit?usp=sharing"
+  pdf: "2023-02-WoTCG-Meetup4-AguzziKorkan.pdf"
+minutes: "2023-02-23-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will present an
+  approach that allows constrained IoT devices to delegate authentication and authorization
+  using the Web of Things. In the framework of the NAMIB project, he will demonstrate this
+  approach in a use case where hotel guests need to have access to their smart environments
+  only during their visits. Additionally, an open-source WoT implementation based on the
+  Dart programming language will be shown, which allows WoT Consumers to be deployed on
+  smartphones.

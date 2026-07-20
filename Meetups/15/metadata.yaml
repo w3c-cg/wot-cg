@@ -1,0 +1,24 @@
+meetup: 15
+title: "Beyond Local Connectivity: Bridging Web of Things and Matter"
+date: "14-03-2024"
+youtube_url: "https://www.youtube.com/watch?v=upUN9-0so2s"
+w3c_event_link: "https://www.w3.org/events/meetings/66be002d-864b-4a49-a4d4-4d231b4c99bf/"
+thumbnail: "W3C_WoT_Meetup_15.png"
+speakers:
+  - name: "Till Langen"
+    organisation: "Deutsche Telekom"
+presenter_slides:
+  - file: "2024-03-WoTCG-Meetup15-MatterAndWoT-Langen.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/14jMoUwxGq2J_smzZTjwcXpHN2fIrKAGCczmVx74X3FU/edit?usp=sharing"
+  pdf: "2024-03-WoTCG-Meetup15-AguzziKorkan.pdf"
+minutes: "2024-03-14-minutes.md"
+description: >-
+  In our next meetup, we welcome Till Langen from Deutsche Telekom to talk about Matter.
+  Matter aims for a standardized Smart Home System, in a local domain. Behind Matter is a
+  merger of the leading hardware and software companies, which is leveraging the
+  distribution. For the scope of a seamless integration in the World Wide Web a mapping from
+  the data model to Web of Things is necessary. This meetup gives an introduction in the
+  Matter data model and a first concept of the abstraction to Web of Things. The concept
+  will look at the function of Matter to bridge devices, compose endpoints and the access
+  control definition.

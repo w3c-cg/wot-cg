@@ -1,0 +1,17 @@
+meetup: 3
+title: "WoT Applications on the Serverless Edge"
+date: "15-12-2022"
+youtube_url: null  # this meetup was not recorded
+w3c_event_link: "https://www.w3.org/events/meetings/f49cc19b-66a6-4d4c-a9c1-0ca327908486/"
+thumbnail: "W3C_WoT_Meetup_3.png"
+speakers:
+  - name: "Arturo Romero"
+    organisation: "Netzo.io"
+  - name: "Miguel Romero Karam"
+    organisation: "Netzo.io"
+presenter_slides:
+  - file: "2022-12-WoTCG-Meetup3-Netzo-Edge-Computing.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1fEB38kNR4yICol825EdXD-7ULjxSy0ZO_KozXiMCaSQ/edit?usp=sharing"
+  pdf: "2022-12-WoTCG-Meetup3-AguzziKorkan.pdf"
+minutes: "2022-12-15-minutes.md"

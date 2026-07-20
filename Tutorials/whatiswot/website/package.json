@@ -11,9 +11,7 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "validate-videos": "node ../../../scripts/validate-video-yaml.js",
-    "update-readme": "node ../../../scripts/update-meetups-readme.js"
+    "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
     "@docusaurus/core": "2.4.1",
@@ -26,8 +24,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.4.1",
-    "dotenv": "^16.4.5",
-    "js-yaml": "^4.1.0"
+    "dotenv": "^16.4.5"
   },
   "browserslist": {
     "production": [

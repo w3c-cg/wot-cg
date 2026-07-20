@@ -1,0 +1,26 @@
+meetup: 6
+title: "Automated Industrial Asset Onboarding Using Open Standards"
+date: "03-04-2023"
+youtube_url: "https://youtu.be/xFnrWOeh3pc"
+w3c_event_link: "https://www.w3.org/events/meetings/322db7e4-1a9f-44c6-8ddf-af601043dfb9/"
+thumbnail: "W3C_WoT_Meetup_6.png"
+speakers:
+  - name: "Erich Barnstedt"
+    organisation: "Microsoft"
+  - name: "Sebastian Käbisch"
+    organisation: "Siemens"
+  - name: "Felix Paulini"
+    organisation: "Evosoft"
+presenter_slides:
+  - file: "2023-04-WoTCG-Meetup6-Siemens-Microsoft.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1mIqp21oQg92ZrPttWJeM9iE1QcV-JPMcJyY37a9N-bc/edit?usp=sharing"
+  pdf: "2023-04-WoTCG-Meetup6-AguzziKorkan.pdf"
+minutes: "2023-04-03-minutes.md"
+description: >-
+  In this W3C WoT CG Meetups, we welcome Microsoft and Siemens for a joint presentation.
+  Erich Barnstedt from Microsoft, together with Sebastian Käbisch from Siemens and Felix
+  Paulini from evosoft show how the same Thing Description can be used to onboard an
+  industrial asset into the cloud systems of two different organizations. This shows that
+  device descriptions based on common web standards enable real interoperability across IoT
+  stacks and provide a vendor-neutral device onboarding and communication experience.

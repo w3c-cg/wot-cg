@@ -1,0 +1,17 @@
+meetup: 25
+title: "An Introduction to Eclipse LMOS"
+date: "14-03-2025"
+youtube_url: "https://youtu.be/gcpHYtqTBbA"
+w3c_event_link: "https://www.w3.org/events/meetings/5a77b997-467b-4d5d-bb40-b84789c17d2e/20250314T090000/"
+thumbnail: "W3C_WoT_Meetup_25.png"
+speakers:
+  - name: "Robert Winkler"
+presenter_slides:
+  - file: "2025-03-WoTCG-Meetup25-LMOS-DeutscheTelekomEclipse.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1K-ZriSHVq_q_mbTvx3pa98C7ytST3Ak7YGHhqdHWnPM/edit?usp=sharing"
+  pdf: "2025-03-WoTCG-Meetup25-AguzziKorkan.pdf"
+minutes: "2025-03-14-minutes.md"
+description: >-
+  In this special session, we have three community groups joining for a presentation by
+  Robert Winkler from Deutsche Telekom on the Eclipse LMOS project.

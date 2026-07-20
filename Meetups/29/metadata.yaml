@@ -1,0 +1,24 @@
+meetup: 29
+title: "OPC UA and Web of Things"
+date: "16-10-2025"
+youtube_url: "https://youtu.be/PlY-ixquyZc"
+w3c_event_link: "https://www.w3.org/events/meetings/b0b77d2e-5c92-4338-84ce-af3e6094a341/"
+thumbnail: "W3C_WoT_Meetup_29.png"
+speakers:
+  - name: "Erich Barnstedt"
+  - name: "Sebastian Kaebisch"
+presenter_slides:
+  - file: "2025-10-WoTCG-Meetup29-Barnstedt-Microsoft.pdf"
+    label: "Erich"
+  - file: "2025-10-WoTCG-Meetup29-Kaebisch-Siemens.pdf"
+    label: "Sebastian"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1SeGbmA9skmgVQEbsnO2904Lj8ztp-HsCX9M3MIxbSWc/edit?usp=sharing"
+  pdf: "2025-10-WoTCG-Meetup29-AguzziKorkan.pdf"
+minutes: "2025-10-16-minutes.md"
+description: >-
+  In this meetup, we welcome Erich Barnstedt from Microsoft and Sebastian Käbisch from
+  Siemens. They show how Web of Things is becoming a successful building block for
+  industrial automation systems built with OPC UA. First, they show TDs can be used to
+  onboard non OPC UA devices and then explain how to represent OPC UA servers with TDs using
+  the OPC UA Binding. Also, you get to see open-source projects supporting both workflows.

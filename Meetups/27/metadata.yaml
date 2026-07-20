@@ -1,0 +1,22 @@
+meetup: 27
+title: "Visual Programming with WoT"
+date: "05-06-2025"
+youtube_url: "https://youtu.be/p-iU_B6MQFo"
+w3c_event_link: "https://www.w3.org/events/meetings/9eea7c28-e07f-4f47-9ce5-4b79f47abffe/"
+thumbnail: "W3C_WoT_Meetup_27.png"
+speakers:
+  - name: "Thomas Wehr"
+presenter_slides:
+  - file: "2025-06-WoTCG-Meetup27-BLAST-FAU.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1JQcGoVY-3I_RCkKpGqoLGjR0XRAJSmRMYVTF7gPh4G0/edit?usp=sharing"
+  pdf: "2025-06-WoTCG-Meetup27-AguzziKorkan.pdf"
+minutes: "2025-06-05-minutes.md"
+description: >-
+  In this meetup, we welcome Thomas Wehr from the Friedrich-Alexander-Universität
+  Erlangen-Nürnberg. He presents BLAST - Block Applications for Things, a browser-based
+  visual programming and execution environment for WoT Consumers. BLAST includes custom
+  protocol bindings for Bluetooth and HID devices, allowing for end users to quickly create
+  applications that interact with a broad range of devices. Applications are created by
+  geometrically arranging blocks, either predefined blocks or blocks dynamically generated
+  from Thing Descriptions.

@@ -1,0 +1,21 @@
+meetup: 5
+title: "Empowering Industrial Automation with WoT"
+date: "23-03-2023"
+youtube_url: "https://youtu.be/SIKMbxLJXow"
+w3c_event_link: "https://www.w3.org/events/meetings/e72912b5-3087-440e-950e-886acbab645d/"
+thumbnail: "W3C_WoT_Meetup_5.png"
+speakers:
+  - name: "Matthias Held"
+    organisation: "SICK AG"
+presenter_slides:
+  - file: "2023-03-WoTCG-Meetup5-Held_SICK.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1LsE6-5ZQ5h_rt2W1zvAE1cVsdrlKCgb4Cf9i2RFYnkk/edit?usp=sharing"
+  pdf: "2023-03-WoTCG-Meetup5-AguzziKorkan.pdf"
+minutes: "2023-03-23-minutes.md"
+description: >-
+  In this iteration of the W3C WoT CG Meetups, we welcome Matthias Held from SICK AG. He
+  shows us how they have implemented a full WoT stack where TMs, TD Directories, Edge
+  Gateways, and more are used for their Digital Twin solution. With the help of WoT
+  technologies, they enable low-code onboarding of their sensors to the cloud, while being
+  interoperable.

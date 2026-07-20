@@ -1,0 +1,21 @@
+meetup: 10
+title: "Designing an API for the Physical World"
+date: "05-10-2023"
+youtube_url: "https://www.youtube.com/watch?v=LHybkrb3Xek"
+w3c_event_link: "https://www.w3.org/events/meetings/251e6917-340c-47f5-a0ed-a3ca85c71102/"
+thumbnail: "W3C_WoT_Meetup_10.png"
+speakers:
+  - name: "Sy Bohy"
+    organisation: "Seam"
+presenter_slides:
+  - file: "2023-10-WoTCG-Meetup10-Seam-SyBohy.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/17Whb-1nKF949bWN3dXjEin7q0nuJW9kUsVXgp3HlcLY/edit?usp=sharing"
+  pdf: "2023-10-WoTCG-Meetup10-AguzziKorkan.pdf"
+minutes: "2023-10-05-minutes.md"
+description: >-
+  In our next meetup, we welcome Sy Bohy, CEO and Co-Founder of Seam. Sy will talk about
+  Seam's unified API for IoT devices, inspired in some of its designs by the WoT work at
+  W3C. Sy will discuss the origins of Seam, its design constraints, its focus on developer
+  experience, its relationship with IoT manufacturers, and the future that lies ahead for
+  Seam and the IoT industry.
