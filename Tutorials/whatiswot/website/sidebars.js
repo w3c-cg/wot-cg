@@ -131,7 +131,17 @@ const sidebars = {
               type: "doc",
               id: "wot/td-in-practice/building-a-thing",
               label: "Building a Thing",
-            }
+            },
+            {
+              type: "doc",
+              id: "wot/td-in-practice/expanding-a-thing",
+              label: "Expanding a Thing",
+            },
+            {
+              type: "doc",
+              id: "wot/td-in-practice/building-a-consumer",
+              label: "Building a Consumer",
+            },
           ],
         }
         // {
