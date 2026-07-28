@@ -1,0 +1,42 @@
+name: Update YouTube descriptions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Meetups/**/metadata.yaml"
+
+jobs:
+  update:
+    name: Update descriptions for changed meetups
+    runs-on: ubuntu-latest
+    # Pauses for a human to approve before any write to the live channel.
+    # Set up under Settings -> Environments, add yourself as a required reviewer.
+    environment: youtube-prod
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: cd scripts && npm ci
+
+      - name: Update descriptions
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          # only the metadata files this push actually touched
+          changed=$(git diff --name-only HEAD^ HEAD -- 'Meetups/**/metadata.yaml')
+          if [ -z "$changed" ]; then
+            echo "No metadata.yaml changes - nothing to do."
+            exit 0
+          fi
+          echo "Changed files:"
+          echo "$changed"
+          node scripts/update-youtube.js $changed --apply
