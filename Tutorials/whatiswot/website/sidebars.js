@@ -129,13 +129,13 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "wot/td-in-practice/building-a-thing",
-              label: "Building a Thing",
+              id: "wot/td-in-practice/building-a-thing-part-1",
+              label: "Building a Thing - Part 1",
             },
             {
               type: "doc",
-              id: "wot/td-in-practice/expanding-a-thing",
-              label: "Expanding a Thing",
+              id: "wot/td-in-practice/building-a-thing-part-2",
+              label: "Building a Thing - Part 2",
             },
             {
               type: "doc",

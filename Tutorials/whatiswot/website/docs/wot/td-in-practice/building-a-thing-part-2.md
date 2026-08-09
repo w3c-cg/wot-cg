@@ -1,11 +1,11 @@
 ---
-sidebar_label: Expanding a Thing
+sidebar_label: Building a Thing - Part 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Expanding a Thing
+# Building a Thing - Part 2
 
 ## Introduction
 
@@ -23,13 +23,13 @@ As we covered in the [Interaction Affordances](/docs/wot/td/interaction-affordan
 | `brewCoffee` | Action | Brews a coffee of a given size, deducting beans and water |
 | `lowOnWater` | Event | Emitted when the water level drops below 500 ml |
 
-Open `thing.js` from the previous tutorial — we'll extend it step by step.
+Open [`thing.js` from the previous tutorial](/docs/wot/td-in-practice/building-a-thing-part-1#complete-thing-js) — we'll extend it step by step.
 
 ## Adding the Action
 
 ### Extending the TD
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 Inside the `WoT.produce()` call, add an `actions` section after `properties`:
@@ -92,7 +92,7 @@ The handler checks whether there are enough beans and water for the requested si
 
 > To keep things simple in this tutorial, brewing happens instantly. The handler returns as soon as the resources are deducted.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `setActionHandler` works the same way as `setPropertyReadHandler` — you name the affordance and supply an async function. The handler receives the input as a `params` object; calling `await params.value()` deserialises it into a plain JavaScript object.
@@ -164,11 +164,13 @@ app.post("/smart-coffee-machine/actions/brewCoffee", (req, res) => {
 
 ## Adding the Event
 
+HTTP has no built-in push mechanism — unlike MQTT, where publish/subscribe is the foundation, or CoAP, which has an Observe option built in. To support events over HTTP, the WoT HTTP binding uses subprotocols: the `subprotocol` field on an event's form tells the Consumer which mechanism the server is using. Here we use long polling, where the Consumer holds a GET request open until the event fires. In protocols with native eventing, this field is not needed.
+
 ### Extending the TD
 
 The `lowOnWater` event carries a `data` schema — the value the Thing sends when the event fires. Here it's the current water level, so the Consumer knows exactly how much is left.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 Add an `events` section to the `WoT.produce()` call, alongside `actions`:
@@ -183,7 +185,7 @@ events: {
 }
 ```
 
-node-wot automatically creates an SSE endpoint for the event and fills in the corresponding `forms` entry in the generated TD — no extra routing code required.
+node-wot automatically creates a long polling endpoint for the event and fills in the corresponding `forms` entry in the generated TD — no extra routing code required.
 
   </TabItem>
   <TabItem value="express" label="Express.js">
@@ -198,8 +200,8 @@ Add an `"events"` section to the `thingDescription` object:
     "data": { "type": "number", "minimum": 0, "maximum": 1000 },
     "forms": [{
       "href": `http://localhost:${PORT}/smart-coffee-machine/events/lowOnWater`,
-      "contentType": "text/event-stream",
-      "subprotocol": "sse",
+      "contentType": "application/json",
+      "subprotocol": "longpoll",
       "op": "subscribeevent"
     }]
   }
@@ -213,7 +215,7 @@ Add an `"events"` section to the `thingDescription` object:
 
 The `lowOnWater` event should fire whenever brewing leaves the water level below 500 ml. We add that check inside the brew logic, right after deducting water.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 First add `const LOW_WATER = 500;` at the top of `thing.js`, alongside `coffeeBeansLeft` and `waterLevel`. Then add the threshold check inside `setActionHandler`, after updating `waterLevel`:
@@ -231,27 +233,22 @@ console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}m
 return { success: true, message: `Brewing a ${size} coffee` };
 ```
 
-`thing.emitEvent()` sends the payload to all subscribed Consumers over the SSE connection that node-wot manages automatically.
+`thing.emitEvent()` sends the payload to all subscribed Consumers over the long polling connection that node-wot manages automatically.
 
   </TabItem>
   <TabItem value="express" label="Express.js">
 
-For Express, events require [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) (SSE) — a protocol where the client opens a persistent HTTP connection and the server pushes updates over it. We keep a list of active subscriber responses and write to them when the event fires.
+For Express, we use long polling — the Consumer sends a GET request that the server holds open until the event fires, then responds with the payload and closes the connection. The Consumer immediately re-polls to wait for the next event.
 
-Add `const LOW_WATER = 500;` at the top of `thing.js` alongside the other constants. Then add the subscriber list and SSE route:
+Add `const LOW_WATER = 500;` at the top of `thing.js` alongside the other constants. Then add the poller list and long polling route:
 
 ```javascript
-const subscribers = [];
+const pollers = [];
 
 app.get("/smart-coffee-machine/events/lowOnWater", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-  res.flushHeaders();
-
-  subscribers.push(res);
+  pollers.push(res);
   req.on("close", () => {
-    subscribers.splice(subscribers.indexOf(res), 1);
+    pollers.splice(pollers.indexOf(res), 1);
   });
 });
 ```
@@ -263,7 +260,8 @@ coffeeBeansLeft -= beanUsage[size];
 waterLevel      -= waterUsage[size];
 
 if (waterLevel < LOW_WATER) {
-  subscribers.forEach(res => res.write(`data: ${JSON.stringify(waterLevel)}\n\n`));
+  const waiting = pollers.splice(0);
+  waiting.forEach(res => res.json(waterLevel));
   console.log(`Low water event emitted: ${waterLevel}ml remaining`);
 }
 
@@ -271,7 +269,7 @@ console.log(`Brewing ${size}. Beans: ${coffeeBeansLeft}g | Water: ${waterLevel}m
 return { success: true, message: `Brewing a ${size} coffee` };
 ```
 
-This is what node-wot handles for you behind the scenes — it manages the SSE connection lifecycle and the subscriber list automatically.
+This mirrors what node-wot handles for you automatically — holding the connection open and responding when the event fires.
 
   </TabItem>
 </Tabs>
@@ -279,7 +277,7 @@ This is what node-wot handles for you behind the scenes — it manages the SSE c
 <details>
 <summary>View complete <code>thing.js</code></summary>
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 ```javascript
@@ -300,14 +298,13 @@ servient.start().then((WoT) => {
     description: "Remote controllable coffee machine",
     id: "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
     "@context": "https://www.w3.org/2022/wot/td/v1.1",
-    securityDefinitions: { nosec_sc: { scheme: "nosec" } },
-    security: "nosec_sc",
     properties: {
       coffeeBeansLeft: {
         title: "Remaining Coffee Beans",
         type: "number",
         minimum: 0,
         maximum: 500,
+        unit: "g",
         readOnly: true,
         observable: false,
       },
@@ -316,6 +313,7 @@ servient.start().then((WoT) => {
         type: "number",
         minimum: 0,
         maximum: 1000,
+        unit: "mL",
         readOnly: true,
         observable: false,
       }
@@ -408,18 +406,16 @@ const thingDescription = {
   "id": "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
   "title": "Smart Coffee Machine",
   "description": "Remote controllable coffee machine",
-  "securityDefinitions": { "nosec_sc": { "scheme": "nosec" } },
-  "security": "nosec_sc",
   "properties": {
     "coffeeBeansLeft": {
       "title": "Remaining Coffee Beans",
-      "type": "number", "minimum": 0, "maximum": 500,
+      "type": "number", "minimum": 0, "maximum": 500, "unit": "g",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/coffeeBeansLeft`, "contentType": "application/json", "op": "readproperty" }]
     },
     "waterLevel": {
       "title": "Water Level",
-      "type": "number", "minimum": 0, "maximum": 1000,
+      "type": "number", "minimum": 0, "maximum": 1000, "unit": "mL",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
@@ -446,15 +442,15 @@ const thingDescription = {
       "data": { "type": "number", "minimum": 0, "maximum": 1000 },
       "forms": [{
         "href": `http://localhost:${PORT}/smart-coffee-machine/events/lowOnWater`,
-        "contentType": "text/event-stream",
-        "subprotocol": "sse",
+        "contentType": "application/json",
+        "subprotocol": "longpoll",
         "op": "subscribeevent"
       }]
     }
   }
 };
 
-const subscribers = [];
+const pollers = [];
 
 function handleBrew(size) {
   const beanUsage  = { small: 8,   medium: 12,  large: 16  };
@@ -478,7 +474,8 @@ function handleBrew(size) {
   waterLevel      -= waterUsage[size];
 
   if (waterLevel < LOW_WATER) {
-    subscribers.forEach(res => res.write(`data: ${JSON.stringify(waterLevel)}\n\n`));
+    const waiting = pollers.splice(0);
+    waiting.forEach(res => res.json(waterLevel));
     console.log(`Low water event emitted: ${waterLevel}ml remaining`);
   }
 
@@ -493,14 +490,9 @@ app.post("/smart-coffee-machine/actions/brewCoffee", (req, res) => {
   res.json(handleBrew(req.body.size));
 });
 app.get("/smart-coffee-machine/events/lowOnWater", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-  res.flushHeaders();
-
-  subscribers.push(res);
+  pollers.push(res);
   req.on("close", () => {
-    subscribers.splice(subscribers.indexOf(res), 1);
+    pollers.splice(pollers.indexOf(res), 1);
   });
 });
 
@@ -533,7 +525,7 @@ The `curl` commands below work on macOS, Linux, and Windows Git Bash. On Windows
 GUI HTTP clients like [Postman](https://www.postman.com/), [Bruno](https://www.usebruno.com/), and [Insomnia](https://insomnia.rest/) are especially convenient for POST requests — you can set the body, send, and inspect the response without constructing a curl command.
 :::
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="macos-linux" label="macOS / Linux" default>
 
 ```bash
@@ -563,16 +555,16 @@ Your server terminal will log: `Brewing medium. Beans: 308g | Water: 820ml`
 
 The `lowOnWater` event fires when water drops below 500 ml. Starting from 1000 ml, three medium brews use 540 ml total, leaving 460 ml.
 
-To observe the event in real time, open a second terminal and subscribe to the SSE endpoint **before** brewing:
+To observe the event in real time, open a second terminal and open a long poll **before** brewing:
 
 ```bash
-curl -N http://localhost:8080/smart-coffee-machine/events/lowOnWater
+curl http://localhost:8080/smart-coffee-machine/events/lowOnWater
 ```
 
-The `-N` flag disables output buffering, so events appear as they arrive. Then brew three medium coffees in your first terminal. On the third brew, you'll see the event payload appear in the subscriber terminal:
+The request will hang until the event fires. Then brew three medium coffees in your first terminal. On the third brew, the long poll responds and you'll see the payload in the second terminal:
 
 ```
-data: 460
+460
 ```
 
 Your server terminal will also log: `Low water event emitted: 460ml remaining`
@@ -580,5 +572,3 @@ Your server terminal will also log: `Low water event emitted: 460ml remaining`
 ## Summary
 
 The coffee machine now exposes all three interaction affordance types: properties that describe its state, an action that changes it, and an event that notifies Consumers when something important happens. The TD describes all three — what data each interaction accepts, what it returns, and the exact URLs to use.
-
-In the next tutorial, we'll write a Consumer — an application that fetches the TD and uses it to read properties, invoke the action, and subscribe to the event, with no hardcoded URLs.

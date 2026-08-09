@@ -1,11 +1,11 @@
 ---
-sidebar_label: Building a Thing
+sidebar_label: Building a Thing - Part 1
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Building a Thing
+# Building a Thing - Part 1
 
 ## Introduction
 
@@ -45,7 +45,7 @@ npm init -y
 
 Now install the dependencies for whichever approach you're following:
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 ```bash
@@ -77,7 +77,7 @@ Create a file called `thing.js` in the project folder. That's where the implemen
 
 A property affordance in the TD carries the data schema (`type`, `minimum`, `maximum`, `readOnly`) and a `forms` array that tells Consumers how to read it. With node-wot you define this in code and the TD is generated for you; with Express you maintain it as a JavaScript object.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 In node-wot the runtime is called a Servient. We create one, attach an HTTP server, and start it. Everything else happens inside the `.then()` callback once the runtime is ready. We call `WoT.produce()` with an object that mirrors the TD structure — node-wot registers all HTTP routes and generates the full TD automatically.
@@ -98,14 +98,13 @@ servient.start().then((WoT) => {
     description: "Remote controllable coffee machine",
     id: "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
     "@context": "https://www.w3.org/2022/wot/td/v1.1",
-    securityDefinitions: { nosec_sc: { scheme: "nosec" } },
-    security: "nosec_sc",
     properties: {
       coffeeBeansLeft: {
         title: "Remaining Coffee Beans",
         type: "number",
         minimum: 0,
         maximum: 500,
+        unit: "g",
         readOnly: true,
         observable: false,
       },
@@ -114,6 +113,7 @@ servient.start().then((WoT) => {
         type: "number",
         minimum: 0,
         maximum: 1000,
+        unit: "mL",
         readOnly: true,
         observable: false,
       }
@@ -144,18 +144,16 @@ const thingDescription = {
   "id": "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
   "title": "Smart Coffee Machine",
   "description": "Remote controllable coffee machine",
-  "securityDefinitions": { "nosec_sc": { "scheme": "nosec" } },
-  "security": "nosec_sc",
   "properties": {
     "coffeeBeansLeft": {
       "title": "Remaining Coffee Beans",
-      "type": "number", "minimum": 0, "maximum": 500,
+      "type": "number", "minimum": 0, "maximum": 500, "unit": "g",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/coffeeBeansLeft`, "contentType": "application/json", "op": "readproperty" }]
     },
     "waterLevel": {
       "title": "Water Level",
-      "type": "number", "minimum": 0, "maximum": 1000,
+      "type": "number", "minimum": 0, "maximum": 1000, "unit": "mL",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
@@ -174,7 +172,7 @@ Any time you add a route below, you must also add a matching `forms` entry to th
 
 With the TD defined, we connect it to the actual values the properties should return.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `setPropertyReadHandler` runs whenever a Consumer reads that property. It simply returns the current value of the matching variable.
@@ -206,10 +204,10 @@ app.get("/smart-coffee-machine/properties/waterLevel", (req, res) => {
 
 The last step starts the server and makes the Thing reachable on the network.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
-`thing.expose()` starts the HTTP server and publishes the Thing. The full TD — with all `forms` filled in automatically — becomes available at the root URL.
+`thing.expose()` exposes the Thing, making its interaction affordances reachable over the network. The full TD — with all `forms` filled in automatically — is served at the root URL.
 
 ```javascript
 thing.expose().then(() => {
@@ -217,6 +215,10 @@ thing.expose().then(() => {
   console.log("  HTTP → http://localhost:8080/smart-coffee-machine");
 });
 ```
+
+:::note
+node-wot derives the URL path from the `title` field: it lowercases the string and replaces spaces with hyphens. `"Smart Coffee Machine"` becomes `smart-coffee-machine`. The root URL always follows the pattern `http://[host]:[port]/[sanitized-title]`.
+:::
 
   </TabItem>
   <TabItem value="express" label="Express.js">
@@ -233,10 +235,10 @@ app.listen(PORT, () => {
   </TabItem>
 </Tabs>
 
-<details>
+<details id="complete-thing-js">
 <summary>View complete <code>thing.js</code></summary>
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 ```javascript
@@ -255,14 +257,13 @@ servient.start().then((WoT) => {
     description: "Remote controllable coffee machine",
     id: "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
     "@context": "https://www.w3.org/2022/wot/td/v1.1",
-    securityDefinitions: { nosec_sc: { scheme: "nosec" } },
-    security: "nosec_sc",
     properties: {
       coffeeBeansLeft: {
         title: "Remaining Coffee Beans",
         type: "number",
         minimum: 0,
         maximum: 500,
+        unit: "g",
         readOnly: true,
         observable: false,
       },
@@ -271,6 +272,7 @@ servient.start().then((WoT) => {
         type: "number",
         minimum: 0,
         maximum: 1000,
+        unit: "mL",
         readOnly: true,
         observable: false,
       }
@@ -307,18 +309,16 @@ const thingDescription = {
   "id": "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
   "title": "Smart Coffee Machine",
   "description": "Remote controllable coffee machine",
-  "securityDefinitions": { "nosec_sc": { "scheme": "nosec" } },
-  "security": "nosec_sc",
   "properties": {
     "coffeeBeansLeft": {
       "title": "Remaining Coffee Beans",
-      "type": "number", "minimum": 0, "maximum": 500,
+      "type": "number", "minimum": 0, "maximum": 500, "unit": "g",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/coffeeBeansLeft`, "contentType": "application/json", "op": "readproperty" }]
     },
     "waterLevel": {
       "title": "Water Level",
-      "type": "number", "minimum": 0, "maximum": 1000,
+      "type": "number", "minimum": 0, "maximum": 1000, "unit": "mL",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
@@ -337,6 +337,56 @@ app.listen(PORT, () => {
 
   </TabItem>
 </Tabs>
+
+</details>
+
+<details>
+<summary>View complete Thing Description</summary>
+
+Both implementations serve the same TD. This is what a Consumer receives when it fetches `http://localhost:8080/smart-coffee-machine`:
+
+```json
+{
+  "@context": "https://www.w3.org/2022/wot/td/v1.1",
+  "id": "urn:uuid:0804d572-cce8-422a-bb7c-4412fcd56f06",
+  "title": "Smart Coffee Machine",
+  "description": "Remote controllable coffee machine",
+  "properties": {
+    "coffeeBeansLeft": {
+      "title": "Remaining Coffee Beans",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 500,
+      "unit": "g",
+      "readOnly": true,
+      "observable": false,
+      "forms": [
+        {
+          "href": "http://localhost:8080/smart-coffee-machine/properties/coffeeBeansLeft",
+          "contentType": "application/json",
+          "op": "readproperty"
+        }
+      ]
+    },
+    "waterLevel": {
+      "title": "Water Level",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000,
+      "unit": "mL",
+      "readOnly": true,
+      "observable": false,
+      "forms": [
+        {
+          "href": "http://localhost:8080/smart-coffee-machine/properties/waterLevel",
+          "contentType": "application/json",
+          "op": "readproperty"
+        }
+      ]
+    }
+  }
+}
+```
 
 </details>
 

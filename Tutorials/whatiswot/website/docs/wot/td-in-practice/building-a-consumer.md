@@ -19,7 +19,7 @@ In this tutorial you'll write a Consumer that reads the initial machine state, b
 
 Make sure your Thing server is running (`node thing.js` in a terminal). Create a new file called `consumer.js` in the same project folder.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 Just like the Thing side uses a Servient with servers attached, the Consumer side uses a Servient with client factories — one per protocol it needs to speak. Here we only need HTTP.
@@ -58,7 +58,7 @@ run().catch(console.error);
 
 The Consumer's first step is always to fetch the TD. From that point on, all URLs and protocol details come from the TD's `forms` entries — the Consumer never constructs a URL itself.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `WoT.requestThingDescription()` fetches and parses the TD. `WoT.consume(td)` returns a `ConsumedThing` — an object that exposes all the affordances described in the TD as method calls.
@@ -86,7 +86,7 @@ console.log(`Connected to: ${td.title}`);
 
 With the TD in hand, we can read properties. With node-wot the `ConsumedThing` handles the HTTP request automatically; with fetch we look up the `href` from the TD's `forms` and request it directly.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `readProperty()` uses the TD's forms to issue the correct HTTP request and deserialise the response. Calling `.value()` on the result gives the plain JavaScript value.
@@ -118,7 +118,7 @@ console.log(`Beans: ${beans}g | Water: ${water}ml`);
 
 Invoking an action follows the same pattern — look up the form, send the request with the input, and read the response.
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `invokeAction()` sends the input object, waits for the response, and returns it. Calling `.value()` deserialises the output into a plain JavaScript object.
@@ -160,7 +160,7 @@ console.log(`After brew — Beans: ${beansAfter}g | Water: ${waterAfter}ml`);
 
 Events work differently from properties and actions — instead of a request/response cycle, the Consumer maintains a persistent connection and receives notifications as they happen. Here's how to subscribe to the `lowOnWater` event:
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 `subscribeEvent()` keeps the connection open and calls the callback each time the event fires. Set this up before invoking any actions that might trigger it.
@@ -175,16 +175,19 @@ await thing.subscribeEvent("lowOnWater", async (data) => {
   </TabItem>
   <TabItem value="express" label="Express.js">
 
-The event endpoint uses [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). In Node.js, subscribing to an SSE endpoint requires the `eventsource` package (`npm install eventsource`) — browsers have `EventSource` built in.
+The event endpoint uses long polling — we send a GET request that hangs until the event fires, then immediately re-poll. No external packages needed.
 
 ```javascript
-const EventSource = require("eventsource");
-
 const eventForm = td.events.lowOnWater.forms.find(f => f.op === "subscribeevent");
-const es = new EventSource(eventForm.href);
-es.onmessage = (event) => {
-  console.log(`Low on water: ${JSON.parse(event.data)}ml remaining`);
+
+const pollEvent = async () => {
+  while (true) {
+    const res = await fetch(eventForm.href);
+    const level = await res.json();
+    console.log(`Low on water: ${level}ml remaining`);
+  }
 };
+pollEvent();
 ```
 
   </TabItem>
@@ -193,7 +196,7 @@ es.onmessage = (event) => {
 <details>
 <summary>View complete <code>consumer.js</code></summary>
 
-<Tabs>
+<Tabs groupId="implementation">
   <TabItem value="nodewot" label="node-wot" default>
 
 ```javascript
@@ -235,8 +238,6 @@ servient.start().then(async (WoT) => {
   <TabItem value="express" label="Express.js">
 
 ```javascript
-const EventSource = require("eventsource");
-
 const TD_URL = "http://localhost:8080/smart-coffee-machine";
 
 async function run() {
@@ -244,15 +245,19 @@ async function run() {
   const td = await (await fetch(TD_URL)).json();
   console.log(`Connected to: ${td.title}`);
 
-  const eventForm = td.events.lowOnWater.forms.find(f => f.op === "subscribeevent");
-  const es = new EventSource(eventForm.href);
-  es.onmessage = (event) => {
-    console.log(`Low on water: ${JSON.parse(event.data)}ml remaining`);
-  };
-
   const beansForm = td.properties.coffeeBeansLeft.forms.find((f) => f.op === "readproperty");
   const waterForm = td.properties.waterLevel.forms.find((f) => f.op === "readproperty");
   const brewForm  = td.actions.brewCoffee.forms.find((f) => f.op === "invokeaction");
+  const eventForm = td.events.lowOnWater.forms.find(f => f.op === "subscribeevent");
+
+  const pollEvent = async () => {
+    while (true) {
+      const res = await fetch(eventForm.href);
+      const level = await res.json();
+      console.log(`Low on water: ${level}ml remaining`);
+    }
+  };
+  pollEvent();
 
   const beans = await (await fetch(beansForm.href)).json();
   const water = await (await fetch(waterForm.href)).json();
@@ -272,7 +277,6 @@ async function run() {
   const waterAfter = await (await fetch(waterForm.href)).json();
   console.log(`After brews — Beans: ${beansAfter}g | Water: ${waterAfter}ml`);
 
-  es.close();
 }
 
 run().catch(console.error);
