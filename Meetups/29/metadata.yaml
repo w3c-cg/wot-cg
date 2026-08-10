@@ -6,7 +6,24 @@ w3c_event_link: "https://www.w3.org/events/meetings/b0b77d2e-5c92-4338-84ce-af3e
 thumbnail: "W3C_WoT_Meetup_29.png"
 speakers:
   - name: "Erich Barnstedt"
+    organisation: null
+    bio: >-
+      Erich has worked in various engineering roles at Microsoft for over 22 years, initially in
+      the Windows team and later in the Azure team. Throughout his career, he worked in the
+      automotive and manufacturing verticals and is the founder of both the Windows and the Azure
+      Industrial IoT teams. He is the inventor of many Industrial IoT products from Microsoft.
+      More recently, he shifted his work to the support of open industrial standards in Microsoft
+      products as well as commitments to open-source and consortia work in the Corporate Standards
+      Group at Microsoft as Senior Director and Architect.
   - name: "Sebastian Kaebisch"
+    organisation: null
+    bio: >-
+      Dr. Sebastian Käbisch is a Principal Key Expert at Siemens Foundational Technologies in
+      Munich, Germany. His work focuses on the efficient realization and usage of standardized
+      Internet & Web technologies for the Industrial Internet of Things domain. He leads strategic
+      initiatives, research, and development for Siemens business units such as industrial and
+      building automation. Sebastian is co-chair of the W3C Web of Things and chairs the OPC UA
+      Binding for Web of Things working group at the OPC Foundation.
 presenter_slides:
   - file: "2025-10-WoTCG-Meetup29-Barnstedt-Microsoft.pdf"
     label: "Erich"
@@ -22,3 +39,12 @@ description: >-
   industrial automation systems built with OPC UA. First, they show TDs can be used to
   onboard non OPC UA devices and then explain how to represent OPC UA servers with TDs using
   the OPC UA Binding. Also, you get to see open-source projects supporting both workflows.
+
+youtube_description: |
+  In this meetup, we welcome Erich Barnstedt from Microsoft and Sebastian Käbisch from Siemens. They show how Web of Things is becoming a successful building block for industrial automation systems built with OPC UA. First, they show TDs can be used to onboard non OPC UA devices and then explain how to represent OPC UA servers with TDs using the OPC UA Binding. Also, you get to see open-source projects supporting both workflows.
+
+  Useful Links:
+  Presenter slides (Erich): https://github.com/w3c-cg/wot-cg/blob/main/Meetups/29/2025-10-WoTCG-Meetup29-Barnstedt-Microsoft.pdf
+  Presenter slides (Sebastian): https://github.com/w3c-cg/wot-cg/blob/main/Meetups/29/2025-10-WoTCG-Meetup29-Kaebisch-Siemens.pdf
+  Intro slides: https://docs.google.com/presentation/d/1SeGbmA9skmgVQEbsnO2904Lj8ztp-HsCX9M3MIxbSWc/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/29/2025-10-16-minutes.md

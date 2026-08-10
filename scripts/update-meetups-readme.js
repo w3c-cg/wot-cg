@@ -8,8 +8,10 @@ const yaml = require('js-yaml');
 const MONTHS = ['January','February','March','April','May','June',
   'July','August','September','October','November','December'];
 
-// Newest 3 get a thumbnail card, the rest are collapsed.
+// Newest few get a big thumbnail card; the rest are collapsed with a small one.
 const LATEST_COUNT = 3;
+const CARD_IMG_WIDTH = 400;
+const OLDER_IMG_WIDTH = 253;
 
 function formatDate(dateStr) {
   const [d, m, y] = String(dateStr).split('-');
@@ -18,15 +20,12 @@ function formatDate(dateStr) {
   return `${parseInt(d, 10)} ${month} ${y}`;
 }
 
-function formatSpeakers(speakers) {
-  return speakers
-    .map(s => s.organisation ? `${s.name} - ${s.organisation}` : s.name)
-    .join(', ');
-}
+// "Name - Org", or just "Name" when organisation is null.
+function nameOf(s) { return s.organisation ? `${s.name} - ${s.organisation}` : s.name; }
 
-function presenterLabel(speakers) {
-  return speakers.length > 1 ? 'Presenters' : 'Presenter';
-}
+function presenterLabel(speakers) { return speakers.length > 1 ? 'Presenters' : 'Presenter'; }
+
+// ----- older meetups: plain markdown bullet section -----
 
 // A deck can be a local file, an online url, or both.
 function presenterSlideLinks(folder, slides) {
@@ -39,131 +38,122 @@ function presenterSlideLinks(folder, slides) {
   });
 }
 
-function introSlideLinks(folder, intro) {
-  if (!intro) return [];
-  const links = [];
-  if (intro.google_slides) links.push(`[Google Slides](${intro.google_slides})`);
-  if (intro.pdf) links.push(`[PDF](./${folder}/${intro.pdf})`);
-  return links;
+// Intro slides bundled onto one line so they read as one thing.
+function introSlideLine(folder, intro) {
+  if (!intro) return null;
+  const parts = [];
+  if (intro.google_slides) parts.push(`[Google Slides](${intro.google_slides})`);
+  if (intro.pdf) parts.push(`[PDF](./${folder}/${intro.pdf})`);
+  return parts.length ? `- Intro Slides: ${parts.join(' | ')}` : null;
 }
 
-function cellSafe(text) {
-  return String(text)
-    .replace(/\|/g, '\\|')
-    .replace(/\n+/g, '<br><br>');
-}
+function blockText(text) { return String(text).replace(/\n+/g, '\n\n'); }
 
-function blockText(text) {
-  return String(text).replace(/\n+/g, '\n\n');
-}
-
-function details(summary, body, inTable) {
-  return inTable
-    ? `<details><summary>${summary}</summary><br>${body}</details>`
-    : `<details>\n<summary>${summary}</summary>\n\n${body}\n\n</details>`;
-}
-
-function descriptionBlock(data, inTable) {
-  if (!data.description) return null;
-  const body = inTable ? cellSafe(data.description) : blockText(data.description);
-  return details('Description', body, inTable);
-}
-
-// One collapsible bio per speaker. Falls back to a single line if nobody has one.
-function speakerLines(speakers, inTable) {
+function speakerLinesMd(speakers) {
   const label = presenterLabel(speakers);
-
   if (!speakers.some(s => s.bio)) {
-    const joined = formatSpeakers(speakers);
-    return inTable
-      ? [`**${label}:** ${cellSafe(joined)}`]
-      : [`- ${label}: ${joined}`];
+    return [`- ${label}: ${speakers.map(nameOf).join(', ')}`];
   }
-
-  const nameOf = s => (s.organisation ? `${s.name} - ${s.organisation}` : s.name);
-
-  if (inTable) {
-    const parts = speakers.map(s => {
-      const who = cellSafe(nameOf(s));
-      return s.bio ? `${who} ${details('Bio', cellSafe(s.bio), true)}` : who;
-    });
-    return [`**${label}:**`, ...parts];
-  }
-
   const lines = [`- ${label}:`];
   for (const s of speakers) {
     lines.push(`  - ${nameOf(s)}`);
-    if (s.bio) lines.push(`    ${details('Bio', s.bio, true)}`);
+    if (s.bio) lines.push(`    <details><summary>Bio</summary><br>${s.bio}</details>`);
   }
   return lines;
 }
 
-// Bullet list, used for the older meetups.
 function generateSection(folder, data) {
   const lines = [`## Meetup ${data.meetup}`, ''];
 
+  // Small thumbnail floated to the right of the bullet list.
+  if (data.thumbnail) {
+    const img = `<img src="./${folder}/${data.thumbnail}" width="${OLDER_IMG_WIDTH}" align="right" alt="${htmlEsc(data.title)}">`;
+    lines.push(data.youtube_url ? `<a href="${data.youtube_url}">${img}</a>` : img, '');
+  }
+
   lines.push(`- Name: ${data.title}`);
-
-  if (data.speakers?.length > 0) {
-    lines.push(...speakerLines(data.speakers, false));
-  }
-
+  if (data.speakers?.length > 0) lines.push(...speakerLinesMd(data.speakers));
   lines.push(`- Date: ${formatDate(data.date)}`);
-
-  for (const link of presenterSlideLinks(folder, data.presenter_slides)) {
-    lines.push(`- ${link}`);
-  }
-
-  const introLinks = introSlideLinks(folder, data.intro_slides);
-  if (introLinks.length > 0) lines.push(`- Intro Slides: ${introLinks.join(' | ')}`);
-
+  for (const link of presenterSlideLinks(folder, data.presenter_slides)) lines.push(`- ${link}`);
+  const intro = introSlideLine(folder, data.intro_slides);
+  if (intro) lines.push(intro);
   lines.push(data.youtube_url ? `- [Video](${data.youtube_url})` : '- No Video Available');
-
   if (data.minutes) lines.push(`- [Minutes](./${folder}/${data.minutes})`);
   if (data.w3c_event_link) lines.push(`- [W3C Event Page](${data.w3c_event_link})`);
 
-  const description = descriptionBlock(data, false);
-  if (description) lines.push('', description);
+  if (data.description) {
+    lines.push('', `<details>\n<summary>Description</summary>\n\n${blockText(data.description)}\n\n</details>`);
+  }
 
   lines.push('');
   return lines.join('\n');
 }
 
-// Table row with the thumbnail, used for the newest meetups.
-function generateCard(folder, data) {
-  const thumb = data.thumbnail
-    ? `![${data.title}](./${folder}/${data.thumbnail})`
-    : '_No thumbnail_';
-  const thumbCell = data.youtube_url ? `[${thumb}](${data.youtube_url})` : thumb;
+// ----- latest meetups: HTML card (no empty header row, sized image) -----
 
-  const detail = [`**${cellSafe(data.title)}**`];
+function htmlEsc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');   // needed for values that land in alt="..."
+}
+function htmlText(s) { return htmlEsc(s).replace(/\n+/g, '<br><br>'); }
+function aTag(text, url) { return `<a href="${url}">${htmlEsc(text)}</a>`; }
 
-  if (data.speakers?.length > 0) {
-    detail.push(...speakerLines(data.speakers, true));
-  }
-
-  detail.push(`**Date:** ${formatDate(data.date)}`);
-
-  const links = [];
-  if (data.youtube_url) links.push(`[Video](${data.youtube_url})`);
-  links.push(...presenterSlideLinks(folder, data.presenter_slides));
-  links.push(...introSlideLinks(folder, data.intro_slides));
-  if (data.minutes) links.push(`[Minutes](./${folder}/${data.minutes})`);
-  if (data.w3c_event_link) links.push(`[W3C Event Page](${data.w3c_event_link})`);
-  if (links.length > 0) detail.push(links.join(' • '));
-
-  const description = descriptionBlock(data, true);
-  if (description) detail.push(description);
-
-  return `| ${thumbCell} | ${detail.join('<br>')} |`;
+function cardSpeakers(speakers) {
+  const items = speakers.map(s => {
+    const who = htmlEsc(nameOf(s));
+    return s.bio ? `${who} <details><summary>Bio</summary><br>${htmlText(s.bio)}</details>` : who;
+  });
+  return `<b>${presenterLabel(speakers)}:</b> ${items.join(', ')}`;
 }
 
-// Strip what we generated last time, otherwise re-running duplicates it.
+function cardLinks(folder, data) {
+  const parts = [];
+  if (data.youtube_url) parts.push(aTag('Video', data.youtube_url));
+  for (const s of data.presenter_slides ?? []) {
+    const label = s.label ? `Presenter Slides - ${s.label}` : 'Presenter Slides';
+    const url = s.file ? `./${folder}/${encodeURIComponent(s.file)}` : s.url;
+    if (url) parts.push(aTag(label, url));
+  }
+  // Intro slides bundled into one entry.
+  const intro = data.intro_slides ?? {};
+  const introParts = [];
+  if (intro.google_slides) introParts.push(aTag('Google Slides', intro.google_slides));
+  if (intro.pdf) introParts.push(aTag('PDF', `./${folder}/${encodeURIComponent(intro.pdf)}`));
+  if (introParts.length) parts.push(`Intro Slides: ${introParts.join(' | ')}`);
+  if (data.minutes) parts.push(aTag('Minutes', `./${folder}/${encodeURIComponent(data.minutes)}`));
+  if (data.w3c_event_link) parts.push(aTag('W3C Event Page', data.w3c_event_link));
+  return parts.join(' • ');
+}
+
+function generateCard(folder, data) {
+  const imgInner = data.thumbnail
+    ? `<img src="./${folder}/${encodeURIComponent(data.thumbnail)}" width="${CARD_IMG_WIDTH}" alt="${htmlEsc(data.title)}">`
+    : '<em>No thumbnail</em>';
+  const thumb = data.youtube_url ? `<a href="${data.youtube_url}">${imgInner}</a>` : imgInner;
+
+  const detail = [`<b>${htmlEsc(data.title)}</b>`, '<br><br>'];       // title, then a gap
+  if (data.speakers?.length > 0) detail.push(cardSpeakers(data.speakers), '<br>');
+  detail.push(`<b>Date:</b> ${formatDate(data.date)}`, '<br><br>');
+  detail.push(cardLinks(folder, data));
+  if (data.description) {
+    detail.push('<br><br>', `<details><summary>Description</summary><br>${htmlText(data.description)}</details>`);
+  }
+
+  return `<tr>\n<td width="${CARD_IMG_WIDTH + 40}">${thumb}</td>\n<td>${detail.join('\n')}</td>\n</tr>`;
+}
+
+// ----- read / regenerate -----
+
+// Strip what we generated last time so re-running doesn't duplicate it. The
+// "Latest Meetups" block is removed up to the older-meetups wrapper (or the
+// first section) regardless of whether it was the old markdown table or the
+// new HTML one, so the format transition is handled too.
 function stripGeneratedWrappers(content) {
   return content
-    .replace(/\n?## Latest Meetups\n\n(?:\|[^\n]*\n)*\n?/, '\n')
-    .replace(/\n?<details>\n<summary>[^\n]*<\/summary>\n\n/, '\n')
-    .replace(/\n?<\/details>\n?/, '\n');
+    .replace(/\n?## Latest Meetups[\s\S]*?(?=\n<details>\n<summary>Show \d+ older|\n## Meetup |$)/, '\n')
+    .replace(/\n?<details>\n<summary>Show \d+ older meetup\(s\)<\/summary>\n\n/, '\n')
+    .replace(/\n?<\/details>\n?$/, '\n');
 }
 
 function parseReadme(content) {
@@ -180,9 +170,11 @@ function parseReadme(content) {
 const meetupsDir = path.join(__dirname, '..', 'Meetups');
 const readmePath = path.join(meetupsDir, 'Readme.md');
 
-const { header, sections } = parseReadme(fs.readFileSync(readmePath, 'utf8'));
+// Normalise to LF so the strip/parse regexes behave the same on Windows
+// (CRLF) checkouts; the file is rewritten with LF endings.
+const { header, sections } = parseReadme(fs.readFileSync(readmePath, 'utf8').replace(/\r\n/g, '\n'));
 
-// Only meetups with a metadata.yaml.
+// Only meetups with a metadata.yaml. Meetup 9 has none, so its text is kept.
 const meetups = {};
 
 const updated = [];
@@ -209,31 +201,23 @@ const olderNums = allNums.slice(LATEST_COUNT);
 
 let newContent = header.trimEnd() + '\n\n## Latest Meetups\n\n';
 
-// One shared table for the cards. A meetup without a yaml closes the table
-// and falls back to its bullet section.
+// Cards for meetups with a yaml go in one shared table; a meetup without one
+// closes the table and falls back to its bullet section.
 let tableOpen = false;
 for (const num of latestNums) {
   if (meetups[num]) {
-    if (!tableOpen) {
-      newContent += '| | |\n|---|---|\n';
-      tableOpen = true;
-    }
+    if (!tableOpen) { newContent += '<table>\n'; tableOpen = true; }
     newContent += generateCard(meetups[num].folder, meetups[num].data) + '\n';
   } else {
-    if (tableOpen) {
-      newContent += '\n';
-      tableOpen = false;
-    }
+    if (tableOpen) { newContent += '</table>\n\n'; tableOpen = false; }
     newContent += sections[num].trimEnd() + '\n\n';
   }
 }
-if (tableOpen) newContent += '\n';
+if (tableOpen) newContent += '</table>\n\n';
 
 if (olderNums.length > 0) {
   newContent += `<details>\n<summary>Show ${olderNums.length} older meetup(s)</summary>\n\n`;
-  for (const num of olderNums) {
-    newContent += sections[num].trimEnd() + '\n\n';
-  }
+  for (const num of olderNums) newContent += sections[num].trimEnd() + '\n\n';
   newContent += '</details>\n';
 }
 

@@ -7,6 +7,12 @@ thumbnail: "W3C_WoT_Meetup_4.png"
 speakers:
   - name: "Jan Romann"
     organisation: "University of Bremen"
+    bio: >-
+      Jan Romann has a background in political science and is currently working toward a Master's
+      degree in Computer Science at the University of Bremen, Germany. Dealing with the Web of
+      Things for about 2.5 years, he became an Invited Expert to the Working Group in September
+      2021. His current focus is on the use of CoAP and related technologies in the context of the
+      WoT as well as Thing Model conversion.
 presenter_slides:
   - file: "2023-02-WoTCG-Meetup4-Romann.pdf"
 intro_slides:
@@ -21,3 +27,11 @@ description: >-
   only during their visits. Additionally, an open-source WoT implementation based on the
   Dart programming language will be shown, which allows WoT Consumers to be deployed on
   smartphones.
+
+youtube_description: |
+  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will present an approach that allows constrained IoT devices to delegate authentication and authorization using the Web of Things. In the framework of the NAMIB project, he will demonstrate this approach in a use case where hotel guests need to have access to their smart environments only during their visits. Additionally, an open-source WoT implementation based on the Dart programming language will be shown, which allows WoT Consumers to be deployed on smartphones.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/04/2023-02-WoTCG-Meetup4-Romann.pdf
+  Intro slides: https://docs.google.com/presentation/d/1BxWkEPw0off4qOSyS6hsb3kVlJAGX1EU1dQGqdPLYds/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/04/2023-02-23-minutes.md

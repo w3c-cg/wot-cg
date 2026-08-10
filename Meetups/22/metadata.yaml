@@ -6,6 +6,12 @@ w3c_event_link: "https://www.w3.org/events/meetings/6373e85a-936c-4c9e-8db4-919a
 thumbnail: "W3C_WoT_Meetup_22.png"
 speakers:
   - name: "Vignesh Venkata Subramanian"
+    organisation: null
+    bio: >-
+      Vignesh is a software developer at Centre for Advanced Laser Applications in Munich. Having
+      studied both physics and electrical engineering and gained solid knowledge of hardware, he
+      intends to make scientific data acquisition easy for the python community. He will be there
+      in the WoT Week next week and is excited to meet the community.
 presenter_slides:
   - file: "2024-11-WoTCG-Meetup22-Scientific_Instrumentation-CALA.pdf"
 intro_slides:
@@ -19,3 +25,11 @@ description: >-
   from different scientific instruments with his beginner friendly server side runtime
   called hololinked. He further demonstrates the use case of state machine in building GUI
   applications with Eclipse Thingweb node-wot.
+
+youtube_description: |
+  In this meetup, we welcome Vignesh Vaidyanathan who discusses potential applications of WoT in Scientific Instrumentation and Control applications in large-scale experimentation labs. He shows a WoT setup implemented in a 3 Terawatt pulsed laser system to capture data from different scientific instruments with his beginner friendly server side runtime called hololinked. He further demonstrates the use case of state machine in building GUI applications with Eclipse Thingweb node-wot.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/22/2024-11-WoTCG-Meetup22-Scientific_Instrumentation-CALA.pdf
+  Intro slides: https://docs.google.com/presentation/d/1ZorsPNGiC3qEeLarrggwyB6G3rgmRz42_vEz5s8icq8/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/22/2024-11-18-minutes.md

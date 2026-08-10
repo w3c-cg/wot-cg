@@ -7,6 +7,12 @@ thumbnail: "W3C_WoT_Meetup_1.png"
 speakers:
   - name: "Thomas Jaeckle"
     organisation: "Bosch.io"
+    bio: >-
+      Thomas Jäckle is Committer and Project Lead of the Eclipse Ditto project which was created
+      in 2017. As a Senior Expert for IoT and Lead Software Developer for the commercial Bosch IoT
+      Things cloud service he works for Bosch.IO GmbH, one of the leading members of the Eclipse
+      IoT working group. He is also part of the WoT Working Group and contributor to the Thing
+      Description.
 presenter_slides:
   - file: "2022-10-WoTCG-Meetup1-EclipseDitto-and-WoT-Jaeckle.pdf"
     url: "https://www.eclipse.org/ditto/slides/2022_10_ditto-and-wot/"

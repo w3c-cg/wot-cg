@@ -6,7 +6,18 @@ w3c_event_link: "https://www.w3.org/events/meetings/f3841afd-9304-447e-8e60-cb0a
 thumbnail: "W3C_WoT_Meetup_24.png"
 speakers:
   - name: "Fady Salama"
+    organisation: null
+    bio: >-
+      Fady Salama is a Research Associate in the Professorship of Embedded Systems and IoT, TUM.
+      He began his research journey by exploring innovative approaches to integrating the Web of
+      Things with complex cyber-physical systems, aiming to enhance their description,
+      interaction, and interoperability.
   - name: "Roman Binkert"
+    organisation: null
+    bio: >-
+      Roman Binkert is a Research Associate at the same research group as Fady. He is interested
+      in Web of Things and how to apply it for manufacturing, robotics and the industrial
+      metaverse.
 presenter_slides:
   - file: "2025-03-WoTCG-Meetup24-Immersive_WoT_Apps_in_MR-TUM.pdf"
 intro_slides:
@@ -20,3 +31,11 @@ description: >-
   application that works with Mixed Reality Headsets such as Hololens. Its open-source
   components such as the new .Net library WoT.Net will be also introduced for those who want
   to build other applications based on that.
+
+youtube_description: |
+  In this meetup, we welcome Fady Salama and Roman Binkert from the Technical University of Munich. They will talk about how WoT simplifies interacting with the devices and creating mashups of devices in mixed reality environments. They will introduce HoloWoT, a Unity application that works with Mixed Reality Headsets such as Hololens. Its open-source components such as the new .Net library WoT.Net will be also introduced for those who want to build other applications based on that.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/24/2025-03-WoTCG-Meetup24-Immersive_WoT_Apps_in_MR-TUM.pdf
+  Intro slides: https://docs.google.com/presentation/d/16EdKkX29RnluzM9PbSPEcgcrkeJER8Vt4hMhR8lTXb4/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/24/2025-03-10-minutes.md

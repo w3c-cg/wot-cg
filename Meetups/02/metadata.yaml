@@ -7,6 +7,11 @@ thumbnail: "W3C_WoT_Meetup_2.png"
 speakers:
   - name: "Robert Winkler"
     organisation: "Deutsche Telekom"
+    bio: >-
+      Robert Winkler works as a solution architect at Deutsche Telekom AG in Darmstadt, Germany.
+      He is responsible for the architecture of Magenta Smart Home and MagentaZuhause App. He is
+      also the creator of Resilience4j. Resilience4j is a lightweight fault tolerance library
+      designed for functional programming that is used by multiple companies worldwide.
 presenter_slides:
   - file: "2022-08-WoTCG-Meetup2-MagentaZuhauseApp-Winkler.pdf"
 intro_slides:

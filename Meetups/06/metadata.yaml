@@ -7,10 +7,33 @@ thumbnail: "W3C_WoT_Meetup_6.png"
 speakers:
   - name: "Erich Barnstedt"
     organisation: "Microsoft"
+    bio: >-
+      Erich has worked in various engineering roles at Microsoft for 20 years, initially in the
+      Windows team and later in the Azure team. Throughout his career, he worked in the automotive
+      and manufacturing verticals and is the founder of both the Windows and the Azure Industrial
+      IoT teams. More recently, he shifted his work to the support of open standards in Microsoft
+      products as well as commitments to open-source and consortia work at Microsoft as Chief
+      Architect. He is the holder of various IoT-related patents and has a bachelor and two
+      master's degrees in computer science from Trinity College, Dublin.
   - name: "Sebastian Käbisch"
     organisation: "Siemens"
+    bio: >-
+      Sebastian Käbisch is a Senior Key Expert at Siemens Technology in Munich, Germany. His work
+      focuses on the efficient realization and usage of standardized Internet & Web technologies
+      for the Industrial Internet of Things domain. Thereby, he drives strategic initiatives,
+      research and development for Siemens business units such as industrial and building
+      automation. Sebastian Käbisch is an active member and contributor of standardization groups
+      such as ECLASS, Industrial Digital Twin Association, and W3C Web of Things. In the latter he
+      is co-chair and coordinates the topics around the W3C Thing Description.
   - name: "Felix Paulini"
     organisation: "Evosoft"
+    bio: >-
+      Felix Paulini is a software developer since 2014, with a strong interest in smart automation
+      systems. He started with automation of software quality assurance and quickly changed to
+      develop software solutions for optimization problems. He then developed a lot of
+      connectivity solutions and got in contact with Web of Things in 2019. Since 2021 he is
+      Product Owner for the Siemens InnerSource implementation sayWoT! and enthusiastically
+      spreading the idea of WoT in software solutions.
 presenter_slides:
   - file: "2023-04-WoTCG-Meetup6-Siemens-Microsoft.pdf"
 intro_slides:
@@ -24,3 +47,11 @@ description: >-
   industrial asset into the cloud systems of two different organizations. This shows that
   device descriptions based on common web standards enable real interoperability across IoT
   stacks and provide a vendor-neutral device onboarding and communication experience.
+
+youtube_description: |
+  In this W3C WoT CG Meetups, we welcome Microsoft and Siemens for a joint presentation. Erich Barnstedt from Microsoft, together with Sebastian Käbisch from Siemens and Felix Paulini from evosoft show how the same Thing Description can be used to onboard an industrial asset into the cloud systems of two different organizations. This shows that device descriptions based on common web standards enable real interoperability across IoT stacks and provide a vendor-neutral device onboarding and communication experience.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/06/2023-04-WoTCG-Meetup6-Siemens-Microsoft.pdf
+  Intro slides: https://docs.google.com/presentation/d/1mIqp21oQg92ZrPttWJeM9iE1QcV-JPMcJyY37a9N-bc/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/06/2023-04-03-minutes.md

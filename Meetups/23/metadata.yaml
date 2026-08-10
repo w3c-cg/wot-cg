@@ -6,6 +6,15 @@ w3c_event_link: "https://www.w3.org/events/meetings/665e7589-ace6-4fe2-a8cb-ed9c
 thumbnail: "W3C_WoT_Meetup_23.png"
 speakers:
   - name: "Andreas Eberhart"
+    organisation: null
+    bio: >-
+      With 25 years of professional experience, Andreas is very proficient in the areas of
+      enterprise cloud, linked & big data, as well as systems architecture and development. He
+      co-founded two startups and drove their growth resulting in two acquisitions by silicon
+      valley giants HP and Veritas. Combined with his extensive background in cutting edge
+      research, he has the unique ability to address projects from technical, time to market, and
+      ROI angles. Currently, Andreas is the CEO of Dashjoin, a provider of an innovative low code
+      platform.
 presenter_slides:
   - file: "2025-02-WoTCG-Meetup23-Generic_WoT_Manager-Dashjoin.pdf"
 intro_slides:
@@ -19,3 +28,11 @@ description: >-
   displays the device properties and displays generic forms for conveniently invoking device
   actions. Furthermore, security, semantic mappings, and the ability to leverage artificial
   intelligence allows to interacting with arbitrary devices more easily.
+
+youtube_description: |
+  In this meetup, we welcome Andreas Eberhart from Dashjoin! He introduces Dashjoin's low-code platform and explains how he has leveraged WoT to build a generic manager that allows for any IoT device to be connected. Building on top of JSON Schema, the system displays the device properties and displays generic forms for conveniently invoking device actions. Furthermore, security, semantic mappings, and the ability to leverage artificial intelligence allows to interacting with arbitrary devices more easily.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/23/2025-02-WoTCG-Meetup23-Generic_WoT_Manager-Dashjoin.pdf
+  Intro slides: https://docs.google.com/presentation/d/1tqunc65fBHE6z2K0bPnSxNvXHyMLkyF3baVE46Uz8QM/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/23/2025-02-20-minutes.md

@@ -1,16 +1,19 @@
 #!/usr/bin/env node
 'use strict';
 
-//turn a meetup's metadata.yaml into the "links" part of its YouTube description
+// Generate each meetup's full YouTube description (the prose from metadata.yaml
+// plus the resource links) and write it back into the same metadata.yaml as a
+// `youtube_description` field. This runs in the PR, so the exact text that will
+// be posted is visible and reviewable on GitHub. update-youtube.js then just
+// pushes that field - it does no text building.
 
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
 const REPO_BASE = 'https://github.com/w3c-cg/wot-cg/blob/main/Meetups';
-
-// Heading that marks the start of our section.
 const HEADING = 'Useful Links:';
+const FIELD = 'youtube_description';
 
 const fileUrl = (folder, file) => `${REPO_BASE}/${folder}/${encodeURIComponent(file)}`;
 
@@ -19,7 +22,6 @@ function linkLines(folder, data) {
 
   for (const s of data.presenter_slides ?? []) {
     const tag = s.label ? `Presenter slides (${s.label})` : 'Presenter slides';
-    // A deck can be a local file, an online url, or both.
     if (s.file) lines.push(`${tag}: ${fileUrl(folder, s.file)}`);
     else if (s.url) lines.push(`${tag}: ${s.url}`);
   }
@@ -34,34 +36,59 @@ function linkLines(folder, data) {
   return lines;
 }
 
-// Heading + the links under it.
-function linksBlock(folder, data) {
-  return [HEADING, ...linkLines(folder, data)].join('\n');
+// Full description = the YAML prose, then the links block.
+function buildDescription(folder, data) {
+  const parts = [];
+  if (data.description) parts.push(String(data.description).trim());
+  const links = linkLines(folder, data);
+  if (links.length) parts.push([HEADING, ...links].join('\n'));
+  return parts.join('\n\n');
 }
 
-// Put the block at the end. If our heading is already there, replace from it
-// down (so re-runs don't duplicate); otherwise append. Text above the heading
-// is left untouched.
-function mergeDescription(existing, block) {
-  const current = (existing ?? '').replace(/\s+$/, '');
-  const idx = current.indexOf(HEADING);
-  const before = (idx === -1 ? current : current.slice(0, idx)).replace(/\s+$/, '');
-  return before ? `${before}\n\n${block}` : block;
+// The generated field is always kept last in the file. Strip any existing one
+// (a `youtube_description: |` literal block at the end) so regeneration is
+// idempotent and never touches the hand-written fields above it.
+const FIELD_BLOCK = new RegExp(`\\n*${FIELD}: \\|\\n(?:(?: {2}[^\\n]*)?\\n)*$`);
+
+function stripField(text) {
+  return text.replace(FIELD_BLOCK, '\n');
 }
 
-function loadMeetup(folder) {
-  const p = path.join(__dirname, '..', 'Meetups', folder, 'metadata.yaml');
-  return yaml.load(fs.readFileSync(p, 'utf8'));
+function setField(text, description) {
+  const body = description.split('\n').map(l => (l ? '  ' + l : '')).join('\n');
+  return stripField(text).replace(/\s+$/, '') + `\n\n${FIELD}: |\n${body}\n`;
 }
 
-module.exports = { linksBlock, mergeDescription, loadMeetup, HEADING };
+module.exports = { buildDescription, FIELD };
 
-// `node build-youtube-description.js <folder>` prints the block so you can check it. e.g. `node build-youtube-description.js 33`
+// CLI: regenerate the youtube_description field for every recorded meetup (or
+// the folders passed as args). Meetups with youtube_url: null have it removed.
 if (require.main === module) {
-  const folder = process.argv[2];
-  if (!folder) {
-    console.error('usage: node build-youtube-description.js <meetup-folder>  (e.g. 33 or 01)');
-    process.exit(1);
+  const meetupsDir = path.join(__dirname, '..', 'Meetups');
+  const args = process.argv.slice(2);
+  const folders = args.length
+    ? args
+    : fs.readdirSync(meetupsDir, { withFileTypes: true }).filter(e => e.isDirectory()).map(e => e.name);
+
+  let changed = 0;
+  for (const folder of folders) {
+    const yamlPath = path.join(meetupsDir, folder, 'metadata.yaml');
+    if (!fs.existsSync(yamlPath)) continue;
+
+    // Normalise to LF so the field-replacement regex works regardless of the
+    // working copy's line endings (Windows checkouts are CRLF); output is LF.
+    const text = fs.readFileSync(yamlPath, 'utf8').replace(/\r\n/g, '\n');
+    const data = yaml.load(text);
+
+    const updated = data.youtube_url
+      ? setField(text, buildDescription(folder, data))
+      : stripField(text).replace(/\s+$/, '') + '\n';
+
+    if (updated !== text) {
+      fs.writeFileSync(yamlPath, updated, 'utf8');
+      changed++;
+      console.log(`Updated youtube_description for meetup ${data.meetup}`);
+    }
   }
-  console.log(linksBlock(folder, loadMeetup(folder)));
+  console.log(`\n${changed} metadata file(s) changed.`);
 }

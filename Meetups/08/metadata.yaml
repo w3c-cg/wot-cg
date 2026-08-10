@@ -7,8 +7,19 @@ thumbnail: "W3C_WoT_Meetup_8.png"
 speakers:
   - name: "Christof Küstner"
     organisation: "Schaeffler"
+    bio: >-
+      Christof is an Expert Data Architect at Schaeffler Group. He is experienced in data-driven
+      product development, machine learning, automation, and IT. To tackle new challenges, he
+      leverages a unique combination of traditional mechanical engineering, contemporary
+      information and communication technologies, and data-driven methodologies. He is passionate
+      about driving the digitization of companies and facilitating their transition into the
+      digital era.
   - name: "Sven Pelzer"
     organisation: "Schaeffler"
+    bio: >-
+      Sven is a Solution Architect at Schaeffler Group. He boasts a career in software development
+      over a range of domains and has been involved with the development of the digital twin
+      offering of Schaeffler Group.
 presenter_slides:
   - file: "2023-05-WoTCG-Meetup8-Kuestner_Schaeffler.pdf"
 intro_slides:
@@ -32,3 +43,12 @@ description: >-
   standardized interface to the data of our products is necessary. In this talk, we show how
   we utilize Web of Things Standards as a Data Model for the product’s API. We highlight the
   advantages of using the Web of Things and the challenges we have with the standard.
+
+youtube_description: |
+  As a leading global supplier to the automotive and industrial sectors, the Schaeffler Group has been driving forward groundbreaking inventions and developments in the fields of motion and mobility for over 75 years. With innovative technologies, products, and services for electric mobility, CO₂-efficient drives, chassis solutions, Industry 4.0, digitalization, and renewable energies, the company is a reliable partner for making motion and mobility more efficient, intelligent, and sustainable – over the entire life cycle. The technology company manufactures high-precision components and systems for powertrain and chassis applications as well as rolling and plain bearing solutions for a large number of industrial applications.
+  In addition to the physical product, we are developing digital representations of our product, which we call Digital Twin. We believe that Digital Twins are the driver for optimizing and enhancing Schaeffler products in a data-driven manner. For this, a standardized interface to the data of our products is necessary. In this talk, we show how we utilize Web of Things Standards as a Data Model for the product’s API. We highlight the advantages of using the Web of Things and the challenges we have with the standard.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/08/2023-05-WoTCG-Meetup8-Kuestner_Schaeffler.pdf
+  Intro slides: https://docs.google.com/presentation/d/1j1trj42kzy7FWaYR3xne39Ic_PJqjszjEmXIww7x_qU/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/08/2023-05-11-minutes.md

@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-
-//update each changed video's YouTube description from its metadata.
-
 const fs = require('fs');
-const path = require('path');
 const yaml = require('js-yaml');
-const { linksBlock, mergeDescription } = require('./build-youtube-description.js');
 
 const APPLY = process.argv.includes('--apply');
 const files = process.argv.slice(2).filter(a => a !== '--apply');
@@ -56,26 +51,34 @@ async function putSnippet(id, snippet, token) {
   if (!res.ok) throw new Error(`update failed: ${res.status} ${JSON.stringify(body)}`);
 }
 
-async function processFile(filePath, token) {
-  const folder = path.basename(path.dirname(filePath));
-  const data = yaml.load(fs.readFileSync(filePath, 'utf8'));
+async function processFile(metadataPath, token) {
+  const data = yaml.load(fs.readFileSync(metadataPath, 'utf8'));
 
   if (!data.youtube_url) {                       // null = not recorded
     console.log(`skip  meetup ${data.meetup}: no video`);
     return;
   }
 
+  const description = (data.youtube_description || '').trimEnd();
+  if (!description) {
+    throw new Error(`meetup ${data.meetup}: youtube_description missing - run build-youtube-description.js`);
+  }
+
   const id = videoId(data.youtube_url);
-
+  // Fetch the snippet so title/categoryId go back unchanged; only the
+  // description is replaced, verbatim from the metadata field.
   const snippet = await getSnippet(id, token);
-  const merged = mergeDescription(snippet.description, linksBlock(folder, data));
-
-  if (!APPLY) {
-    console.log(`DRY   meetup ${data.meetup} (video ${id}) would become:\n\n${merged}\n`);
+  if (snippet.description.trimEnd() === description) {
+    console.log(`ok    meetup ${data.meetup} (video ${id}) already up to date`);
     return;
   }
 
-  snippet.description = merged;
+  if (!APPLY) {
+    console.log(`DRY   meetup ${data.meetup} (video ${id}) would be set to:\n\n${description}\n`);
+    return;
+  }
+
+  snippet.description = description;
   await putSnippet(id, snippet, token);
   console.log(`ok    meetup ${data.meetup} (video ${id}) updated`);
 }
@@ -90,4 +93,6 @@ async function main() {
   for (const f of files) await processFile(f, token);
 }
 
+// Set exitCode and let the process end on its own - calling process.exit() while
+// fetch sockets are still closing crashes libuv on Windows.
 main().catch(err => { console.error(err.message); process.exitCode = 1; });

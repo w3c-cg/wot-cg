@@ -6,6 +6,12 @@ w3c_event_link: "https://www.w3.org/events/meetings/9019e90f-f2c5-4c04-88f5-51ba
 thumbnail: "W3C_WoT_Meetup_30.png"
 speakers:
   - name: "Doğan Fennibay"
+    organisation: null
+    bio: >-
+      Doğan Fennibay is a Principal Key Expert at Siemens, specializing in automation and system
+      architecture. With deep expertise in industrial and building automation, Doğan focuses on
+      advancing the transformation of automation systems into the IoT era through the open nature
+      of the web.
 presenter_slides:
   - file: "2025-11-WoTCG-Meetup30-WoT-BACnet-Fennibay-Siemens.pdf"
 intro_slides:
@@ -20,3 +26,11 @@ description: >-
   binding, which takes this further by integrating BACnet-based automation systems with the
   Web and the Internet of Things. Finally, he shows how these two worlds can be connected in
   a lightweight way and the new use cases this unlocks.
+
+youtube_description: |
+  In this meetup, we welcome Doğan Fennibay from Siemens! He begins by explaining how the BACnet (Building Automation and Control Network) open protocol transformed building automation by allowing devices from different manufacturers to communicate seamlessly and achieve broad market adoption. He then introduces the Web of Things–BACnet protocol binding, which takes this further by integrating BACnet-based automation systems with the Web and the Internet of Things. Finally, he shows how these two worlds can be connected in a lightweight way and the new use cases this unlocks.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/30/2025-11-WoTCG-Meetup30-WoT-BACnet-Fennibay-Siemens.pdf
+  Intro slides: https://docs.google.com/presentation/d/1DUDu4RJXJWP_mEaOuHMW-hcQ33pgF8_kWIUgKGs3JkQ/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/30/2025-11-20-minutes.md

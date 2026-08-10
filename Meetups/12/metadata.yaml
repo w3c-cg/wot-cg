@@ -7,8 +7,17 @@ thumbnail: "W3C_WoT_Meetup_12.png"
 speakers:
   - name: "Fady Salama"
     organisation: "TU Munich"
+    bio: >-
+      Fady Salama is a Ph.D. candidate in the Associate Professorship of Embedded Systems and
+      Internet of Things in the School of Computation, Information and Technology (CIT) in the
+      Technical University of Munich (TUM) in Germany. His work centers around exploring how WoT,
+      with possibly some additions, can be used in and benefit industrial applications.
   - name: "Ege Korkan"
     organisation: "Siemens"
+    bio: >-
+      Ege Korkan is a Research Scientist at Siemens AG in Munich, Germany. He works on the Web of
+      Things topics and is active in the standardization in the Working Group and co-chairs the
+      Community Group.
 presenter_slides:
   - file: "2024-01-WoTCG-Meetup12-Korkan-Salama-RobWoT.pdf"
 intro_slides:
@@ -19,3 +28,11 @@ description: >-
   In this meetup, we are taking a deep dive into using robotics simulators for building
   interactable digital twins. Ege Korkan and Fady Salama showcase a new open-source project
   that bridges CoppeliaSim, a well-known robotics simulator, with Eclipse Thingweb node-wot.
+
+youtube_description: |
+  In this meetup, we are taking a deep dive into using robotics simulators for building interactable digital twins. Ege Korkan and Fady Salama showcase a new open-source project that bridges CoppeliaSim, a well-known robotics simulator, with Eclipse Thingweb node-wot.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/12/2024-01-WoTCG-Meetup12-Korkan-Salama-RobWoT.pdf
+  Intro slides: https://docs.google.com/presentation/d/1r_7PrstswVoU_1awFvrcfa6tuQRzm76coDZkPfuY68k/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/12/2024-01-18-minutes.md

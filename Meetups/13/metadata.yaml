@@ -7,6 +7,12 @@ thumbnail: "W3C_WoT_Meetup_13.png"
 speakers:
   - name: "Richard Bowman"
     organisation: "OpenFlexure and University of Bath"
+    bio: >-
+      Richard works on microscopy and experimental automation, including the development of a 3D
+      printable translation stage with sub-micron accuracy. He has transferred a number of
+      technologies to commercial partners, and leads the OpenFlexure project. OpenFlexure sits at
+      the heart of a global community of medics, biologists, entrepreneurs and engineers, making
+      high quality automated microscopy more reproducible and more accessible.
 presenter_slides:
   - file: "2024-02-WoTCG-Meetup13-Bowman-openflexure_and_labthings.pdf"
 intro_slides:
@@ -23,3 +29,11 @@ description: >-
   with scientific instrument software. In addition to discussing the microscope, Richard
   will delve into how the Web of Things approach holds transformative potential in research
   laboratories.
+
+youtube_description: |
+  In 13th meetup, we are delighted to welcome Richard Bowman (LinkedIn, GitHub), who will explore the intersection of open-source software, hardware, and the Web of Things. Richard will introduce us to the OpenFlexure microscope, an open hardware laboratory microscope widely employed in research, teaching, and potentially medical settings across every continent. He will demonstrate how a Web of Things approach has been utilized to enhance user-friendliness, enable automation, and circumvent many of the challenges associated with scientific instrument software. In addition to discussing the microscope, Richard will delve into how the Web of Things approach holds transformative potential in research laboratories.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/13/2024-02-WoTCG-Meetup13-Bowman-openflexure_and_labthings.pdf
+  Intro slides: https://docs.google.com/presentation/d/1gz5SQmVnOVMZdzN2rziaQBp8ES_gO7XP96hBvZZ28Sc/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/13/2024-02-15-minutes.md

@@ -6,6 +6,11 @@ w3c_event_link: "https://www.w3.org/events/meetings/5a77b997-467b-4d5d-bb40-b847
 thumbnail: "W3C_WoT_Meetup_25.png"
 speakers:
   - name: "Robert Winkler"
+    organisation: null
+    bio: >-
+      Enterprise and solution architect at Deutsche Telekom with a focus on distributed systems,
+      cloud computing, Internet of Things and conversational AI. Solution Architect at day, Gamer
+      at night.
 presenter_slides:
   - file: "2025-03-WoTCG-Meetup25-LMOS-DeutscheTelekomEclipse.pdf"
 intro_slides:
@@ -15,3 +20,11 @@ minutes: "2025-03-14-minutes.md"
 description: >-
   In this special session, we have three community groups joining for a presentation by
   Robert Winkler from Deutsche Telekom on the Eclipse LMOS project.
+
+youtube_description: |
+  In this special session, we have three community groups joining for a presentation by Robert Winkler from Deutsche Telekom on the Eclipse LMOS project.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/25/2025-03-WoTCG-Meetup25-LMOS-DeutscheTelekomEclipse.pdf
+  Intro slides: https://docs.google.com/presentation/d/1K-ZriSHVq_q_mbTvx3pa98C7ytST3Ak7YGHhqdHWnPM/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/25/2025-03-14-minutes.md

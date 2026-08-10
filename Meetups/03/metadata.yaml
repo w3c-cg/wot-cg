@@ -7,8 +7,18 @@ thumbnail: "W3C_WoT_Meetup_3.png"
 speakers:
   - name: "Arturo Romero"
     organisation: "Netzo.io"
+    bio: >-
+      Arturo Romero Karam is co-founder and CEO at Netzo. He holds a M.Sc. in mechanical
+      engineering from the Technical University of Dresden and has experience in leadership,
+      management and digital transformation. As CEO, he is responsible for leading the company's
+      strategic vision and overseeing its operations.
   - name: "Miguel Romero Karam"
     organisation: "Netzo.io"
+    bio: >-
+      Miguel Romero Karam is co-founder and CTO at Netzo, where he is responsible for the
+      company's technical direction and strategy. He holds a Master's degree in Robotics and
+      Artificial Intelligence from the Technical University of Munich and has experience in
+      mechatronics, robotics, software, and AI.
 presenter_slides:
   - file: "2022-12-WoTCG-Meetup3-Netzo-Edge-Computing.pdf"
 intro_slides:

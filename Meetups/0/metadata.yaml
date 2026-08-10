@@ -7,8 +7,18 @@ thumbnail: "W3C_WoT_Meetup_0-1.png"
 speakers:
   - name: "Luca Barbato"
     organisation: "Luminem"
+    bio: >-
+      Long time open source developer, he fixed and made plenty of mistakes (mis)managing memory
+      accesses in Gentoo and Videolan until he started using and contributing to Rust. He is
+      writing a pure rust implementation of Web of Things as part of his efforts in the Horizon
+      2020 project SIFIS-Home.
   - name: "Philipp-Alexander Blum"
     organisation: "Bind Systems"
+    bio: >-
+      Tech-Blogger (Tabtech.de, bought by GIGA Tech). TV commercials, Online-Marketing,
+      Development (Tollabox). Big data analytics & MarTech (Webtrekk, bought by Mapp Digital).
+      Cryptocurrencies & DLTs (IOTA Foundation). Pushing Open Source and Open Standards forward
+      (Bind.systems).
 presenter_slides:
   - file: "2022-09-WoTCG-Meetup0-wot_rust-Barbato.pdf"
     label: "Luca Barbato"
