@@ -23,18 +23,18 @@ intro_slides:
   pdf: "2024-11-WoTCG-Meetup21-AguzziKorkan.pdf"
 minutes: "2024-11-14-minutes.md"
 description: >-
-  In this meetup, we welcome Christian Paul (GitLab | LinkedIn). Discover how easy it is to
-  build, test and prototype with the Web of Things paradigm. This meetup introduces two new
-  tools for you to use: "WoT Wrench" and "WoT Anything." WoT Wrench is a web app that
-  simplifies debugging and interacting with Things. Meanwhile, WoT Anything serves as a
-  versatile JavaScript server that closely implements WoT standards with a twist - allowing
-  multiple Things to share properties, actions, and events. This approach enables flexible
-  API integration beyond traditional one-to-one device mapping. Christian will demonstrate
-  how virtual Things and API integrations broaden the definition of what can qualify as an
-  IoT device.
+  In this meetup, we welcomed Christian Paul (GitLab | LinkedIn), who showed how easy it is
+  to build, test and prototype with the Web of Things paradigm. The meetup introduced two
+  new tools: "WoT Wrench" and "WoT Anything." WoT Wrench is a web app that simplifies
+  debugging and interacting with Things. Meanwhile, WoT Anything serves as a versatile
+  JavaScript server that closely implements WoT standards with a twist - allowing multiple
+  Things to share properties, actions, and events. This approach enables flexible API
+  integration beyond traditional one-to-one device mapping. Christian demonstrated how
+  virtual Things and API integrations broaden the definition of what can qualify as an IoT
+  device.
 
 youtube_description: |
-  In this meetup, we welcome Christian Paul (GitLab | LinkedIn). Discover how easy it is to build, test and prototype with the Web of Things paradigm. This meetup introduces two new tools for you to use: "WoT Wrench" and "WoT Anything." WoT Wrench is a web app that simplifies debugging and interacting with Things. Meanwhile, WoT Anything serves as a versatile JavaScript server that closely implements WoT standards with a twist - allowing multiple Things to share properties, actions, and events. This approach enables flexible API integration beyond traditional one-to-one device mapping. Christian will demonstrate how virtual Things and API integrations broaden the definition of what can qualify as an IoT device.
+  In this meetup, we welcomed Christian Paul (GitLab | LinkedIn), who showed how easy it is to build, test and prototype with the Web of Things paradigm. The meetup introduced two new tools: "WoT Wrench" and "WoT Anything." WoT Wrench is a web app that simplifies debugging and interacting with Things. Meanwhile, WoT Anything serves as a versatile JavaScript server that closely implements WoT standards with a twist - allowing multiple Things to share properties, actions, and events. This approach enables flexible API integration beyond traditional one-to-one device mapping. Christian demonstrated how virtual Things and API integrations broaden the definition of what can qualify as an IoT device.
 
   Useful Links:
   Presenter slides (Standard): https://github.com/w3c-cg/wot-cg/blob/main/Meetups/21/2024-11-WoTCG-Meetup21-WoT_for_every_thing.pdf

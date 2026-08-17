@@ -17,14 +17,14 @@ intro_slides:
   pdf: "2023-10-WoTCG-Meetup10-AguzziKorkan.pdf"
 minutes: "2023-10-05-minutes.md"
 description: >-
-  In our next meetup, we welcome Sy Bohy, CEO and Co-Founder of Seam. Sy will talk about
-  Seam's unified API for IoT devices, inspired in some of its designs by the WoT work at
-  W3C. Sy will discuss the origins of Seam, its design constraints, its focus on developer
-  experience, its relationship with IoT manufacturers, and the future that lies ahead for
-  Seam and the IoT industry.
+  In this meetup, we welcomed Sy Bohy, CEO and Co-Founder of Seam. Sy talked about Seam's
+  unified API for IoT devices, inspired in some of its designs by the WoT work at W3C. He
+  discussed the origins of Seam, its design constraints, its focus on developer experience,
+  its relationship with IoT manufacturers, and the future that lies ahead for Seam and the
+  IoT industry.
 
 youtube_description: |
-  In our next meetup, we welcome Sy Bohy, CEO and Co-Founder of Seam. Sy will talk about Seam's unified API for IoT devices, inspired in some of its designs by the WoT work at W3C. Sy will discuss the origins of Seam, its design constraints, its focus on developer experience, its relationship with IoT manufacturers, and the future that lies ahead for Seam and the IoT industry.
+  In this meetup, we welcomed Sy Bohy, CEO and Co-Founder of Seam. Sy talked about Seam's unified API for IoT devices, inspired in some of its designs by the WoT work at W3C. He discussed the origins of Seam, its design constraints, its focus on developer experience, its relationship with IoT manufacturers, and the future that lies ahead for Seam and the IoT industry.
 
   Useful Links:
   Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/10/2023-10-WoTCG-Meetup10-Seam-SyBohy.pdf

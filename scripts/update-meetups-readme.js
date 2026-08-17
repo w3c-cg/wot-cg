@@ -25,6 +25,10 @@ function nameOf(s) { return s.organisation ? `${s.name} - ${s.organisation}` : s
 
 function presenterLabel(speakers) { return speakers.length > 1 ? 'Presenters' : 'Presenter'; }
 
+// Local asset paths always go through this: filenames may contain spaces or
+// other characters that break a raw markdown link or img src.
+function assetUrl(folder, file) { return `./${folder}/${encodeURIComponent(file)}`; }
+
 // ----- older meetups: plain markdown bullet section -----
 
 // A deck can be a local file, an online url, or both.
@@ -33,7 +37,7 @@ function presenterSlideLinks(folder, slides) {
   return slides.map(s => {
     const label = s.label ? `Presenter Slides - ${s.label}` : 'Presenter Slides';
     if (!s.file) return `[${label}](${s.url})`;
-    const local = `[${label}](./${folder}/${s.file})`;
+    const local = `[${label}](${assetUrl(folder, s.file)})`;
     return s.url ? `${local} ([Online Version](${s.url}))` : local;
   });
 }
@@ -43,7 +47,7 @@ function introSlideLine(folder, intro) {
   if (!intro) return null;
   const parts = [];
   if (intro.google_slides) parts.push(`[Google Slides](${intro.google_slides})`);
-  if (intro.pdf) parts.push(`[PDF](./${folder}/${intro.pdf})`);
+  if (intro.pdf) parts.push(`[PDF](${assetUrl(folder, intro.pdf)})`);
   return parts.length ? `- Intro Slides: ${parts.join(' | ')}` : null;
 }
 
@@ -67,7 +71,7 @@ function generateSection(folder, data) {
 
   // Small thumbnail floated to the right of the bullet list.
   if (data.thumbnail) {
-    const img = `<img src="./${folder}/${data.thumbnail}" width="${OLDER_IMG_WIDTH}" align="right" alt="${htmlEsc(data.title)}">`;
+    const img = `<img src="${assetUrl(folder, data.thumbnail)}" width="${OLDER_IMG_WIDTH}" align="right" alt="${htmlEsc(data.title)}">`;
     lines.push(data.youtube_url ? `<a href="${data.youtube_url}">${img}</a>` : img, '');
   }
 
@@ -78,7 +82,7 @@ function generateSection(folder, data) {
   const intro = introSlideLine(folder, data.intro_slides);
   if (intro) lines.push(intro);
   lines.push(data.youtube_url ? `- [Video](${data.youtube_url})` : '- No Video Available');
-  if (data.minutes) lines.push(`- [Minutes](./${folder}/${data.minutes})`);
+  if (data.minutes) lines.push(`- [Minutes](${assetUrl(folder, data.minutes)})`);
   if (data.w3c_event_link) lines.push(`- [W3C Event Page](${data.w3c_event_link})`);
 
   if (data.description) {
@@ -112,23 +116,23 @@ function cardLinks(folder, data) {
   if (data.youtube_url) parts.push(aTag('Video', data.youtube_url));
   for (const s of data.presenter_slides ?? []) {
     const label = s.label ? `Presenter Slides - ${s.label}` : 'Presenter Slides';
-    const url = s.file ? `./${folder}/${encodeURIComponent(s.file)}` : s.url;
+    const url = s.file ? assetUrl(folder, s.file) : s.url;
     if (url) parts.push(aTag(label, url));
   }
   // Intro slides bundled into one entry.
   const intro = data.intro_slides ?? {};
   const introParts = [];
   if (intro.google_slides) introParts.push(aTag('Google Slides', intro.google_slides));
-  if (intro.pdf) introParts.push(aTag('PDF', `./${folder}/${encodeURIComponent(intro.pdf)}`));
+  if (intro.pdf) introParts.push(aTag('PDF', assetUrl(folder, intro.pdf)));
   if (introParts.length) parts.push(`Intro Slides: ${introParts.join(' | ')}`);
-  if (data.minutes) parts.push(aTag('Minutes', `./${folder}/${encodeURIComponent(data.minutes)}`));
+  if (data.minutes) parts.push(aTag('Minutes', assetUrl(folder, data.minutes)));
   if (data.w3c_event_link) parts.push(aTag('W3C Event Page', data.w3c_event_link));
   return parts.join(' • ');
 }
 
 function generateCard(folder, data) {
   const imgInner = data.thumbnail
-    ? `<img src="./${folder}/${encodeURIComponent(data.thumbnail)}" width="${CARD_IMG_WIDTH}" alt="${htmlEsc(data.title)}">`
+    ? `<img src="${assetUrl(folder, data.thumbnail)}" width="${CARD_IMG_WIDTH}" alt="${htmlEsc(data.title)}">`
     : '<em>No thumbnail</em>';
   const thumb = data.youtube_url ? `<a href="${data.youtube_url}">${imgInner}</a>` : imgInner;
 

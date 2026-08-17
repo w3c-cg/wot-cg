@@ -25,15 +25,15 @@ intro_slides:
   pdf: "2025-03-WoTCG-Meetup24-AguzziKorkan.pdf"
 minutes: "2025-03-10-minutes.md"
 description: >-
-  In this meetup, we welcome Fady Salama and Roman Binkert from the Technical University of
-  Munich. They will talk about how WoT simplifies interacting with the devices and creating
-  mashups of devices in mixed reality environments. They will introduce HoloWoT, a Unity
+  In this meetup, we welcomed Fady Salama and Roman Binkert from the Technical University of
+  Munich. They talked about how WoT simplifies interacting with the devices and creating
+  mashups of devices in mixed reality environments. They introduced HoloWoT, a Unity
   application that works with Mixed Reality Headsets such as Hololens. Its open-source
-  components such as the new .Net library WoT.Net will be also introduced for those who want
-  to build other applications based on that.
+  components such as the new .Net library WoT.Net were also introduced for those who want to
+  build other applications based on that.
 
 youtube_description: |
-  In this meetup, we welcome Fady Salama and Roman Binkert from the Technical University of Munich. They will talk about how WoT simplifies interacting with the devices and creating mashups of devices in mixed reality environments. They will introduce HoloWoT, a Unity application that works with Mixed Reality Headsets such as Hololens. Its open-source components such as the new .Net library WoT.Net will be also introduced for those who want to build other applications based on that.
+  In this meetup, we welcomed Fady Salama and Roman Binkert from the Technical University of Munich. They talked about how WoT simplifies interacting with the devices and creating mashups of devices in mixed reality environments. They introduced HoloWoT, a Unity application that works with Mixed Reality Headsets such as Hololens. Its open-source components such as the new .Net library WoT.Net were also introduced for those who want to build other applications based on that.
 
   Useful Links:
   Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/24/2025-03-WoTCG-Meetup24-Immersive_WoT_Apps_in_MR-TUM.pdf

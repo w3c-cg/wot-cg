@@ -20,16 +20,16 @@ intro_slides:
   pdf: "2023-02-WoTCG-Meetup4-AguzziKorkan.pdf"
 minutes: "2023-02-23-minutes.md"
 description: >-
-  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will present an
+  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, presented an
   approach that allows constrained IoT devices to delegate authentication and authorization
-  using the Web of Things. In the framework of the NAMIB project, he will demonstrate this
+  using the Web of Things. In the framework of the NAMIB project, he demonstrated this
   approach in a use case where hotel guests need to have access to their smart environments
   only during their visits. Additionally, an open-source WoT implementation based on the
-  Dart programming language will be shown, which allows WoT Consumers to be deployed on
+  Dart programming language was shown, which allows WoT Consumers to be deployed on
   smartphones.
 
 youtube_description: |
-  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will present an approach that allows constrained IoT devices to delegate authentication and authorization using the Web of Things. In the framework of the NAMIB project, he will demonstrate this approach in a use case where hotel guests need to have access to their smart environments only during their visits. Additionally, an open-source WoT implementation based on the Dart programming language will be shown, which allows WoT Consumers to be deployed on smartphones.
+  In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, presented an approach that allows constrained IoT devices to delegate authentication and authorization using the Web of Things. In the framework of the NAMIB project, he demonstrated this approach in a use case where hotel guests need to have access to their smart environments only during their visits. Additionally, an open-source WoT implementation based on the Dart programming language was shown, which allows WoT Consumers to be deployed on smartphones.
 
   Useful Links:
   Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/04/2023-02-WoTCG-Meetup4-Romann.pdf

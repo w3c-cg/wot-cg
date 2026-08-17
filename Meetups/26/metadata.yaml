@@ -18,14 +18,14 @@ intro_slides:
   pdf: "2025-03-WoTCG-Meetup26-AguzziKorkan.pdf"
 minutes: "2025-03-27-minutes.md"
 description: >-
-  In this meetup, we dive into the use of WoT standards in building the HiveOT Hub together
-  with Henk. After learning about its objectives and history, we will see how the Thing
-  Description documents facilitates the interaction between consumers and Things using a hub
-  and digital twins. He will also explain the challenges he encountered in using WoT
-  standards during development.
+  In this meetup, we dived into the use of WoT standards in building the HiveOT Hub together
+  with Henk. After learning about its objectives and history, we saw how the Thing
+  Description documents facilitate the interaction between consumers and Things using a hub
+  and digital twins. He also explained the challenges he encountered in using WoT standards
+  during development.
 
 youtube_description: |
-  In this meetup, we dive into the use of WoT standards in building the HiveOT Hub together with Henk. After learning about its objectives and history, we will see how the Thing Description documents facilitates the interaction between consumers and Things using a hub and digital twins. He will also explain the challenges he encountered in using WoT standards during development.
+  In this meetup, we dived into the use of WoT standards in building the HiveOT Hub together with Henk. After learning about its objectives and history, we saw how the Thing Description documents facilitate the interaction between consumers and Things using a hub and digital twins. He also explained the challenges he encountered in using WoT standards during development.
 
   Useful Links:
   Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/26/2025-03-WoTCG-Meetup26-HiveOT.pdf

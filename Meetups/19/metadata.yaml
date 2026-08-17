@@ -22,7 +22,7 @@ intro_slides:
   pdf: "2024-10-WoTCG-Meetup19-AguzziKorkan.pdf"
 minutes: "2024-10-14-minutes.md"
 description: >-
-  In this meetup, we welcome Thomas Jaeckle from Beyonnex.io! Beyonnex.io is a pioneer in
+  In this meetup, we welcomed Thomas Jaeckle from Beyonnex.io! Beyonnex.io is a pioneer in
   facilitating smart and energy-efficient properties in the housing industry. For their
   customers, which include landlords and housing companies, they provide solutions to
   digitally measure and collect energy consumption for residents while also enhancing
@@ -33,14 +33,14 @@ description: >-
   others can be controlled by residents, and some serve to connect other devices to the
   internet.
 
-  This meetup focuses on how Beyonnex.io utilizes Thing Models in combination with Eclipse
-  Ditto. Attendees can expect simplified example models to illustrate how inheritance and
-  composition are used to model their device ecosystem. Additionally, the discussion will
-  touch on the surrounding tooling, such as code generators and model migration tools.
+  This meetup focused on how Beyonnex.io utilizes Thing Models in combination with Eclipse
+  Ditto. Simplified example models illustrated how inheritance and composition are used to
+  model their device ecosystem. Additionally, the discussion touched on the surrounding
+  tooling, such as code generators and model migration tools.
 
 youtube_description: |
-  In this meetup, we welcome Thomas Jaeckle from Beyonnex.io! Beyonnex.io is a pioneer in facilitating smart and energy-efficient properties in the housing industry. For their customers, which include landlords and housing companies, they provide solutions to digitally measure and collect energy consumption for residents while also enhancing comfort and promoting energy savings in daily life. They connect various devices and device types to their IoT platform, where Eclipse Ditto serves as the digital twin middleware. These devices share common aspects, such as the location where they are installed by technicians, but differ in functionality. Some devices only collect data, others can be controlled by residents, and some serve to connect other devices to the internet.
-  This meetup focuses on how Beyonnex.io utilizes Thing Models in combination with Eclipse Ditto. Attendees can expect simplified example models to illustrate how inheritance and composition are used to model their device ecosystem. Additionally, the discussion will touch on the surrounding tooling, such as code generators and model migration tools.
+  In this meetup, we welcomed Thomas Jaeckle from Beyonnex.io! Beyonnex.io is a pioneer in facilitating smart and energy-efficient properties in the housing industry. For their customers, which include landlords and housing companies, they provide solutions to digitally measure and collect energy consumption for residents while also enhancing comfort and promoting energy savings in daily life. They connect various devices and device types to their IoT platform, where Eclipse Ditto serves as the digital twin middleware. These devices share common aspects, such as the location where they are installed by technicians, but differ in functionality. Some devices only collect data, others can be controlled by residents, and some serve to connect other devices to the internet.
+  This meetup focused on how Beyonnex.io utilizes Thing Models in combination with Eclipse Ditto. Simplified example models illustrated how inheritance and composition are used to model their device ecosystem. Additionally, the discussion touched on the surrounding tooling, such as code generators and model migration tools.
 
   Useful Links:
   Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/19/2024-10-WoTCG-Meetup19-TMs_in_Housing_Sector.pdf
