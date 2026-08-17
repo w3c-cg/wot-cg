@@ -313,7 +313,7 @@ servient.start().then((WoT) => {
         type: "number",
         minimum: 0,
         maximum: 1000,
-        unit: "mL",
+        unit: "ml",
         readOnly: true,
         observable: false,
       }
@@ -415,7 +415,7 @@ const thingDescription = {
     },
     "waterLevel": {
       "title": "Water Level",
-      "type": "number", "minimum": 0, "maximum": 1000, "unit": "mL",
+      "type": "number", "minimum": 0, "maximum": 1000, "unit": "ml",
       "readOnly": true, "observable": false,
       "forms": [{ "href": `http://localhost:${PORT}/smart-coffee-machine/properties/waterLevel`, "contentType": "application/json", "op": "readproperty" }]
     }
