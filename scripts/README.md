@@ -33,8 +33,8 @@ presenter_slides:                   # optional
   - file: "...Binkert.pdf"          # file in this folder, OR:
     url: "https://..."              # online version (either/both)
     label: "..."                    # required only if there are 2+ entries
-thumbnail: "W3C_WoT_Meetup_33.png"  # required if recorded (null if not recorded)
-description: >-                      # optional, use >- for long text / quotes
+thumbnail: "W3C_WoT_Meetup_33.png"  # required
+description: >-                     # required, use >- for long text / quotes
   ...
 youtube_description: |              # GENERATED - do not edit by hand
   ...

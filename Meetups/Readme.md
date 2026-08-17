@@ -664,6 +664,13 @@ In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will presen
 - [Minutes](./03/2022-12-15-minutes.md)
 - [W3C Event Page](https://www.w3.org/events/meetings/f49cc19b-66a6-4d4c-a9c1-0ca327908486/)
 
+<details>
+<summary>Description</summary>
+
+In this W3C WoT CG Meetup, the focus was on the topic of Edge Computing. Arturo and Miguel Romero Karam presented Netzo, a scripting platform for developers that streamlines the integration of APIs, the automation of workflows and the creation of internal tools by allowing JavaScript/TypeScript scripts to be deployed to URL endpoints, and showed how WoT applications can be deployed with it. The talk was followed by a discussion on Edge Computing solutions and how the Web of Things can address the related challenges.
+
+</details>
+
 ## Meetup 2
 
 <img src="./02/W3C_WoT_Meetup_2.png" width="253" align="right" alt="Magenta Smart Home">
@@ -679,6 +686,13 @@ In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will presen
 - [Minutes](./02/2022-12-01-minutes.md)
 - [W3C Event Page](https://www.w3.org/events/meetings/07d67134-f9d0-4c8a-ba1e-24f25babef8c/)
 
+<details>
+<summary>Description</summary>
+
+In this W3C WoT CG Meetup, the focus was on smart home solutions. Robert Winkler from Deutsche Telekom presented the architecture of Magenta Smart Home and the MagentaZuhause App, which implement technologies inspired by the Web of Things. The session continued with questions from the attendees and a broader discussion on how Web of Things standards can address the challenges of smart home IoT systems.
+
+</details>
+
 ## Meetup 1
 
 <img src="./01/W3C_WoT_Meetup_1.png" width="253" align="right" alt="Digital Twins with Eclipse Ditto and Web of Things">
@@ -693,6 +707,13 @@ In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will presen
 - No Video Available
 - [Minutes](./01/2022-10-13-minutes.md)
 - [W3C Event Page](https://www.w3.org/events/meetings/c8802811-42b9-4089-a823-8671e3c3a227/)
+
+<details>
+<summary>Description</summary>
+
+In this W3C WoT CG Meetup, the focus was on the topic of digital twins. Thomas Jaeckle presented Eclipse Ditto, an open-source framework to help build digital twins of devices connected to the Internet, whose latest version supports the W3C Web of Things specifications. The presentation was followed by a panel discussion in which attendees shared their perspectives, needs and use cases around digital twins, and explored how W3C Web of Things technologies contribute to this domain.
+
+</details>
 
 ## Meetup 0
 
@@ -711,5 +732,12 @@ In this W3C WoT CG Meetup, Jan Romann, Invited Expert at the WoT WG, will presen
 - No Video Available
 - [Minutes](./0/2022-09-22-minutes.md)
 - [W3C Event Page](https://www.w3.org/events/meetings/05b36b01-51bf-4885-88ea-eac638159f71/)
+
+<details>
+<summary>Description</summary>
+
+In this first W3C WoT CG Meetup, Web of Things implementers and enthusiasts gathered to discuss where the community would be hosted (chat platforms, social media, etc.) and to hear feedback from implementers along with their stories about creating WoT-enabled platforms. Luca Barbato presented wot-rust, a pure Rust implementation of the Web of Things written as part of the Horizon 2020 project SIFIS-Home, and Philipp-Alexander Blum shared his experience on how to build a community.
+
+</details>
 
 </details>

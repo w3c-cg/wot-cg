@@ -20,3 +20,10 @@ intro_slides:
   google_slides: "https://docs.google.com/presentation/d/1iOCkNmtA10AuDTyHKswk26siCU2AAGNOzQsUm15BQYw/edit?usp=sharing"
   pdf: "2022-10-WoTCG-Meetup1-AguzziKorkan.pdf"
 minutes: "2022-10-13-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, the focus was on the topic of digital twins. Thomas Jaeckle
+  presented Eclipse Ditto, an open-source framework to help build digital twins of devices
+  connected to the Internet, whose latest version supports the W3C Web of Things
+  specifications. The presentation was followed by a panel discussion in which attendees
+  shared their perspectives, needs and use cases around digital twins, and explored how
+  W3C Web of Things technologies contribute to this domain.

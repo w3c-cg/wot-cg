@@ -29,3 +29,10 @@ intro_slides:
   google_slides: "https://docs.google.com/presentation/d/1u8OlKdJnq4bqRTtJ4lP2rwVph_Vl_fuvxYi2iZy9sz8/edit?usp=sharing"
   pdf: "2022-09-WoTCG-Meetup0-AguzziKorkan.pdf"
 minutes: "2022-09-22-minutes.md"
+description: >-
+  In this first W3C WoT CG Meetup, Web of Things implementers and enthusiasts gathered to
+  discuss where the community would be hosted (chat platforms, social media, etc.) and to
+  hear feedback from implementers along with their stories about creating WoT-enabled
+  platforms. Luca Barbato presented wot-rust, a pure Rust implementation of the Web of
+  Things written as part of the Horizon 2020 project SIFIS-Home, and Philipp-Alexander Blum
+  shared his experience on how to build a community.

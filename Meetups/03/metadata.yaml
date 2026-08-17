@@ -25,3 +25,10 @@ intro_slides:
   google_slides: "https://docs.google.com/presentation/d/1fEB38kNR4yICol825EdXD-7ULjxSy0ZO_KozXiMCaSQ/edit?usp=sharing"
   pdf: "2022-12-WoTCG-Meetup3-AguzziKorkan.pdf"
 minutes: "2022-12-15-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, the focus was on the topic of Edge Computing. Arturo and Miguel
+  Romero Karam presented Netzo, a scripting platform for developers that streamlines the
+  integration of APIs, the automation of workflows and the creation of internal tools by
+  allowing JavaScript/TypeScript scripts to be deployed to URL endpoints, and showed how WoT
+  applications can be deployed with it. The talk was followed by a discussion on Edge
+  Computing solutions and how the Web of Things can address the related challenges.

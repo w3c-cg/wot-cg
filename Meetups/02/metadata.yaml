@@ -18,3 +18,9 @@ intro_slides:
   google_slides: "https://docs.google.com/presentation/d/13jKtDYPREKXW9e0BM_6bA__aocjGkEq37DxuQ3bMBDY/edit?usp=sharing"
   pdf: "2022-12-WoTCG-Meetup2-AguzziKorkan.pdf"
 minutes: "2022-12-01-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, the focus was on smart home solutions. Robert Winkler from
+  Deutsche Telekom presented the architecture of Magenta Smart Home and the MagentaZuhause
+  App, which implement technologies inspired by the Web of Things. The session continued
+  with questions from the attendees and a broader discussion on how Web of Things standards
+  can address the challenges of smart home IoT systems.
