@@ -10,9 +10,6 @@ jobs:
   update:
     name: Update descriptions for changed meetups
     runs-on: ubuntu-latest
-    # Pauses for a human to approve before any write to the live channel.
-    # Set up under Settings -> Environments, add yourself as a required reviewer.
-    environment: youtube-prod
     steps:
       - uses: actions/checkout@v4
         with:
