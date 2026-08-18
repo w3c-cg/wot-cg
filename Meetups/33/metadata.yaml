@@ -1,0 +1,34 @@
+meetup: 33
+title: "Interoperable Cyber-Physical Multi-Agent Systems Through WoT"
+date: "24-04-2026"
+youtube_url: "https://youtu.be/xMIHykB_ebg"
+w3c_event_link: "https://www.w3.org/events/meetings/c5855bad-fd18-45ce-973f-e0f716dd6bed/20260424T160000/"
+thumbnail: "W3C_WoT_Meetup_33.png"
+speakers:
+  - name: "Roman Binkert"
+    organisation: "TU Munich"
+    bio: >-
+      Roman Binkert is a Ph.D. candidate at the Associate Professorship of Embedded Systems and
+      IoT at the Technical University of Munich (TUM). His research focuses on developing
+      interoperable Cyber-Physical IoT systems by leveraging the W3C Web of Things to integrate
+      diverse information sources and devices into the Industrial Metaverse. A central goal of his
+      work is to ensure that complex system data is made intuitively understandable and actionable
+      for both autonomous agents and human users.
+presenter_slides:
+  - file: "2026-04-WoTCG-Meetup33-WoMaT-Binkert.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/19i_sRMWO3mKbv_SeGMMOaegaxYLIgY-acfMxwdVD-Jo/edit?usp=sharing"
+  pdf: "2026-04-WoTCG-Meetup33-AguzziKorkan.pdf"
+minutes: "2026-04-24-minutes.md"
+description: >-
+  In this session, Roman Binkert talks about Interoperable Cyber-Physical Multi-Agent
+  Systems Through W3C Web of Things. He introduces a framework for bridging the gap between
+  Multi-Agent Systems (MAS) and the physical world using Web of Things (WoT) standards.
+
+youtube_description: |
+  In this session, Roman Binkert talks about Interoperable Cyber-Physical Multi-Agent Systems Through W3C Web of Things. He introduces a framework for bridging the gap between Multi-Agent Systems (MAS) and the physical world using Web of Things (WoT) standards.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/33/2026-04-WoTCG-Meetup33-WoMaT-Binkert.pdf
+  Intro slides: https://docs.google.com/presentation/d/19i_sRMWO3mKbv_SeGMMOaegaxYLIgY-acfMxwdVD-Jo/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/33/2026-04-24-minutes.md

@@ -1,0 +1,32 @@
+meetup: 7
+title: "Web Scale Agents with WoT and No-Code Applications in IoT"
+date: "28-04-2023"
+youtube_url: "https://www.youtube.com/watch?v=iqNX9DgFaBM"
+w3c_event_link: "https://www.w3.org/events/meetings/a15d3d7d-7815-4da5-8233-01aeb62ee227/"
+thumbnail: "W3C_WoT_Meetup_7.png"
+speakers:
+  - name: "Simon Mayer"
+    organisation: "University of St. Gallen"
+    bio: >-
+      Simon is Professor of Interaction- and Communication-based Systems at the University of
+      St.Gallen. Together with his research group (https://interactions.ics.unisg.ch/), he
+      explores interactions among devices and people in ubiquitous computing environments.
+presenter_slides:
+  - file: "2023-04-WoTCG-Meetup7-Mayer-IntellIoT.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1Sqr3uJ_6lLoOGJ9z6Uttg5akKNZcB945yaponz26Uz0/edit?usp=sharing"
+  pdf: "2023-04-WoTCG-Meetup7-AguzziKorkan.pdf"
+minutes: "2023-04-28-minutes.md"
+description: >-
+  In our 7th WoT CG Meetup, we welcomed a seasoned WoT expert. Simon Mayer from the
+  University of St. Gallen brought in experience from a recent European project, IntellIoT,
+  and presented how the Web of Things can be used to implement web-scale agents. He also
+  showed their Web-based Agent IDE where domain experts can develop no-code applications.
+
+youtube_description: |
+  In our 7th WoT CG Meetup, we welcomed a seasoned WoT expert. Simon Mayer from the University of St. Gallen brought in experience from a recent European project, IntellIoT, and presented how the Web of Things can be used to implement web-scale agents. He also showed their Web-based Agent IDE where domain experts can develop no-code applications.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/07/2023-04-WoTCG-Meetup7-Mayer-IntellIoT.pdf
+  Intro slides: https://docs.google.com/presentation/d/1Sqr3uJ_6lLoOGJ9z6Uttg5akKNZcB945yaponz26Uz0/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/07/2023-04-28-minutes.md

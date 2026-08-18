@@ -1,0 +1,39 @@
+meetup: 14
+title: "Smart Building Solutions built on WebThings"
+date: "22-02-2024"
+youtube_url: "https://www.youtube.com/watch?v=7FGS10G-YIc"
+w3c_event_link: "https://www.w3.org/events/meetings/8772efe6-1a75-4c08-83e5-f92e4165e11f/"
+thumbnail: "W3C_WoT_Meetup_14.png"
+speakers:
+  - name: "Ben Francis"
+    organisation: "Krellian"
+    bio: >-
+      Ben Francis is a Software Engineer and Founder of Krellian. He also founded the Webian and
+      WebThings projects and is a W3C Invited Expert on Web Applications and the Web of Things. He
+      has previously worked for Mozilla and Google.
+presenter_slides:
+  - file: "2024-02-WoTCG-Meetup14-Francis-Krellian.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/14jMoUwxGq2J_smzZTjwcXpHN2fIrKAGCczmVx74X3FU/edit?usp=sharing"
+  pdf: "2024-02-WoTCG-Meetup14-AguzziKorkan.pdf"
+minutes: "2024-02-22-minutes.md"
+description: >-
+  In our 14th meetup, we are delighted to welcome Ben Francis from Krellian. Krellian helps
+  facilities managers of commercial buildings meet their net zero targets whilst saving
+  money, by optimising space utilisation and reducing energy consumption. Krellian's
+  Founder, Ben Francis, talks about his experience building commercial smart building
+  solutions on top of the open source WebThings platform, originally developed at Mozilla
+  for DIY smart homes. This includes developing a smart building analytics service hosted in
+  the cloud, and work towards a production quality version of WebThings Gateway suited to
+  larger commercial buildings. Ben talks about how W3C WoT standards are central to
+  Krellian's products and services and share lessons learned which may help others
+  implementing those standards, and contribute to improving future versions of the
+  specifications.
+
+youtube_description: |
+  In our 14th meetup, we are delighted to welcome Ben Francis from Krellian. Krellian helps facilities managers of commercial buildings meet their net zero targets whilst saving money, by optimising space utilisation and reducing energy consumption. Krellian's Founder, Ben Francis, talks about his experience building commercial smart building solutions on top of the open source WebThings platform, originally developed at Mozilla for DIY smart homes. This includes developing a smart building analytics service hosted in the cloud, and work towards a production quality version of WebThings Gateway suited to larger commercial buildings. Ben talks about how W3C WoT standards are central to Krellian's products and services and share lessons learned which may help others implementing those standards, and contribute to improving future versions of the specifications.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/14/2024-02-WoTCG-Meetup14-Francis-Krellian.pdf
+  Intro slides: https://docs.google.com/presentation/d/14jMoUwxGq2J_smzZTjwcXpHN2fIrKAGCczmVx74X3FU/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/14/2024-02-22-minutes.md

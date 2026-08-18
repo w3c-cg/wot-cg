@@ -1,0 +1,26 @@
+meetup: 2
+title: "Magenta Smart Home"
+date: "01-12-2022"
+youtube_url: null  # this meetup was not recorded
+w3c_event_link: "https://www.w3.org/events/meetings/07d67134-f9d0-4c8a-ba1e-24f25babef8c/"
+thumbnail: "W3C_WoT_Meetup_2.png"
+speakers:
+  - name: "Robert Winkler"
+    organisation: "Deutsche Telekom"
+    bio: >-
+      Robert Winkler works as a solution architect at Deutsche Telekom AG in Darmstadt, Germany.
+      He is responsible for the architecture of Magenta Smart Home and MagentaZuhause App. He is
+      also the creator of Resilience4j. Resilience4j is a lightweight fault tolerance library
+      designed for functional programming that is used by multiple companies worldwide.
+presenter_slides:
+  - file: "2022-08-WoTCG-Meetup2-MagentaZuhauseApp-Winkler.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/13jKtDYPREKXW9e0BM_6bA__aocjGkEq37DxuQ3bMBDY/edit?usp=sharing"
+  pdf: "2022-12-WoTCG-Meetup2-AguzziKorkan.pdf"
+minutes: "2022-12-01-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, the focus was on smart home solutions. Robert Winkler from
+  Deutsche Telekom presented the architecture of Magenta Smart Home and the MagentaZuhause
+  App, which implement technologies inspired by the Web of Things. The session continued
+  with questions from the attendees and a broader discussion on how Web of Things standards
+  can address the challenges of smart home IoT systems.

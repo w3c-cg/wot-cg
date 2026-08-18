@@ -1,0 +1,46 @@
+meetup: 34
+title: "Quick onboarding of devices to Prosys Forge using OPC UA WoT Connectivity"
+date: "28-05-2026"
+youtube_url: "https://youtu.be/l-suLrJDjd0"
+w3c_event_link: "https://www.w3.org/events/meetings/86d27050-dddb-4d7e-80f8-a0e5a31c8ea5/"
+thumbnail: "WoT-CG Meetup 34.jpg"
+speakers:
+  - name: "Jouni Aro"
+    organisation: "Prosys OPC Ltd"
+    bio: >-
+      Jouni Aro is the CTO of Prosys OPC and leads OPC UA product development as the chief
+      architect of Prosys OPC products. He has deep expertise in interoperable and
+      future-proof industrial connectivity. Jouni is a long-standing contributor to the OPC UA
+      ecosystem through OPC Foundation working groups and the Technical Advisory Council, and
+      is actively involved in key standardization and industry initiatives.
+  - name: "Iivo Yrjölä"
+    organisation: "Prosys OPC Ltd"
+    bio: >-
+      Iivo Yrjölä is a Lead Engineer at Prosys OPC, working in Customer Support and
+      Integration with a strong focus on IT/OT integration solutions. He specializes in the
+      Prosys Forge application, helping customers modernize existing systems and design
+      scalable, future-proof architectures. Iivo is known for making advanced concepts like
+      OPC UA and information models practical and understandable in real-world manufacturing
+      use cases.
+presenter_slides:
+  - file: "2026-05-WoTCG-Meetup34-onboarding-prosys.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1wfNo2CIODBaKUgMssS_1oD5ta-pAydvDRXkp3lDKW0c/edit?usp=sharing"
+  pdf: "2026-05-WoTCG-Meetup34-AguzziKorkan.pdf"
+minutes: "2026-05-28-minutes.md"
+description: >-
+  In this session, Jouni Aro and Iivo Yrjölä from Prosys OPC Ltd showed how the OPC UA WoT
+  Connectivity standard can be used to enable quick and reliable onboarding of devices to
+  Prosys Forge. They demonstrated how manufacturer-provided Thing Descriptions let devices
+  be set up without manual configuration, using Siemens SENTRON Energy Meters communicating
+  over Modbus, and how vendor-specific data models can be converted to a standard Energy
+  Consumption Management Information Model so the data becomes usable by a wider range of
+  applications.
+
+youtube_description: |
+  In this session, Jouni Aro and Iivo Yrjölä from Prosys OPC Ltd showed how the OPC UA WoT Connectivity standard can be used to enable quick and reliable onboarding of devices to Prosys Forge. They demonstrated how manufacturer-provided Thing Descriptions let devices be set up without manual configuration, using Siemens SENTRON Energy Meters communicating over Modbus, and how vendor-specific data models can be converted to a standard Energy Consumption Management Information Model so the data becomes usable by a wider range of applications.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/34/2026-05-WoTCG-Meetup34-onboarding-prosys.pdf
+  Intro slides: https://docs.google.com/presentation/d/1wfNo2CIODBaKUgMssS_1oD5ta-pAydvDRXkp3lDKW0c/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/34/2026-05-28-minutes.md

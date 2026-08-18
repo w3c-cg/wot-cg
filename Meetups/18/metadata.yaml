@@ -1,0 +1,52 @@
+meetup: 18
+title: "Digital Twins in Monitoring Applications Using the Web of Things"
+date: "23-05-2024"
+youtube_url: "https://www.youtube.com/watch?v=XtJ260RuiWY"
+w3c_event_link: "https://www.w3.org/events/meetings/d4a1aa3f-a477-4877-8e11-32eb9075a186/"
+thumbnail: "W3C_WoT_Meetup_18.png"
+speakers:
+  - name: "Marco di Felice"
+    organisation: "University of Bologna"
+    bio: >-
+      Marco Di Felice is a Full Professor at the University of Bologna where he founded the IoT
+      Prism Lab, which focuses on scientific and industrial research in pervasive and mobile
+      systems. He is also faculty member of the international PhD program in Engineering and
+      Information Technology for Structural and Environmental Monitoring and Risk Management
+      (EIT4SEMM) and affiliated to the Advanced Research Center on Electronics Systems (ARCES). He
+      has served as an associate editor for the IEEE Internet of Things journal and the Ad Hoc
+      Networks journal. Currently, he is an associate editor for the Computer Networks journal. He
+      authored more than 160 scientific articles on wireless, pervasive and mobile systems,
+      interoperability and IoT data processing and platforms.
+  - name: "Luca Sciullo"
+    organisation: "University of Bologna"
+    bio: >-
+      Luca Sciullo is a Junior Assistant Professor who authored more than 30 papers in both
+      international conferences and journals. He was a Visiting Researcher at the Huawei European
+      Research Center of Munich, Germany. His research interests include wireless systems,
+      Internet of Things (IoT) Systems, Web of Things (WoT), Digital Twin, Industry 4.0, and
+      Blockchains.
+presenter_slides:
+  - file: "2024-05-WoTCG-Meetup18-DTs_in_Monitoring-difelice_sciullo.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1Ny17TC6eFp_t6tUo7KuFiWGM5_thqOvkNYaLR2BTMg8/edit?usp=sharing"
+  pdf: "2024-05-WoTCG-Meetup18-AguzziKorkan.pdf"
+minutes: "2024-05-23-minutes.md"
+description: >-
+  In this meetup, we welcome Marco Di Felice and Luca Sciullo from the IoT Prism lab of the
+  University of Bologna. In their talk, they focus on data integration and processing for
+  the design and development of large-scale IoT monitoring systems. The talk is structured
+  into two parts. In the first part, they address Structural Health Monitoring (SHM). They
+  discuss the challenges of IoT data collection and demonstrate how they have used the W3C
+  Web of Things (WoT) standards to address the fragmentation of data sources. The second
+  part covers their findings on the automatic generation of IoT systems using the W3C WoT.
+  They present approaches and frameworks that enable the creation of digital twins (DT) from
+  operational W3C Web of Things systems and discuss open issues and future directions in
+  this area.
+
+youtube_description: |
+  In this meetup, we welcome Marco Di Felice and Luca Sciullo from the IoT Prism lab of the University of Bologna. In their talk, they focus on data integration and processing for the design and development of large-scale IoT monitoring systems. The talk is structured into two parts. In the first part, they address Structural Health Monitoring (SHM). They discuss the challenges of IoT data collection and demonstrate how they have used the W3C Web of Things (WoT) standards to address the fragmentation of data sources. The second part covers their findings on the automatic generation of IoT systems using the W3C WoT. They present approaches and frameworks that enable the creation of digital twins (DT) from operational W3C Web of Things systems and discuss open issues and future directions in this area.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/18/2024-05-WoTCG-Meetup18-DTs_in_Monitoring-difelice_sciullo.pdf
+  Intro slides: https://docs.google.com/presentation/d/1Ny17TC6eFp_t6tUo7KuFiWGM5_thqOvkNYaLR2BTMg8/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/18/2024-05-23-minutes.md

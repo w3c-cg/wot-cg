@@ -1,0 +1,29 @@
+meetup: 1
+title: "Digital Twins with Eclipse Ditto and Web of Things"
+date: "13-10-2022"
+youtube_url: null  # this meetup was not recorded
+w3c_event_link: "https://www.w3.org/events/meetings/c8802811-42b9-4089-a823-8671e3c3a227/"
+thumbnail: "W3C_WoT_Meetup_1.png"
+speakers:
+  - name: "Thomas Jaeckle"
+    organisation: "Bosch.io"
+    bio: >-
+      Thomas Jäckle is Committer and Project Lead of the Eclipse Ditto project which was created
+      in 2017. As a Senior Expert for IoT and Lead Software Developer for the commercial Bosch IoT
+      Things cloud service he works for Bosch.IO GmbH, one of the leading members of the Eclipse
+      IoT working group. He is also part of the WoT Working Group and contributor to the Thing
+      Description.
+presenter_slides:
+  - file: "2022-10-WoTCG-Meetup1-EclipseDitto-and-WoT-Jaeckle.pdf"
+    url: "https://www.eclipse.org/ditto/slides/2022_10_ditto-and-wot/"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1iOCkNmtA10AuDTyHKswk26siCU2AAGNOzQsUm15BQYw/edit?usp=sharing"
+  pdf: "2022-10-WoTCG-Meetup1-AguzziKorkan.pdf"
+minutes: "2022-10-13-minutes.md"
+description: >-
+  In this W3C WoT CG Meetup, the focus was on the topic of digital twins. Thomas Jaeckle
+  presented Eclipse Ditto, an open-source framework to help build digital twins of devices
+  connected to the Internet, whose latest version supports the W3C Web of Things
+  specifications. The presentation was followed by a panel discussion in which attendees
+  shared their perspectives, needs and use cases around digital twins, and explored how
+  W3C Web of Things technologies contribute to this domain.

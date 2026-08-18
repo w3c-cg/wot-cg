@@ -1,0 +1,37 @@
+meetup: 15
+title: "Beyond Local Connectivity: Bridging Web of Things and Matter"
+date: "14-03-2024"
+youtube_url: "https://www.youtube.com/watch?v=upUN9-0so2s"
+w3c_event_link: "https://www.w3.org/events/meetings/66be002d-864b-4a49-a4d4-4d231b4c99bf/"
+thumbnail: "W3C_WoT_Meetup_15.png"
+speakers:
+  - name: "Till Langen"
+    organisation: "Deutsche Telekom"
+    bio: >-
+      Since 2020, Till is working as a part of the MagentaZuhause app team in Deutsche Telekom.
+      Initially, he has worked with Thread and then with Matter. After working on a proof of
+      concept for the integration in the MagentaZuhause architecture, he realized that an
+      abstraction from Matter to Web of Things would make the solution more resource efficient and
+      lightweight.
+presenter_slides:
+  - file: "2024-03-WoTCG-Meetup15-MatterAndWoT-Langen.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/14jMoUwxGq2J_smzZTjwcXpHN2fIrKAGCczmVx74X3FU/edit?usp=sharing"
+  pdf: "2024-03-WoTCG-Meetup15-AguzziKorkan.pdf"
+minutes: "2024-03-14-minutes.md"
+description: >-
+  In this meetup, we welcomed Till Langen from Deutsche Telekom to talk about Matter. Matter
+  aims for a standardized Smart Home System, in a local domain. Behind Matter is a merger of
+  the leading hardware and software companies, which is leveraging the distribution. For the
+  scope of a seamless integration in the World Wide Web a mapping from the data model to Web
+  of Things is necessary. This meetup gave an introduction in the Matter data model and a
+  first concept of the abstraction to Web of Things. The concept looked at the function of
+  Matter to bridge devices, compose endpoints and the access control definition.
+
+youtube_description: |
+  In this meetup, we welcomed Till Langen from Deutsche Telekom to talk about Matter. Matter aims for a standardized Smart Home System, in a local domain. Behind Matter is a merger of the leading hardware and software companies, which is leveraging the distribution. For the scope of a seamless integration in the World Wide Web a mapping from the data model to Web of Things is necessary. This meetup gave an introduction in the Matter data model and a first concept of the abstraction to Web of Things. The concept looked at the function of Matter to bridge devices, compose endpoints and the access control definition.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/15/2024-03-WoTCG-Meetup15-MatterAndWoT-Langen.pdf
+  Intro slides: https://docs.google.com/presentation/d/14jMoUwxGq2J_smzZTjwcXpHN2fIrKAGCczmVx74X3FU/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/15/2024-03-14-minutes.md

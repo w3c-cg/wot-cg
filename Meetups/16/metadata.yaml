@@ -1,0 +1,35 @@
+meetup: 16
+title: "WoT Digital Twin Ontology"
+date: "07-05-2024"
+youtube_url: "https://www.youtube.com/watch?v=uPhKn-q-ZkA"
+w3c_event_link: "https://www.w3.org/events/meetings/1529773f-380c-4536-9504-9cb8c3d35bbf/"
+thumbnail: "W3C_WoT_Meetup_16.png"
+speakers:
+  - name: "Salvador González Gerpe"
+    organisation: "Universidad Politécnica de Madrid"
+    bio: >-
+      Salvador is a researcher in Artificial Intelligence with extensive knowledge focused on the
+      semantic characterisation of Digital Twins. Graduated in computer engineering with a
+      master's degree in artificial intelligence. Currently, working on a PhD in Artificial
+      Intelligence, with the main focus on semantic characterisation and interoperability between
+      different Digital Twins.
+presenter_slides:
+  - file: "2024-05-WoTCG-Meetup16-WoTDT-Gerpe.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1fGmg6lW4JH00OdodfsvvMqcA7O90u57ZHE7REEWt2oY/edit?usp=sharing"
+  pdf: "2024-05-WoTCG-Meetup16-AguzziKorkan.pdf"
+minutes: "2024-05-07-minutes.md"
+description: >-
+  n this meetup, we welcome Salvador González Gerpe from the Ontology Engineering Group at
+  the Universidad Politécnica de Madrid. He takes us back to the concept of Digital Twins
+  with a new ontology, WoTDT. The WoTDT ontology can describe the five-dimensional
+  architecture of a Digital Twin. Furthermore, it allows for the description and location of
+  the metadata belonging to each of the dimensions with the help of WoT.
+
+youtube_description: |
+  n this meetup, we welcome Salvador González Gerpe from the Ontology Engineering Group at the Universidad Politécnica de Madrid. He takes us back to the concept of Digital Twins with a new ontology, WoTDT. The WoTDT ontology can describe the five-dimensional architecture of a Digital Twin. Furthermore, it allows for the description and location of the metadata belonging to each of the dimensions with the help of WoT.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/16/2024-05-WoTCG-Meetup16-WoTDT-Gerpe.pdf
+  Intro slides: https://docs.google.com/presentation/d/1fGmg6lW4JH00OdodfsvvMqcA7O90u57ZHE7REEWt2oY/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/16/2024-05-07-minutes.md

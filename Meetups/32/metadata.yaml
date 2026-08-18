@@ -1,0 +1,34 @@
+meetup: 32
+title: "From WoT to Chain: Enabling Zero-Trust Oracles for Blockchain IoT Applications"
+date: "15-12-2025"
+youtube_url: "https://youtu.be/-ZJ3A0txXD8"
+w3c_event_link: "https://www.w3.org/events/meetings/fb10b377-c5a7-4ee9-ae60-89a2a5cc627d/"
+thumbnail: "W3C_WoT_Meetup_32.png"
+speakers:
+  - name: "Ivan Dimitry Ribeiro Zyrianoff"
+    organisation: null
+    bio: >-
+      Ivan is a Research Fellow from the University of Bologna and a member of the IoT-Prism lab.
+      He received a Ph.D. in structural and environmental health monitoring and management from
+      the University of Bologna in 2024. He was involved in numerous national and European
+      projects centered on IoT applied to different contexts. His current research topics
+      encompass interoperability for the Internet of Things, Edge Computing, and Edge Caching.
+presenter_slides:
+  - file: "2025-12-WoTCG-Meetup32-Zonia-Ivan.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1bYQHcKImeMGR2CT3MWXJwDegtzpbZq5AKTssvVhR5Ww/edit?usp=sharing"
+  pdf: "2025-12-WoTCG-Meetup32-AguzziKorkan.pdf"
+minutes: "2025-12-15-minutes.md"
+description: >-
+  In this meetup, we welcome Ivan Dimitry Ribeiro Zyrianoff from the University of Bologna.
+  He presents ZONIA, a zero-trust decentralized oracle network that improves data integrity
+  and interoperability in IoT systems by bridging with the blockchain. He focuses on the WoT
+  integration and showcases experiments on parametric insurance using IoT sensor data.
+
+youtube_description: |
+  In this meetup, we welcome Ivan Dimitry Ribeiro Zyrianoff from the University of Bologna. He presents ZONIA, a zero-trust decentralized oracle network that improves data integrity and interoperability in IoT systems by bridging with the blockchain. He focuses on the WoT integration and showcases experiments on parametric insurance using IoT sensor data.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/32/2025-12-WoTCG-Meetup32-Zonia-Ivan.pdf
+  Intro slides: https://docs.google.com/presentation/d/1bYQHcKImeMGR2CT3MWXJwDegtzpbZq5AKTssvVhR5Ww/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/32/2025-12-15-minutes.md

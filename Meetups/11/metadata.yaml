@@ -1,0 +1,31 @@
+meetup: 11
+title: "ISO Industrial Data Ontology"
+date: "12-12-2023"
+youtube_url: "https://youtu.be/VYHjMU5a9FI"
+w3c_event_link: "https://www.w3.org/events/meetings/3b58fdf1-ab01-4700-88f1-0181396c94d3/"
+thumbnail: "W3C_WoT_Meetup_11.png"
+speakers:
+  - name: "Mikkel Haggren Brynildsen"
+    organisation: "Grundfos"
+    bio: >-
+      Mikkel is the Chief Data Scientist of Grundfos "Data & AI". He holds a MsC in Physics and a
+      PhD in Mathematics. Mikkel is a member of two national boards of standardization for
+      Denmark: one on AI and one on Industrial Data.
+presenter_slides:
+  - file: "2023-12-WoTCG-Meetup11-MikkelHBrynildsen-ISO_IDO.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1r_7PrstswVoU_1awFvrcfa6tuQRzm76coDZkPfuY68k/edit?usp=sharing"
+  pdf: "2023-12-WoTCG-Meetup11-AguzziKorkan.pdf"
+minutes: "2023-12-12-minutes.md"
+description: >-
+  In this meetup, we welcomed Mikkel Haggren Brynildsen from Grundfos. He talked about the
+  then-upcoming ISO standard called Industrial Data Ontology that relates to the Web of
+  Things. He explained the motivation behind it and the future development of the standard.
+
+youtube_description: |
+  In this meetup, we welcomed Mikkel Haggren Brynildsen from Grundfos. He talked about the then-upcoming ISO standard called Industrial Data Ontology that relates to the Web of Things. He explained the motivation behind it and the future development of the standard.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/11/2023-12-WoTCG-Meetup11-MikkelHBrynildsen-ISO_IDO.pdf
+  Intro slides: https://docs.google.com/presentation/d/1r_7PrstswVoU_1awFvrcfa6tuQRzm76coDZkPfuY68k/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/11/2023-12-12-minutes.md

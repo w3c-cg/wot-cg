@@ -1,0 +1,39 @@
+meetup: 13
+title: "Smart microscopy for everyone with OpenFlexure and LabThings"
+date: "15-02-2024"
+youtube_url: "https://www.youtube.com/watch?v=TI6HUOw6lhU"
+w3c_event_link: "https://www.w3.org/events/meetings/dafab839-0eba-46f2-89b1-634539577b9b/"
+thumbnail: "W3C_WoT_Meetup_13.png"
+speakers:
+  - name: "Richard Bowman"
+    organisation: "OpenFlexure and University of Bath"
+    bio: >-
+      Richard works on microscopy and experimental automation, including the development of a 3D
+      printable translation stage with sub-micron accuracy. He has transferred a number of
+      technologies to commercial partners, and leads the OpenFlexure project. OpenFlexure sits at
+      the heart of a global community of medics, biologists, entrepreneurs and engineers, making
+      high quality automated microscopy more reproducible and more accessible.
+presenter_slides:
+  - file: "2024-02-WoTCG-Meetup13-Bowman-openflexure_and_labthings.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1gz5SQmVnOVMZdzN2rziaQBp8ES_gO7XP96hBvZZ28Sc/edit?usp=sharing"
+  pdf: "2024-02-WoTCG-Meetup13-AguzziKorkan.pdf"
+minutes: "2024-02-15-minutes.md"
+description: >-
+  In the 13th meetup, we were delighted to welcome Richard Bowman (LinkedIn, GitHub), who
+  explored the intersection of open-source software, hardware, and the Web of Things.
+  Richard introduced us to the OpenFlexure microscope, an open hardware laboratory
+  microscope widely employed in research, teaching, and potentially medical settings across
+  every continent. He demonstrated how a Web of Things approach has been utilized to enhance
+  user-friendliness, enable automation, and circumvent many of the challenges associated
+  with scientific instrument software. In addition to discussing the microscope, Richard
+  delved into how the Web of Things approach holds transformative potential in research
+  laboratories.
+
+youtube_description: |
+  In the 13th meetup, we were delighted to welcome Richard Bowman (LinkedIn, GitHub), who explored the intersection of open-source software, hardware, and the Web of Things. Richard introduced us to the OpenFlexure microscope, an open hardware laboratory microscope widely employed in research, teaching, and potentially medical settings across every continent. He demonstrated how a Web of Things approach has been utilized to enhance user-friendliness, enable automation, and circumvent many of the challenges associated with scientific instrument software. In addition to discussing the microscope, Richard delved into how the Web of Things approach holds transformative potential in research laboratories.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/13/2024-02-WoTCG-Meetup13-Bowman-openflexure_and_labthings.pdf
+  Intro slides: https://docs.google.com/presentation/d/1gz5SQmVnOVMZdzN2rziaQBp8ES_gO7XP96hBvZZ28Sc/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/13/2024-02-15-minutes.md

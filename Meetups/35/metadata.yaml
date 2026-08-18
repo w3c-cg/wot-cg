@@ -1,0 +1,37 @@
+meetup: 35
+title: "Agent Integrations Are Documents: Driving Systems from Thing Descriptions"
+date: "02-07-2026"
+youtube_url: "https://youtu.be/3QdxP7ydAB0"
+w3c_event_link: "https://www.w3.org/events/meetings/b39f930a-d817-4ca2-97b6-8763c7a12a10/"
+thumbnail: "WoT-CG Meetup 35.jpg"
+speakers:
+  - name: "Sherif Abdelwahab"
+    organisation: "Microsoft"
+    bio: >-
+      Sherif defines architectural direction for a multi-agent Physical AI platform spanning
+      edge runtime, messaging, and AI lifecycle surfaces. He holds a PhD in edge and IoT
+      systems and several patents in distributed edge computing.
+presenter_slides:
+  - file: "2026-07-WoTCG-Meetup35-thingctx-sherif.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1Ksfj5pzlSc-Zb1_0ZUpB_nJCtITGfojJmBsJUoxKp_s/edit?usp=sharing"
+  pdf: "2026-07-WoTCG-Meetup35-AguzziKorkan.pdf"
+minutes: "2026-07-02-minutes.md"
+description: >-
+  In this session, Sherif Abdelwahab showed an alternative to the usual way of connecting an
+  AI agent to a system, which normally means writing a server per integration: an MCP or UTCP
+  wrapper that has to be built, deployed and maintained for every tool. He presented a path
+  built on W3C WoT in which the integration becomes a document an agent reads rather than a
+  server you run, mapping Thing Description affordances to LLM tool calls so that systems can
+  be driven directly from their descriptions while keeping the standard's typing, security and
+  discovery. He also covered a bridge to MCP for agents that require it, and introduced
+  thingctx, an open-source project that automates system integration through W3C Thing
+  Descriptions. thingctx is his personal work and not a Microsoft product.
+
+youtube_description: |
+  In this session, Sherif Abdelwahab showed an alternative to the usual way of connecting an AI agent to a system, which normally means writing a server per integration: an MCP or UTCP wrapper that has to be built, deployed and maintained for every tool. He presented a path built on W3C WoT in which the integration becomes a document an agent reads rather than a server you run, mapping Thing Description affordances to LLM tool calls so that systems can be driven directly from their descriptions while keeping the standard's typing, security and discovery. He also covered a bridge to MCP for agents that require it, and introduced thingctx, an open-source project that automates system integration through W3C Thing Descriptions. thingctx is his personal work and not a Microsoft product.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/35/2026-07-WoTCG-Meetup35-thingctx-sherif.pdf
+  Intro slides: https://docs.google.com/presentation/d/1Ksfj5pzlSc-Zb1_0ZUpB_nJCtITGfojJmBsJUoxKp_s/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/35/2026-07-02-minutes.md

@@ -1,0 +1,33 @@
+meetup: 26
+title: "How the Hive of Things - HiveOT - embraces WoT"
+date: "27-03-2025"
+youtube_url: "https://youtu.be/JxGcW70tqfk"
+w3c_event_link: "https://www.w3.org/events/meetings/08a75b44-0e01-4926-ad7d-4755317ee8a4/"
+thumbnail: "W3C_WoT_Meetup_26.png"
+speakers:
+  - name: "Henk Spaay"
+    organisation: null
+    bio: >-
+      Henk Spaay is a retired Senior Software Engineer and development manager. He was educated as
+      Electronics Engineer and has over 30 years of software development experience in embedded
+      industrial and consumer solutions.
+presenter_slides:
+  - file: "2025-03-WoTCG-Meetup26-HiveOT.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/192ScNSZCw31CBW2r9Omipr5hJTe8fLsP9tB6ZSNsbVw/edit?usp=sharing"
+  pdf: "2025-03-WoTCG-Meetup26-AguzziKorkan.pdf"
+minutes: "2025-03-27-minutes.md"
+description: >-
+  In this meetup, we dived into the use of WoT standards in building the HiveOT Hub together
+  with Henk. After learning about its objectives and history, we saw how the Thing
+  Description documents facilitate the interaction between consumers and Things using a hub
+  and digital twins. He also explained the challenges he encountered in using WoT standards
+  during development.
+
+youtube_description: |
+  In this meetup, we dived into the use of WoT standards in building the HiveOT Hub together with Henk. After learning about its objectives and history, we saw how the Thing Description documents facilitate the interaction between consumers and Things using a hub and digital twins. He also explained the challenges he encountered in using WoT standards during development.
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/26/2025-03-WoTCG-Meetup26-HiveOT.pdf
+  Intro slides: https://docs.google.com/presentation/d/192ScNSZCw31CBW2r9Omipr5hJTe8fLsP9tB6ZSNsbVw/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/26/2025-03-27-minutes.md

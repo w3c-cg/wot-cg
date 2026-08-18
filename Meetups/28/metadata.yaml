@@ -1,0 +1,44 @@
+meetup: 28
+title: "An Open-source Software Stack for IoT Virtualization and Convergence with Edge Computing Technologies"
+date: "17-07-2025"
+youtube_url: "https://youtu.be/EkeoQLWIhlI"
+w3c_event_link: "https://www.w3.org/events/meetings/d5ca8089-230f-4126-9e95-5b7446784a6d/"
+thumbnail: "W3C_WoT_Meetup_28.png"
+speakers:
+  - name: "Dimitrios Spatharakis"
+    organisation: null
+    bio: >-
+      Dimitrios Spatharakis is a postdoctoral fellow in the NETMODE Lab at NTUA. His research
+      interests focus on IoT, cyber-physical systems, edge computing and cloud computing. He has
+      been involved as a researcher in several European and National R&D projects.
+  - name: "Nikos Filinis"
+    organisation: null
+    bio: >-
+      Nikos Filinis is pursuing his PhD at NTUA. His research interests lie in the areas of
+      intelligent orchestration mechanisms for cloud and edge computing resources, reinforcement
+      learning, software stacks for IoT, 5G networks and software development.
+presenter_slides:
+  - file: "2025-07-WoTCG-Meetup28-VO-WoT.pdf"
+intro_slides:
+  google_slides: "https://docs.google.com/presentation/d/1iQjM7CGnVCx1XQCK2bi3iIfUCfIDwqTdjEng5ebfCEQ/edit?usp=sharing"
+  pdf: "2025-07-WoTCG-Meetup28-AguzziKorkan.pdf"
+minutes: "2025-07-17-minutes.md"
+description: >-
+  In this meetup, we welcome Dr. Dimitris Spatharakis and Nikos Filinis from the NETMODE Lab
+  at the National Technical University of Athens, Greece. They talk about the design and
+  implementation of a software stack that supports IoT virtualization through the
+  development of Virtual Objects (VOs) that encapsulate WoT Things. VOs provide an
+  abstraction layer over real IoT devices while augmenting their capabilities through a
+  multi-layer software stack, called the VOStack. The VOStack is an open-source software
+  stack that supports interaction with both physical IoT devices and edge/cloud computing
+  orchestration platforms. The implementation of VOStack is aligned with the WoT
+  specifications and is implemented in the framework of the NEPHELE Horizon Europe project
+  (https://nephele-project.eu/).
+
+youtube_description: |
+  In this meetup, we welcome Dr. Dimitris Spatharakis and Nikos Filinis from the NETMODE Lab at the National Technical University of Athens, Greece. They talk about the design and implementation of a software stack that supports IoT virtualization through the development of Virtual Objects (VOs) that encapsulate WoT Things. VOs provide an abstraction layer over real IoT devices while augmenting their capabilities through a multi-layer software stack, called the VOStack. The VOStack is an open-source software stack that supports interaction with both physical IoT devices and edge/cloud computing orchestration platforms. The implementation of VOStack is aligned with the WoT specifications and is implemented in the framework of the NEPHELE Horizon Europe project (https://nephele-project.eu/).
+
+  Useful Links:
+  Presenter slides: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/28/2025-07-WoTCG-Meetup28-VO-WoT.pdf
+  Intro slides: https://docs.google.com/presentation/d/1iQjM7CGnVCx1XQCK2bi3iIfUCfIDwqTdjEng5ebfCEQ/edit?usp=sharing
+  Minutes: https://github.com/w3c-cg/wot-cg/blob/main/Meetups/28/2025-07-17-minutes.md
