@@ -121,6 +121,28 @@ const sidebars = {
             },
 
           ],
+        },
+        {
+          type: "category",
+          label: "Thing Description in Practice",
+          collapsed: false,
+          items: [
+            {
+              type: "doc",
+              id: "wot/td-in-practice/building-a-thing-part-1",
+              label: "Building a Thing - Part 1",
+            },
+            {
+              type: "doc",
+              id: "wot/td-in-practice/building-a-thing-part-2",
+              label: "Building a Thing - Part 2",
+            },
+            {
+              type: "doc",
+              id: "wot/td-in-practice/building-a-consumer",
+              label: "Building a Consumer",
+            },
+          ],
         }
         // {
         //   type: "doc",
