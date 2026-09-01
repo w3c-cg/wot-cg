@@ -9,7 +9,7 @@ Applications in Industrial and Agriculture Systems | What is WoT
 In this video, we introduce the W3C Web of Things by exploring its application domains and common architecture patterns in the context of industrial and agriculture systems.
 The corresponding web page of this video is at https://w3c.github.io/wot-cg/tutorials/whatiswot/docs/wot/application-domains/industrial-and-agriculture-systems .
 
-This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below.
+This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below. AI has been used for generating the voiceover. All other work is manually done and everything has been reviewed by the W3C Web of Things Community Group.
 
 Next video: https://youtu.be/traPzBmeuSo
 

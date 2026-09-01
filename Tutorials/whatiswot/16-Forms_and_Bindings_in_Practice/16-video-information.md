@@ -8,7 +8,7 @@ Forms and Bindings in Practice | What is WoT
 
 In this video, we put Bindings into practice by tracing how a single Thing Description turns WoT operations into real network traffic across four different protocols. Using a smart coffee machine example, we follow the Consumer as it reads a property over HTTP, invokes an action over CoAP, subscribes to an event over MQTT, and reads a register over Modbus. The corresponding web page of this video is at https://w3c.github.io/wot-cg/tutorials/whatiswot/docs/wot/thing-description/forms-and-bindings-in-practice .
 
-This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below.
+This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below. AI has been used for generating the voiceover. All other work is manually done and everything has been reviewed by the W3C Web of Things Community Group.
 
 Next video: Coming Soon!
 

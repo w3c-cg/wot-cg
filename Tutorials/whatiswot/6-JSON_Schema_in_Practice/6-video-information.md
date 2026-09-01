@@ -9,7 +9,7 @@ JSON Schema in Practice | What is WoT
 As we discussed in the previous video, JSON Schema is a declarative format for “describing the structure of other data”. Now we will explain its implementation.
 The corresponding web page of this video is at https://w3c.github.io/wot-cg/tutorials/whatiswot/docs/preliminary/json-schema/practice .
 
-This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below.
+This video is created by the W3C Web of Things Community Group and is developed open source. You can provide feedback via the GitHub link below. AI has been used for generating the voiceover. All other work is manually done and everything has been reviewed by the W3C Web of Things Community Group.
 
 Next video: https://youtu.be/gZa2vxmrm4Q
 
