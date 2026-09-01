@@ -1,0 +1,107 @@
+WEBVTT
+
+00:00:09.239 --> 00:00:16.982 
+In the previous tutorial, we explored Interaction Affordances — properties, actions, and events — and how they describe what a
+
+00:00:16.982 --> 00:00:18.024 
+Thing can do.
+
+00:00:18.024 --> 00:00:25.627 
+ In this video, we will focus on the next important question: How do those interactions actually happen over the
+
+00:00:25.627 --> 00:00:26.278 
+network?
+
+00:00:26.278 --> 00:00:33.891 
+ In the Web of Things, this is handled through bindings. Bindings define how a Consumer communicates with a Thing
+
+00:00:33.891 --> 00:00:43.957 
+using concrete protocols like HTTP, CoAP, MQTT, and others, or how the data is serialized, such as JSON, text, or
+
+00:00:43.957 --> 00:00:44.790 
+CBOR.
+
+00:00:44.790 --> 00:00:50.978 
+ A binding maps an operation of an interaction affordance — such as reading a property or invoking an action
+
+00:00:50.978 --> 00:00:58.992 
+— to a specific network message which includes the communication protocol and endpoint, and the parameters required by the protocol.
+
+00:00:58.992 --> 00:01:05.752 
+ By the end of this video, you'll understand how the Consumer knows where to send a request, which protocol
+
+00:01:05.752 --> 00:01:08.790 
+to use, and how to encode the data.
+
+00:01:08.790 --> 00:01:15.604 
+ A form describes a way to interact with an affordance over a specific protocol. It can be thought of
+
+00:01:15.604 --> 00:01:22.602 
+as a simple instruction to the Consumer:"To perform this type of operation, on this affordance, send a request, in this
+
+00:01:22.602 --> 00:01:27.656 
+way, to this address." Now let's break down the key parts of a form.
+
+00:01:27.656 --> 00:01:32.458 
+Each form can declare one or more operations, using the "op" field.
+
+00:01:32.458 --> 00:01:41.259 
+Operations describe what semantic actions the Consumer can perform — for example: reading or writing a property, invoking an action,
+
+00:01:41.259 --> 00:01:42.959 
+or subscribing to an event.
+
+00:01:42.959 --> 00:01:49.274 
+These operation types are defined by the WoT specification and are independent of any specific protocol.
+
+00:01:49.274 --> 00:01:52.674 
+You can find a full list on the TD specification.
+
+00:01:52.674 --> 00:01:58.327 
+If the "op" field is omitted, default operations are inferred based on the affordance type.
+
+00:01:58.327 --> 00:02:05.734 
+For example, forms of a readable property are assumed to include the "readproperty" operation unless stated otherwise.
+
+00:02:05.734 --> 00:02:10.148 
+ The most important field in a form is " href".
+
+00:02:10.148 --> 00:02:16.001 
+The " href" is a URI that tells the client where to interact with the Thing and which protocol to
+
+00:02:16.001 --> 00:02:16.869 
+use.
+
+00:02:16.869 --> 00:02:20.561 
+The protocol is inferred directly from the URI scheme.
+
+00:02:20.561 --> 00:02:28.740 
+ This design allows the Thing Description concept to stay protocol-agnostic while still enabling concrete protocol-level interactions.
+
+00:02:28.740 --> 00:02:35.377 
+A single affordance can expose multiple forms as well, offering the same interaction over different protocols.
+
+00:02:35.377 --> 00:02:41.747 
+ Forms also specify a "contentType", which tells the client how the payload is encoded.
+
+00:02:41.747 --> 00:02:46.283 
+Common examples include JSON, CBOR and plain text formats.
+
+00:02:46.283 --> 00:02:52.027 
+ This ensures that both the Thing and the Consumer agree on how data is serialized and parsed.
+
+00:02:52.027 --> 00:03:00.139 
+If no content type is specified, protocol-specific defaults may apply, but explicitly declaring them improves interoperability.
+
+00:03:00.139 --> 00:03:11.402 
+ While WoT aims to stay protocol-independent, forms allow protocol-specific extensions when needed. These are expressed through additional fields defined
+
+00:03:11.402 --> 00:03:13.909 
+in protocol binding specifications.
+
+00:03:13.909 --> 00:03:21.576 
+ In the next tutorial, we will see how protocol bindings work in practice using real protocols with our smart
+
+00:03:21.576 --> 00:03:26.718 
+coffee machine example. You can proceed by clicking on the card or the video description.
+
