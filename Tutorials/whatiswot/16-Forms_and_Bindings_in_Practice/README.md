@@ -240,7 +240,7 @@ Let's trace how the Consumer translates this form into a Modbus message. The `ba
 ```modbus
 Unit ID:        0x01     (from /1/ in base URI)
 Function Code:  0x03     (readHoldingRegisters from modv:function)
-Start Address:  0x0002   (= 40003 from href)
+Start Address:  40003
 Quantity:       0x0001   (read 1 register = 2 bytes)
 ```
 
