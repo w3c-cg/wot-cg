@@ -7,6 +7,11 @@ on:
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
+# Shared with adopters-deploy.yml: both push to the same Pages branch.
+concurrency:
+  group: gh-pages-branch
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages

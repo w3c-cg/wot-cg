@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WoT Adopters</title>
+  <meta name="description" content="Organizations and open-source projects that use the W3C Web of Things, and the standards WoT integrates with.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="hero-total" id="total">&nbsp;</div>
+      <p class="hero-label">organizations and projects use the Web of Things</p>
+    </header>
+
+    <p class="load-msg" id="load-msg">Loading adopters…</p>
+
+    <div class="sections" id="sections" hidden>
+
+      <!-- Each section has a clickable header and a collapsible body. Grids and counts are filled by app.js. -->
+      <section class="panel" data-group="companies" aria-labelledby="title-companies">
+        <div class="panel-head">
+          <h2 class="panel-title" id="title-companies">Companies &amp; research organizations</h2>
+          <button class="info" type="button" aria-label="About this category"
+                  data-tip="Companies that use WoT in their products, and research organizations that actively use it in their research.">?</button>
+          <span class="count"></span>
+          <button class="chev" type="button" aria-expanded="true" aria-controls="body-companies" aria-labelledby="title-companies"></button>
+        </div>
+        <div class="panel-body" id="body-companies">
+          <div class="panel-inner"><div class="grid"></div></div>
+        </div>
+      </section>
+
+      <!-- Side-by-side sections, see "Side-by-side pair" in styles.css. -->
+      <div class="pair">
+        <section class="panel" data-group="sdo" aria-labelledby="title-sdo">
+          <div class="panel-head">
+            <h2 class="panel-title" id="title-sdo">Standard development organizations</h2>
+            <button class="info" type="button" aria-label="About this category"
+                    data-tip="Organizations that build WoT into their own specifications.">?</button>
+            <span class="count"></span>
+            <button class="chev" type="button" aria-expanded="true" aria-controls="body-sdo" aria-labelledby="title-sdo"></button>
+          </div>
+          <div class="panel-body" id="body-sdo">
+            <div class="panel-inner"><div class="grid"></div></div>
+          </div>
+        </section>
+
+        <section class="panel" data-group="oss" aria-labelledby="title-oss">
+          <div class="panel-head">
+            <h2 class="panel-title" id="title-oss">Open-source projects</h2>
+            <button class="info" type="button" aria-label="About this category"
+                    data-tip="Open-source software that implements or integrates WoT.">?</button>
+            <span class="count"></span>
+            <button class="chev" type="button" aria-expanded="true" aria-controls="body-oss" aria-labelledby="title-oss"></button>
+          </div>
+          <div class="panel-body" id="body-oss">
+            <div class="panel-inner"><div class="grid"></div></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Bindings are not adopters, so they are listed here instead of in the CSV. -->
+      <section class="panel has-link" data-group="bindings" aria-labelledby="title-bindings">
+        <div class="panel-head">
+          <h2 class="panel-title" id="title-bindings">Bindings</h2>
+          <button class="info" type="button" aria-label="About this category"
+                  data-tip="Standards that WoT can integrate with.">?</button>
+          <span class="count"></span>
+          <button class="chev" type="button" aria-expanded="true" aria-controls="body-bindings" aria-labelledby="title-bindings"></button>
+          <a class="head-link" href="https://w3c.github.io/wot-binding-templates/" target="_blank" rel="noopener">Binding Templates ↗</a>
+        </div>
+        <div class="panel-body" id="body-bindings">
+          <div class="panel-inner">
+            <div class="grid grid--bindings">
+              <div class="binding">HTTP</div>
+              <div class="binding">CoAP</div>
+              <div class="binding">MQTT</div>
+              <div class="binding">WebSockets</div>
+              <div class="binding">Modbus</div>
+              <div class="binding">BACnet</div>
+              <div class="binding">OPC UA</div>
+              <div class="binding">ECHONET Lite</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="foot">
+      Want to be listed?
+      <!-- TODO: link to the submission form or issue template -->
+      <a href="#">Submit your organization</a>
+      · Data last updated <span id="updated"></span>
+    </footer>
+  </main>
+
+  <!-- Tooltip shared by the info buttons. Kept outside the sections so their overflow: hidden doesn't clip it. -->
+  <div class="tip" id="tip" role="tooltip" hidden></div>
+
+  <!-- Adopter popup, filled by app.js. -->
+  <dialog class="detail" id="detail" aria-labelledby="detail-name">
+    <div class="detail-card">
+      <div class="detail-head">
+        <span class="detail-logo" id="detail-logo" aria-hidden="true"></span>
+        <div class="detail-id">
+          <h2 class="detail-name" id="detail-name"></h2>
+          <p class="detail-sub" id="detail-type"></p>
+        </div>
+        <button class="detail-close" id="detail-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="detail-body" id="detail-body">
+        <section id="detail-projects">
+          <h3 class="detail-section">WoT projects</h3>
+          <ul class="detail-list"></ul>
+        </section>
+        <section id="detail-meetups">
+          <h3 class="detail-section">Related meetups</h3>
+          <ul class="detail-list"></ul>
+        </section>
+        <p class="detail-source" id="detail-source">
+          Source: <span id="detail-evidence"></span> · <a id="detail-evidence-link" target="_blank" rel="noopener">View ↗</a>
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Templates cloned by app.js. -->
+  <template id="tile-template">
+    <button class="tile" type="button">
+      <span class="tile-logo" aria-hidden="true"></span>
+      <span class="tile-name"></span>
+    </button>
+  </template>
+
+  <template id="project-template">
+    <li class="project">
+      <span class="project-title"></span>
+      <span class="project-desc"></span>
+    </li>
+  </template>
+
+  <template id="meetup-template">
+    <li>
+      <a class="meetup" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="meetup-title"><b class="meetup-number"></b><span class="meetup-name"></span></span>
+        <span class="meetup-date"></span>
+      </a>
+    </li>
+  </template>
+</body>
+</html>
