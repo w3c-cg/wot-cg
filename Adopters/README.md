@@ -3,8 +3,6 @@
 A static page listing organizations and projects that use the Web of Things.
 Live at https://w3c.github.io/wot-cg/adopters/, deployed by [adopters-deploy.yml](../.github/workflows/adopters-deploy.yml) when this folder changes on `main`.
 
-There is no build step. The page loads `adopters.csv` in the browser.
-
 ## Files
 
 - `adopters.csv`: the adopter list
@@ -28,17 +26,6 @@ Add a row to `adopters.csv` and update `LAST_UPDATED` in `app.js`. Every row is 
 | `Evidence link` | URL for the source |
 
 Meetup titles, dates and links are read from `Meetups/<nn>/metadata.yaml` on `main`, so new meetups need no extra work here.
-
-## Running locally
-
-The CSV is fetched over HTTP, so opening `index.html` directly won't work:
-
-```sh
-cd Adopters
-python -m http.server 8000
-```
-
-Then open http://localhost:8000.
 
 ## Embedding
 
