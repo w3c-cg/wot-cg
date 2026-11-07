@@ -1,0 +1,26 @@
+# Standard development organizations. Field reference: Adopters/README.md
+
+- name: OPC Foundation
+  projects:
+    - title: OPC UA for WoT Connectivity
+      description: OPC 10100-1, builds on the WoT Thing Description
+  sources:
+    - label: OPC 10100-1 v1.02
+      link: https://reference.opcfoundation.org/specs/OPC-10100-1/6
+
+- name: Industrial Digital Twin Association (IDTA)
+  projects:
+    - title: Asset Interfaces Description submodel
+      description: Derived from the WoT Thing Description
+  sources:
+    - label: IDTA 02017 v1.1, Apr 2026
+      link: https://industrialdigitaltwin.org/en/wp-content/uploads/sites/2/2026/04/IDTA-02017-1-1_Submodel_Asset-Interfaces-Description.pdf
+
+- name: ECHONET Consortium
+  projects:
+    - title: ECHONET Lite Web API device description
+      description: Based on the WoT Thing Description
+    - title: TPAC 2025 plugfest
+  sources:
+    - label: ECHONET activities with W3C WoT
+      link: https://echonet.jp/?p=30956

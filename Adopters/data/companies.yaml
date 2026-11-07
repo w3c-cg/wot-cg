@@ -1,0 +1,302 @@
+# Companies & research organizations. Field reference: Adopters/README.md
+
+- name: Siemens
+  type: Company
+  projects:
+    - title: node-wot
+    - title: sayWoT!
+    - title: TD Playground
+    - title: SparTDD
+    - title: Thing Model Catalog
+    - title: Building X
+    - title: BACnet and building onboarding
+  meetups: [20, 29, 30, 31]
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+    - label: Siemens press release on IoT interoperability with Microsoft
+      link: https://press.siemens.com/global/en/pressrelease/siemens-enters-collaboration-microsoft-enhance-iot-interoperability-buildings
+
+- name: Microsoft
+  type: Company
+  projects:
+    - title: WoT support in Azure IoT Operations
+    - title: UA Edge Translator
+      description: OPC UA WoT Connectivity
+  meetups: [6, 29]
+  sources:
+    - label: Microsoft blog, Apr 2026
+      link: https://techcommunity.microsoft.com/blog/iotblog/w3c-web-of-things-wot-support-in-azure-iot-operations/4511215
+    - label: Siemens press release on IoT interoperability with Microsoft
+      link: https://press.siemens.com/global/en/pressrelease/siemens-enters-collaboration-microsoft-enhance-iot-interoperability-buildings
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Bosch (Bosch.IO)
+  type: Company
+  projects:
+    - title: Eclipse Ditto WoT integration
+    - title: Co-developer of Eclipse EdiTDor
+  meetups: [1]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: Deutsche Telekom
+  type: Company
+  projects:
+    - title: MagentaZuhause smart home app
+    - title: WoT-Matter bridge
+    - title: Eclipse LMOS agents described as Thing Descriptions
+    - title: kotlin-wot
+  meetups: [2, 15, 25]
+
+- name: Fujitsu
+  type: Company
+  projects:
+    - title: WoT gateway
+    - title: WoT sensors
+    - title: Legacy device adapters
+      description: ECHONET Lite, EtherCAT
+    - title: LED bulb
+    - title: Proxy
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: Hitachi
+  type: Company
+  projects:
+    - title: Node-RED node generator
+    - title: Node-RED WoT discovery plugin
+    - title: ESP-IDF sensor Things
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: Huawei
+  type: Company
+  projects:
+    - title: WoT-enabled Eclipse Californium CoAP framework
+    - title: Meta-interaction Thing
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+
+- name: Intel
+  type: Company
+  projects:
+    - title: OCF metadata translator
+    - title: Camera and speech Things
+    - title: Security proxy
+    - title: Home Assistant Thing Description directory integration
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: NHK
+  type: Company
+  projects:
+    - title: Emulated WoT devices
+      description: Including a Hybridcast TV emulator
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: Oracle
+  type: Company
+  projects:
+    - title: Thing Description to device model converters
+    - title: Digital twin simulator
+    - title: node-wot binding to Oracle IoT Cloud
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+
+- name: Panasonic
+  type: Company
+  projects:
+    - title: WoT server for real devices
+    - title: WoT simulator
+    - title: Browser and Node-RED clients
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+
+- name: Samsung SmartThings
+  type: Company
+  projects:
+    - title: Thing Description producers
+      description: For Hue, IKEA Tradfri and Node-RED sensors
+  sources:
+    - label: Thing Description 1.0 implementation report (listed as SmartThings)
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+
+- name: SICK
+  type: Company
+  projects:
+    - title: Thing Description directory at the edge in SICK LiveConnect
+    - title: Onboarding to Azure
+  meetups: [5]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Schaeffler
+  type: Company
+  projects:
+    - title: WoT for digital twins and attached sensors
+  meetups: [8]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Krellian
+  type: Company
+  projects:
+    - title: WebThings Gateway and Krellian Cloud
+      description: Thing Description 1.1 consumer, Thing Description directory
+  meetups: [14]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Prosys OPC
+  type: Company
+  projects:
+    - title: Prosys Forge
+      description: Onboards devices from Thing Descriptions via OPC UA WoT Connectivity
+  meetups: [34]
+
+- name: beyonnex.io
+  type: Company
+  projects:
+    - title: WoT Thing Models for smart, energy-efficient housing
+  meetups: [19]
+
+- name: Netzo
+  type: Company
+  projects:
+    - title: WoT applications on the serverless edge
+  meetups: [3]
+
+- name: Luminem
+  type: Company
+  projects:
+    - title: wot-rust crates for SIFIS-Home
+      description: wot-td, wot-serve
+  meetups: [0]
+  sources:
+    - label: wot-td on docs.rs
+      link: https://docs.rs/crate/wot-td/latest
+
+- name: Technical University of Munich
+  type: Research
+  projects:
+    - title: Things for the Thing Description reports
+      description: Flask, MicroPython, MQTT, Hue
+    - title: Robot digital twins
+    - title: Mixed reality
+    - title: Multi-agent systems
+  meetups: [12, 24, 33]
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: University of Bologna
+  type: Research
+  projects:
+    - title: Digital twins for monitoring
+    - title: ZONIA zero-trust blockchain oracle
+  meetups: [18, 32]
+
+- name: Universidad Politécnica de Madrid
+  type: Research
+  projects:
+    - title: WoT Hive Thing Directory
+    - title: WoT digital twin ontology
+  meetups: [16]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: University of Bremen
+  type: Research
+  projects:
+    - title: dart_wot
+    - title: Delegated device authorization
+  meetups: [4]
+  sources:
+    - label: dart_wot repository (maintainer)
+      link: https://github.com/eclipse-thingweb/dart_wot
+
+- name: University of St. Gallen
+  type: Research
+  projects:
+    - title: Web-scale agents and no-code IoT
+      description: IntellIoT
+  meetups: [7]
+
+- name: University of Bath
+  type: Research
+  projects:
+    - title: OpenFlexure microscope and LabThings
+  meetups: [13]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: FAU Erlangen-Nürnberg
+  type: Research
+  projects:
+    - title: BLAST visual programming for WoT devices
+  meetups: [27]
+  sources:
+    - label: FAU announcement, Apr 2025
+      link: https://www.ti.rw.fau.de/2025/04/blast-is-now-public/
+
+- name: Fraunhofer
+  type: Research
+  projects:
+    - title: TinyIoT Thing Directory
+      description: LinkSmart fork
+    - title: WoT + Solid integration
+  meetups: [17]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: National Technical University of Athens (NETMODE)
+  type: Research
+  projects:
+    - title: VOStack / VO-WoT IoT virtualization stack
+      description: NEPHELE project
+  meetups: [28]
+
+- name: ERCIM
+  type: Research
+  projects:
+    - title: Arena WebHub and Arena client
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html

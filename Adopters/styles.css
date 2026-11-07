@@ -1,0 +1,541 @@
+:root {
+  /* ----- colors: text and surfaces ----- */
+  --ink: #1b2430;              /* main text */
+  --muted: #5d6876;            /* secondary text */
+  --faint: #8a94a1;            /* least important text */
+  --line: #e2e7ed;             /* borders */
+  --line-strong: #cfd6de;      /* dashed binding borders */
+  --bg: #f6f8fa;               /* page background */
+  --surface: #fff;             /* cards and panels */
+  --logo-bg: #edf1f5;          /* gray square behind initials */
+  --link: #005a9c;
+
+  /* ----- colors: sections (one per data-group) ----- */
+  --c-companies: #005a9c;
+  --c-sdo: #0b7f86;
+  --c-oss: #3b6a9c;
+  --c-bindings: #4d6074;
+
+  /* ----- colors: on top of a colored section header ----- */
+  --on-accent: #fff;
+  --on-accent-tint: rgb(255 255 255 / .22);       /* count badge */
+  --on-accent-hover: rgb(255 255 255 / .15);      /* arrow button hover */
+  --on-accent-shade: rgb(0 0 0 / .22);            /* info button */
+  --on-accent-shade-strong: rgb(0 0 0 / .38);     /* info button hover */
+  --backdrop: rgb(20 28 38 / .45);                /* dimmed page behind the popup */
+
+  /* ----- text ----- */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;  /* system fonts only */
+  --text-2xs: 11px;      /* info button, count badges */
+  --text-xs: 12.5px;     /* section titles, tile names, small print */
+  --text-sm: 13px;       /* tooltip, footer, dates, descriptions */
+  --text-md: 14px;       /* body text */
+  --text-lg: 18px;       /* sub-headline, popup initials */
+  --text-xl: 21px;       /* popup name */
+  --text-display: 56px;  /* headline number */
+
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --tracking-caps: .13em;   /* letter spacing for uppercase labels */
+
+  /* ----- spacing scale ----- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 10px;
+  --space-4: 12px;
+  --space-5: 18px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+
+  /* ----- corners ----- */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+
+  /* ----- shadows ----- */
+  --shadow-card: 0 1px 2px rgb(16 24 40 / .04), 0 2px 8px rgb(16 24 40 / .04);
+  --shadow-hover: 0 4px 12px rgb(16 24 40 / .08);
+  --shadow-tooltip: 0 6px 20px rgb(0 0 0 / .18);
+  --shadow-popup: 0 24px 60px rgb(16 24 40 / .25);
+
+  /* ----- motion ----- */
+  --speed-fast: 150ms;   /* hovers */
+  --speed-medium: 220ms; /* popup opening */
+  --speed-slow: 380ms;   /* collapsing sections */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+
+  /* ----- layout ----- */
+  --page-max: 1880px;
+  --page-gutter: clamp(16px, 3vw, 64px);
+  --strip: 56px;   /* width of a collapsed section in the side-by-side pair */
+  /* The 760px breakpoint is hard-coded; custom properties aren't supported in media queries. */
+
+  color-scheme: light;
+}
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); }
+
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+.wrap {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--page-gutter) var(--space-7);
+}
+.is-embedded .wrap { padding-block: var(--space-5); }
+
+/* =====================================================================
+   Headline
+   ===================================================================== */
+
+.hero { margin-bottom: var(--space-6); }
+.hero-total {
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--c-companies);
+  font-variant-numeric: tabular-nums;
+}
+.hero-label { margin: var(--space-2) 0 0; font-size: var(--text-lg); }
+
+/* =====================================================================
+   Section colors: each data-group sets --accent for its header, tile
+   hover and popup.
+   ===================================================================== */
+
+[data-group="companies"] { --accent: var(--c-companies); }
+[data-group="sdo"]       { --accent: var(--c-sdo); }
+[data-group="oss"]       { --accent: var(--c-oss); }
+[data-group="bindings"]  { --accent: var(--c-bindings); }
+
+/* =====================================================================
+   Sections (panels)
+   ===================================================================== */
+
+.sections { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.panel,
+.pair {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.panel { display: flex; flex-direction: column; min-width: 0; }
+
+/* ----- header bar ----- */
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 46px;
+  padding: 0 var(--space-5);
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  user-select: none;
+}
+.panel-head :focus-visible { outline-color: var(--on-accent); }
+
+.panel-title {
+  margin: 0;
+  min-width: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--on-accent-shade);
+  color: var(--on-accent);
+  font-family: inherit;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  cursor: help;
+}
+.info:hover { background: var(--on-accent-shade-strong); }
+
+.count {
+  flex: none;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--on-accent-tint);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.chev {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.chev:hover { background: var(--on-accent-hover); }
+/* Chevron drawn with two borders of a rotated square. Points down when open, right when collapsed. */
+.chev::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--speed-slow) var(--ease);
+}
+.is-collapsed .chev::before { transform: rotate(-45deg); }
+
+.head-link {
+  flex: none;
+  margin-left: auto;
+  color: var(--on-accent);
+  font-size: var(--text-xs);
+  text-decoration: none;
+  opacity: .92;
+  white-space: nowrap;
+}
+.head-link:hover { text-decoration: underline; opacity: 1; }
+.has-link .chev { margin-left: calc(-1 * var(--space-1)); }
+
+/* ----- collapsible body: the grid row transitions from 1fr to 0fr ----- */
+
+.panel-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--speed-slow) var(--ease);
+}
+.panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  transition: opacity var(--speed-slow) var(--ease);
+}
+.is-collapsed .panel-body { grid-template-rows: 0fr; }
+.is-collapsed .panel-inner { opacity: 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+/* =====================================================================
+   Adopter tiles
+   ===================================================================== */
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-4) var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--speed-fast), box-shadow var(--speed-fast), transform var(--speed-fast);
+}
+.tile:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+.tile-logo {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--logo-bg);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+/* Clamp to three lines. */
+.tile-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  max-width: 100%;
+  min-height: 2.5em;
+  font-size: var(--text-xs);
+  line-height: 1.25;
+  text-align: center;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================================
+   Bindings: dashed cards to distinguish them from adopters
+   ===================================================================== */
+
+.grid--bindings { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.binding {
+  display: grid;
+  place-items: center;
+  min-height: 58px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  font-size: var(--text-md);
+  text-align: center;
+}
+
+/* =====================================================================
+   Side-by-side pair (standard development organizations, open-source projects)
+   ===================================================================== */
+
+.pair { display: flex; align-items: stretch; }
+.pair > .panel {
+  flex: 1 1 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: flex-grow var(--speed-slow) var(--ease);
+}
+.pair > .panel + .panel { border-left: 1px solid var(--line); }
+
+/* Widths: 2:3 when both are open, equal when both are collapsed. */
+.pair > [data-group="sdo"] { flex-grow: 2; }
+.pair > [data-group="oss"] { flex-grow: 3; }
+.pair > .panel.is-collapsed { flex-grow: 1; }
+
+/* A collapsed section next to an open one (is-strip, set in app.js) becomes a vertical strip.
+   Wide screens only; on phones the sections stack. */
+@media (min-width: 761px) {
+  .pair > .panel.is-strip { flex-grow: 0; min-width: var(--strip); }
+  .is-strip .panel-head {
+    flex: 1;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: var(--space-5) 0;
+  }
+  .is-strip .panel-title { white-space: normal; text-align: start; line-height: 1.5; }
+  .is-strip .chev { margin: 0; margin-inline-end: auto; }
+  .is-strip .chev::before { transform: rotate(135deg); }   /* header is rotated 180deg; points right */
+  .is-strip .panel-body { display: none; }
+}
+
+/* =====================================================================
+   Footer, loading message, tooltip
+   ===================================================================== */
+
+.foot {
+  margin-top: var(--space-6);
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+.foot a { text-decoration: none; font-weight: var(--weight-medium); }
+.foot a:hover { text-decoration: underline; }
+
+.load-msg { color: var(--muted); }
+
+.tip {
+  position: fixed;
+  z-index: 10;
+  max-width: 300px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--on-accent);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  box-shadow: var(--shadow-tooltip);
+  pointer-events: none;
+}
+
+/* =====================================================================
+   Popup
+   ===================================================================== */
+
+.detail {
+  width: min(560px, calc(100vw - 2 * var(--space-5)));
+  max-height: min(88vh, 760px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-popup);
+  overflow: hidden;
+}
+.detail[open] { display: flex; animation: pop var(--speed-medium) var(--ease); }
+.detail::backdrop { background: var(--backdrop); animation: fade var(--speed-medium) var(--ease); }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+@keyframes fade { from { opacity: 0; } }
+
+.detail-card { display: flex; flex-direction: column; width: 100%; min-height: 0; }
+
+/* ----- popup header ----- */
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+.detail-logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+.detail-id { flex: 1; min-width: 0; }
+.detail-name { margin: 0; font-size: var(--text-xl); font-weight: var(--weight-semibold); line-height: 1.25; }
+.detail-sub { margin: var(--space-1) 0 0; color: var(--muted); font-size: var(--text-md); }
+.detail-close {
+  flex: none;
+  align-self: flex-start;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.detail-close:hover { background: var(--logo-bg); color: var(--ink); }
+
+/* ----- popup body ----- */
+
+.detail-body { padding: var(--space-2) var(--space-6) var(--space-6); overflow-y: auto; }
+
+.detail-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-5) 0 var(--space-4);
+  color: var(--muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+/* Accent bar before each heading. */
+.detail-section::before {
+  content: "";
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.detail-list { display: grid; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+
+.project {
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+}
+.project-title { display: block; font-weight: var(--weight-semibold); }
+.project-desc { display: block; margin-top: 2px; color: var(--muted); font-size: var(--text-sm); }
+
+.meetup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color var(--speed-fast), background var(--speed-fast);
+}
+.meetup:hover { border-color: var(--accent); background: var(--bg); }
+.meetup svg { flex: none; color: var(--muted); }
+.meetup-title { flex: 1; min-width: 0; }
+.meetup-number { font-weight: var(--weight-medium); }
+.meetup-name { color: var(--muted); }
+.meetup-date { flex: none; color: var(--muted); font-size: var(--text-sm); }
+
+.source-list { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; font-size: var(--text-sm); }
+.source-list a { text-decoration: none; }
+.source-list a:hover { text-decoration: underline; }
+
+/* =====================================================================
+   Phones (760px must match the 761px query in the side-by-side pair)
+   ===================================================================== */
+
+@media (max-width: 760px) {
+  .hero-total { font-size: 44px; }
+  .hero-label { font-size: 16px; }
+  .panel-head { padding-block: var(--space-2); }
+  .panel-title { white-space: normal; line-height: 1.35; }
+  .pair { flex-direction: column; }
+  .pair > .panel { flex: none; }
+  .pair > .panel + .panel { border-left: 0; border-top: 1px solid var(--line); }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2); padding: var(--space-4); }
+  .grid--bindings { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .tile-name { -webkit-line-clamp: 4; }
+  .detail-head { gap: var(--space-4); padding: var(--space-5); }
+  .detail-logo { width: 52px; height: 52px; }
+  .detail-body { padding: var(--space-1) var(--space-5) var(--space-5); }
+}
+
+/* Reduced motion: near-instant transitions and animations. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}

@@ -1,0 +1,46 @@
+name: Deploy Adopters page to GitHub Pages Branch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Adopters/**"
+      - ".github/workflows/adopters-deploy.yml"
+  workflow_dispatch:
+
+# Shared with whatiswot-deploy.yml: both push to the same Pages branch.
+concurrency:
+  group: gh-pages-branch
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Adopters page
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Shown in the page footer. Needs the full history (fetch-depth: 0).
+      - name: Write date of the last data change
+        run: git log -1 --format=%cs -- Adopters/data > Adopters/data/last-updated.txt
+      - name: Stash the site outside the work tree
+        run: cp -r Adopters "$RUNNER_TEMP/adopters"
+      - name: Change to deployment branch
+        run: git checkout docusaurus-whatiswot
+      - name: Replace adopters folder
+        run: rm -rf adopters && cp -r "$RUNNER_TEMP/adopters" adopters
+      - name: Commit and push if changed
+        run: |
+          git add adopters
+          if git diff --cached --quiet; then
+            echo "No changes to deploy"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -s -m "deploy adopters page"
+          git push origin docusaurus-whatiswot
