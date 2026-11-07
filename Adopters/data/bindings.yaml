@@ -1,0 +1,11 @@
+# Standards WoT can integrate with, shown in the Bindings section in this order.
+# Field reference: Adopters/README.md
+
+- name: HTTP
+- name: CoAP
+- name: MQTT
+- name: WebSockets
+- name: Modbus
+- name: BACnet
+- name: OPC UA
+- name: ECHONET Lite

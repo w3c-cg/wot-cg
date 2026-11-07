@@ -5,27 +5,44 @@ Live at https://w3c.github.io/wot-cg/adopters/, deployed by [adopters-deploy.yml
 
 ## Files
 
-- `adopters.csv`: the adopter list
-- `index.html`: page structure, section titles, "?" texts and the bindings list
+- `data/`: the adopter lists, one file per section, and `bindings.yaml`
+- `index.html`: page structure, section titles and "?" texts
 - `styles.css`: layout and styling
-- `app.js`: builds the page from the CSV and handles interaction; `LAST_UPDATED` is at the top
-- `parse.js`: CSV parsing and text helpers
+- `app.js`: builds the page from `data/` and handles interaction
+- `labels.js`: tile labels and initials
 - `meetups.js`: loads meetup details
+- `vendor/js-yaml.mjs`: YAML parser ([js-yaml](https://github.com/nodeca/js-yaml), MIT)
 
 ## Adding an adopter
 
-Add a row to `adopters.csv` and update `LAST_UPDATED` in `app.js`. Every row is shown, so only add confirmed adopters.
+Add an entry to the matching file in `data/`. Every entry is shown, so only add confirmed adopters. The "last updated" date in the footer is set on deploy from the last commit that changed `data/`, and is hidden when running locally.
 
-| Column | Notes |
-| --- | --- |
-| `Category` | `Companies & research organizations`, `Standard development organizations` or `Open-source projects` |
-| `Type` | `Company`, `Research`, `SDO` or `Open source` |
-| `Name` | A trailing acronym is used as the tile label, e.g. `Industrial Digital Twin Association (IDTA)` shows as `IDTA` |
-| `What they did with WoT` | Projects separated by `;`. An optional trailing `(...)` is shown as a description |
-| `Evidence` | Source text. Mentions like `Meetup 12` or `Meetups 20, 29` are listed under related meetups |
-| `Evidence link` | URL for the source |
+```yaml
+- name: Siemens                       # required
+  type: Company                       # companies.yaml only: Company or Research
+  projects:                           # required, at least one
+    - title: node-wot                 # required
+      # description: ...              # optional, shown under the title
+    - title: Building X
+  meetups: [20, 29, 30, 31]           # optional, meetup numbers
+  sources:                            # optional, evidence other than meetups
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+```
+
+Each entry needs `meetups`, `sources` or both. A trailing acronym in the name is used as the tile label, e.g. `Industrial Digital Twin Association (IDTA)` shows as `IDTA`.
 
 Meetup titles, dates and links are read from `Meetups/<nn>/metadata.yaml` on `main`, so new meetups need no extra work here.
+
+## Adding a binding
+
+Add a `- name: ...` line to `data/bindings.yaml`. Bindings are shown in file order.
+
+## Checking your changes
+
+Check your changes with `node scripts/validate-adopters-yaml.js` (run `npm ci` in `scripts/` first). The same check runs on pull requests.
+
+To preview the page, serve this folder, e.g. `python -m http.server` in `Adopters/`, and open http://localhost:8000. Opening `index.html` directly doesn't work because the browser blocks loading `data/`.
 
 ## Embedding
 

@@ -24,6 +24,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      # Shown in the page footer. Needs the full history (fetch-depth: 0).
+      - name: Write date of the last data change
+        run: git log -1 --format=%cs -- Adopters/data > Adopters/data/last-updated.txt
       - name: Stash the site outside the work tree
         run: cp -r Adopters "$RUNNER_TEMP/adopters"
       - name: Change to deployment branch

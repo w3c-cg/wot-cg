@@ -19,7 +19,7 @@
 
     <div class="sections" id="sections" hidden>
 
-      <!-- Each section has a clickable header and a collapsible body. Grids and counts are filled by app.js. -->
+      <!-- Each section has a clickable header and a collapsible body. Grids and counts are filled by app.js from data/. -->
       <section class="panel" data-group="companies" aria-labelledby="title-companies">
         <div class="panel-head">
           <h2 class="panel-title" id="title-companies">Companies &amp; research organizations</h2>
@@ -62,7 +62,6 @@
         </section>
       </div>
 
-      <!-- Bindings are not adopters, so they are listed here instead of in the CSV. -->
       <section class="panel has-link" data-group="bindings" aria-labelledby="title-bindings">
         <div class="panel-head">
           <h2 class="panel-title" id="title-bindings">Bindings</h2>
@@ -74,16 +73,7 @@
         </div>
         <div class="panel-body" id="body-bindings">
           <div class="panel-inner">
-            <div class="grid grid--bindings">
-              <div class="binding">HTTP</div>
-              <div class="binding">CoAP</div>
-              <div class="binding">MQTT</div>
-              <div class="binding">WebSockets</div>
-              <div class="binding">Modbus</div>
-              <div class="binding">BACnet</div>
-              <div class="binding">OPC UA</div>
-              <div class="binding">ECHONET Lite</div>
-            </div>
+            <div class="grid grid--bindings"></div>
           </div>
         </div>
       </section>
@@ -93,7 +83,7 @@
       Want to be listed?
       <!-- TODO: link to the submission form or issue template -->
       <a href="#">Submit your organization</a>
-      · Data last updated <span id="updated"></span>
+      <span id="updated-note" hidden>· Data last updated <span id="updated"></span></span>
     </footer>
   </main>
 
@@ -123,9 +113,10 @@
           <h3 class="detail-section">Related meetups</h3>
           <ul class="detail-list"></ul>
         </section>
-        <p class="detail-source" id="detail-source">
-          Source: <span id="detail-evidence"></span> · <a id="detail-evidence-link" target="_blank" rel="noopener">View ↗</a>
-        </p>
+        <section id="detail-sources">
+          <h3 class="detail-section">Sources</h3>
+          <ul class="source-list"></ul>
+        </section>
       </div>
     </div>
   </dialog>
@@ -143,6 +134,10 @@
       <span class="project-title"></span>
       <span class="project-desc"></span>
     </li>
+  </template>
+
+  <template id="source-template">
+    <li><a target="_blank" rel="noopener"></a></li>
   </template>
 
   <template id="meetup-template">

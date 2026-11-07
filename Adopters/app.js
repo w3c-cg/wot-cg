@@ -1,25 +1,29 @@
-// Builds the adopters page from adopters.csv and handles user interaction.
+// Builds the adopters page from the files in data/ and handles user interaction.
 
-import { parseCsv, parseProjects, parseMeetupNumbers, tileLabel, initials } from './parse.js';
+import { load as parseYaml } from './vendor/js-yaml.mjs';
+import { tileLabel, initials } from './labels.js';
 import { loadMeetup, meetupFolderUrl, formatMonth } from './meetups.js';
 
 // ---------- settings ----------
 
-const LAST_UPDATED = 'November 2026';
-
-// Section (data-group in index.html) -> CSV Category value.
-const CATEGORY_OF_GROUP = {
-  companies: 'Companies & research organizations',
-  sdo: 'Standard development organizations',
-  oss: 'Open-source projects',
+// Section (data-group in index.html) -> data file.
+const FILE_OF_GROUP = {
+  companies: 'data/companies.yaml',
+  sdo: 'data/standard-development-organizations.yaml',
+  oss: 'data/open-source.yaml',
 };
+const BINDINGS_FILE = 'data/bindings.yaml';
+// Written by adopters-deploy.yml, so it doesn't exist locally.
+const LAST_UPDATED_FILE = 'data/last-updated.txt';
 
-// CSV Type value -> popup subtitle.
+// Popup subtitle: the adopter's type in companies.yaml, otherwise the section.
 const TYPE_LABELS = {
   Company: 'Company',
   Research: 'Research organization',
-  SDO: 'Standard development organization',
-  'Open source': 'Open-source project',
+};
+const GROUP_LABELS = {
+  sdo: 'Standard development organization',
+  oss: 'Open-source project',
 };
 
 const isEmbedded = window.parent !== window;
@@ -39,26 +43,40 @@ function sectionOf(group) {
 
 // ---------- loading the data ----------
 
-async function loadAdopters() {
-  const response = await fetch('adopters.csv');
-  if (!response.ok) throw new Error(`adopters.csv: ${response.status}`);
-  return parseCsv(await response.text());
+/** Returns the list in a data file. */
+async function loadList(file) {
+  const response = await fetch(file);
+  if (!response.ok) throw new Error(`${file}: ${response.status}`);
+  return parseYaml(await response.text()) ?? [];
+}
+
+/** Shows the date of the last data change in the footer, e.g. "2026-11-07" -> "November 2026". */
+async function showLastUpdated() {
+  try {
+    const response = await fetch(LAST_UPDATED_FILE);
+    if (!response.ok) return;
+    const [year, month] = (await response.text()).trim().split('-').map(Number);
+    if (!year || !month) return;
+    byId('updated').textContent = new Date(year, month - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    byId('updated-note').hidden = false;
+  } catch {
+    // leave the note hidden
+  }
 }
 
 /** Returns the adopters of a section, sorted by tile label. */
-function adoptersInGroup(rows, group) {
-  return rows
-    .filter(row => row.Category === CATEGORY_OF_GROUP[group])
-    .sort((a, b) => tileLabel(a.Name).localeCompare(tileLabel(b.Name), undefined, { sensitivity: 'base' }));
+async function loadAdopters(group) {
+  const adopters = await loadList(FILE_OF_GROUP[group]);
+  return adopters.sort((a, b) => tileLabel(a.name).localeCompare(tileLabel(b.name), undefined, { sensitivity: 'base' }));
 }
 
 // ---------- tiles ----------
 
 function createTile(adopter, group) {
   const tile = fromTemplate('tile-template');
-  const label = tileLabel(adopter.Name);
+  const label = tileLabel(adopter.name);
 
-  tile.title = adopter.Name;   // full name on hover
+  tile.title = adopter.name;   // full name on hover
   tile.querySelector('.tile-logo').textContent = initials(label);
   tile.querySelector('.tile-name').textContent = label;
   tile.addEventListener('click', () => openPopup(adopter, group));
@@ -67,6 +85,17 @@ function createTile(adopter, group) {
 
 function fillSection(group, adopters) {
   sectionOf(group).querySelector('.grid').append(...adopters.map(adopter => createTile(adopter, group)));
+}
+
+/** Bindings are plain cards in file order, without a popup. */
+function fillBindings(bindings) {
+  const cards = bindings.map(binding => {
+    const card = document.createElement('div');
+    card.className = 'binding';
+    card.textContent = binding.name;
+    return card;
+  });
+  sectionOf('bindings').querySelector('.grid').append(...cards);
 }
 
 /** Sets each section's count badge to its number of tiles. */
@@ -170,6 +199,14 @@ function createProjectCard(project) {
   return card;
 }
 
+function createSourceLink(source) {
+  const item = fromTemplate('source-template');
+  const link = item.querySelector('a');
+  link.href = source.link;
+  link.textContent = `${source.label} ↗`;
+  return item;
+}
+
 /**
  * Creates a meetup row that links to the meetup folder. The title, date and
  * video link are added once the meetup's metadata.yaml has loaded.
@@ -198,16 +235,13 @@ function fillPopupList(sectionId, items) {
 
 function openPopup(adopter, group) {
   popup.dataset.group = group;   // sets the accent color
-  byId('detail-logo').textContent = initials(tileLabel(adopter.Name));
-  byId('detail-name').textContent = adopter.Name;
-  byId('detail-type').textContent = TYPE_LABELS[adopter.Type] ?? adopter.Type;
+  byId('detail-logo').textContent = initials(tileLabel(adopter.name));
+  byId('detail-name').textContent = adopter.name;
+  byId('detail-type').textContent = TYPE_LABELS[adopter.type] ?? GROUP_LABELS[group];
 
-  fillPopupList('detail-projects', parseProjects(adopter['What they did with WoT']).map(createProjectCard));
-  fillPopupList('detail-meetups', parseMeetupNumbers(adopter.Evidence).map(createMeetupRow));
-
-  byId('detail-evidence').textContent = adopter.Evidence;
-  byId('detail-evidence-link').href = adopter['Evidence link'];
-  byId('detail-source').hidden = !adopter['Evidence link'];
+  fillPopupList('detail-projects', (adopter.projects ?? []).map(createProjectCard));
+  fillPopupList('detail-meetups', (adopter.meetups ?? []).map(createMeetupRow));
+  fillPopupList('detail-sources', (adopter.sources ?? []).map(createSourceLink));
 
   hideTooltip();
   popup.showModal();   // centered, with backdrop and Escape to close
@@ -258,24 +292,25 @@ function reportHeightToParent() {
 // ---------- start ----------
 
 async function start() {
-  byId('updated').textContent = LAST_UPDATED;
+  showLastUpdated();
   if (isEmbedded) document.documentElement.classList.add('is-embedded');
 
-  let rows;
+  const groups = Object.keys(FILE_OF_GROUP);
+  let adoptersByGroup, bindings;
   try {
-    rows = await loadAdopters();
+    [bindings, ...adoptersByGroup] = await Promise.all([loadList(BINDINGS_FILE), ...groups.map(loadAdopters)]);
   } catch {
     byId('load-msg').textContent =
-      'Could not load adopters.csv. If you opened index.html directly, serve the folder with a local web server instead.';
+      'Could not load the adopter data. If you opened index.html directly, serve the folder with a local web server instead.';
     return;
   }
 
   let total = 0;
-  for (const group of Object.keys(CATEGORY_OF_GROUP)) {
-    const adopters = adoptersInGroup(rows, group);
-    fillSection(group, adopters);
-    total += adopters.length;
-  }
+  groups.forEach((group, i) => {
+    fillSection(group, adoptersByGroup[i]);
+    total += adoptersByGroup[i].length;
+  });
+  fillBindings(bindings);
   updateCounts();
   byId('total').textContent = total;
 

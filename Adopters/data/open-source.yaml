@@ -1,0 +1,220 @@
+# Open-source projects. Field reference: Adopters/README.md
+
+- name: Eclipse Thingweb
+  projects:
+    - title: node-wot
+    - title: dart_wot
+    - title: wot-py
+    - title: kotlin-wot
+    - title: Domus TDD
+    - title: TD Playground
+    - title: TD Code
+    - title: WAM
+    - title: TD Tools
+  sources:
+    - label: thingweb.io
+      link: https://thingweb.io/
+    - label: Repositories on GitHub
+      link: https://github.com/eclipse-thingweb
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: Eclipse Ditto
+  projects:
+    - title: Digital twins with WoT Thing Models and Thing Descriptions
+    - title: WoT tooling
+  meetups: [1]
+  sources:
+    - label: Ditto WoT integration docs
+      link: https://eclipse.dev/ditto/basic-wot-integration.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: Eclipse EdiTDor
+  projects:
+    - title: Editor for Thing Descriptions and Thing Models
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/eclipse-editdor/editdor
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: Eclipse LMOS
+  projects:
+    - title: Agent descriptions written as WoT Thing Descriptions
+  meetups: [25]
+  sources:
+    - label: LMOS agent description docs
+      link: https://eclipse.dev/lmos/docs/multi_agent_system/agent_description/
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: SANE WoT Servient
+  projects:
+    - title: Java WoT runtime
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/sane-city/wot-servient
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: SIFIS-Home wot crates
+  projects:
+    - title: Rust crates
+      description: wot-td, wot-serve, wot-discovery
+  sources:
+    - label: wot-serve on docs.rs
+      link: https://docs.rs/crate/wot-serve/latest
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: WebThings Gateway
+  projects:
+    - title: Open-source smart building gateway
+  meetups: [14]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/WebThingsIO/gateway
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: HiveOT
+  projects:
+    - title: Hub built on WoT standards and Thing Descriptions
+  meetups: [26]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/hiveot/hub
+
+- name: hololinked
+  projects:
+    - title: Server-side runtime for scientific instruments
+  meetups: [22]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/hololinked-dev/hololinked
+
+- name: OpenFlexure / LabThings
+  projects:
+    - title: Open microscopy with WoT interfaces
+  meetups: [13]
+  sources:
+    - label: LabThings on GitHub
+      link: https://github.com/labthings
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: VOStack (VO-WoT)
+  projects:
+    - title: IoT virtualization with Virtual Objects
+  meetups: [28]
+  sources:
+    - label: Repository on Eclipse GitLab
+      link: https://gitlab.eclipse.org/eclipse/vostack/vostack
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: ZONIA
+  projects:
+    - title: Zero-trust oracle network for blockchain IoT
+  meetups: [32]
+
+- name: BLAST
+  projects:
+    - title: Block-based visual programming for WoT devices
+  meetups: [27]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/wintechis/blast
+    - label: FAU announcement, Apr 2025
+      link: https://www.ti.rw.fau.de/2025/04/blast-is-now-public/
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: WoT Hive
+  projects:
+    - title: Thing Directory with Semantic Web features
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/oeg-upm/wot-hive
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: TinyIoT Thing Directory
+  projects:
+    - title: Lightweight Thing Description directory
+      description: LinkSmart heritage
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/TinyIoT/thing-directory
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: UA Edge Translator
+  projects:
+    - title: Edge app translating WoT-described assets to OPC UA
+  meetups: [29]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/OPCFoundation/UA-EdgeTranslator
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: Node-RED node generator
+  projects:
+    - title: Generates Node-RED nodes from Thing Descriptions
+      description: Hitachi
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/node-red/node-red-nodegen
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: RIOT WoT
+  projects:
+    - title: WoT modules for RIOT OS
+      description: CoAP, DTLS
+  sources:
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: thingctx
+  projects:
+    - title: Drive systems from Thing Descriptions
+      description: Personal project, not a Microsoft product
+  meetups: [35]
+  sources:
+    - label: Repository on GitHub
+      link: https://github.com/thingctx/thingctx
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
+
+- name: WoT Wrench / WoT Anything
+  projects:
+    - title: Debugging web app and JS Thing server
+  meetups: [21]
+  sources:
+    - label: WoT Wrench on Codeberg
+      link: https://codeberg.org/jaller94/wot-wrench
+    - label: WoT Anything on GitLab
+      link: https://gitlab.com/webthings/wot-anything
+    - label: W3C WoT developer tools
+      link: https://www.w3.org/WoT/developers/tools
