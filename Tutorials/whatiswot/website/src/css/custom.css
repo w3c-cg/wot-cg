@@ -28,3 +28,15 @@
   --ifm-color-primary-lightest: #EDF3F8;
   --docusaurus-highlighted-code-line-bg: rgba(96, 123, 145, 0.22);
 }
+
+/* Collapsible "Watch out" notes inside table cells (TD cheatsheet). */
+.markdown table details {
+  --ifm-alert-background-color: var(--ifm-color-warning-contrast-background);
+  --ifm-alert-background-color-highlight: rgba(230, 167, 0, 0.15);
+  --ifm-alert-foreground-color: var(--ifm-color-warning-contrast-foreground);
+  --ifm-alert-border-color: var(--ifm-color-warning-dark);
+  margin: 0.4rem 0 0;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.85em;
+  box-shadow: none;
+}
