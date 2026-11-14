@@ -129,6 +129,16 @@ const sidebars = {
               id: "wot/td/forms-and-bindings-in-practice",
               label: "Forms and Bindings in Practice",
             },
+            {
+              type: "doc",
+              id: "wot/td/writing-a-td",
+              label: "Writing a TD - Cheatsheet",
+            },
+            {
+              type: "doc",
+              id: "wot/td/writing-a-good-td",
+              label: "Writing a Good TD",
+            },
 
           ],
         },
