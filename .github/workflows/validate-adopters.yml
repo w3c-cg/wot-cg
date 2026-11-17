@@ -1,0 +1,32 @@
+name: Validate adopters data
+
+on:
+  push:
+    paths:
+      - "Adopters/data/**"
+      - "scripts/validate-adopters-yaml.js"
+      - ".github/workflows/validate-adopters.yml"
+  pull_request:
+    paths:
+      - "Adopters/data/**"
+      - "scripts/validate-adopters-yaml.js"
+      - ".github/workflows/validate-adopters.yml"
+
+jobs:
+  validate:
+    name: Validate Adopters/data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install dependencies
+        run: cd scripts && npm ci
+
+      - name: Validate adopter files
+        run: node scripts/validate-adopters-yaml.js

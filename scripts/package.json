@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "validate-videos": "node validate-video-yaml.js",
-    "update-readme": "node update-meetups-readme.js"
+    "update-readme": "node update-meetups-readme.js",
+    "validate-adopters": "node validate-adopters-yaml.js"
   },
   "dependencies": {
     "js-yaml": "^4.1.0"

@@ -1,0 +1,164 @@
+# Industry: companies that use WoT. Field reference: Adopters/README.md
+
+- name: Siemens
+  products:
+    - title: sayWoT!
+    - title: Building X
+    - title: BACnet and building onboarding
+  contributions:
+    - title: node-wot
+    - title: TD Playground
+    - title: Thing Model Catalog
+  meetups: [6, 12, 20, 29, 30, 31]
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+    - label: Siemens press release on IoT interoperability with Microsoft
+      link: https://press.siemens.com/global/en/pressrelease/siemens-enters-collaboration-microsoft-enhance-iot-interoperability-buildings
+
+- name: Microsoft
+  products:
+    - title: WoT support in Azure IoT Operations
+  contributions:
+    - title: UA Edge Translator
+      description: OPC UA WoT Connectivity
+  meetups: [6, 29]
+  sources:
+    - label: Microsoft blog, Apr 2026
+      link: https://techcommunity.microsoft.com/blog/iotblog/w3c-web-of-things-wot-support-in-azure-iot-operations/4511215
+    - label: Siemens press release on IoT interoperability with Microsoft
+      link: https://press.siemens.com/global/en/pressrelease/siemens-enters-collaboration-microsoft-enhance-iot-interoperability-buildings
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Bosch (Bosch.IO)
+  contributions:
+    - title: Eclipse Ditto WoT integration
+    - title: Co-developer of Eclipse EdiTDor
+  meetups: [1]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: Deutsche Telekom
+  products:
+    - title: MagentaZuhause smart home app
+    - title: WoT-Matter bridge
+  contributions:
+    - title: Eclipse LMOS agents described as Thing Descriptions
+    - title: kotlin-wot
+  meetups: [2, 15, 25]
+
+- name: Hitachi
+  contributions:
+    - title: Node-RED node generator
+    - title: Node-RED WoT discovery plugin
+    - title: ESP-IDF sensor Things
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: SICK
+  products:
+    - title: Thing Description directory at the edge in SICK LiveConnect
+    - title: Onboarding to Azure
+  meetups: [5]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Schaeffler
+  products:
+    - title: WoT for digital twins and attached sensors
+  meetups: [8]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Krellian
+  products:
+    - title: WebThings Gateway and Krellian Cloud
+      description: Thing Description 1.1 consumer, Thing Description directory
+  meetups: [14]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: Prosys OPC
+  products:
+    - title: Prosys Forge
+      description: Onboards devices from Thing Descriptions via OPC UA WoT Connectivity
+  meetups: [34]
+
+- name: beyonnex.io
+  products:
+    - title: WoT Thing Models for smart, energy-efficient housing
+  meetups: [19]
+
+- name: Netzo
+  products:
+    - title: WoT applications on the serverless edge
+  meetups: [3]
+
+- name: Altair
+  products:
+    - title: Altair IoT Studio
+      description: Things in AnythingDB are defined based on the Web of Things
+  sources:
+    - label: Altair IoT Studio documentation
+      link: https://help.altair.com/altair-iot-studio/topics/anythingdb/thing_intro.htm
+
+- name: Dashjoin
+  products:
+    - title: Generic WoT manager on the Dashjoin low-code platform
+  meetups: [23]
+  sources:
+    - label: djapp-wot repository on GitHub
+      link: https://github.com/dashjoin/djapp-wot
+
+- name: Grundfos
+  contributions:
+    - title: ISO Industrial Data Ontology
+      description: ISO standard related to the Web of Things
+  meetups: [11]
+
+- name: Seam
+  products:
+    - title: Unified API for IoT devices
+      description: Design inspired by the W3C WoT work
+  meetups: [10]
+
+- name: Takenaka
+  products:
+    - title: Data platform for smart buildings
+      description: WoT is used to implement data models and APIs
+    - title: EQ House digital twin application
+  sources:
+    - label: W3C talk on web-based digital twins, Nov 2023 (slides 18-19)
+      link: https://www.w3.org/2023/Talks/1127-web-based-digitaltwins-ka/20231127-dt4sc-ka.pdf
+    - label: W3C talk on smart cities, Apr 2024 (slides 17-18)
+      link: https://www.w3.org/2024/Talks/0419-smartcities-ka/20240419-smartcities.pdf
+
+- name: Bertrandt
+  products:
+    - title: WIP
+
+- name: Müller-BBM
+  products:
+    - title: WIP
+
+- name: archeion
+  contributions:
+    - title: ZONIA-MC
+      description: Multi-chain zero-trust oracle system for blockchain IoT applications, with the University of Bologna
+  sources:
+    - label: ZONIA-MC on NGI TrustChain
+      link: https://trustchain.ngi.eu/zonia-mc/
