@@ -8,51 +8,51 @@ const yaml = require('js-yaml');
 const DATA_DIR = path.join(__dirname, '..', 'Adopters', 'data');
 const MEETUPS_DIR = path.join(__dirname, '..', 'Meetups');
 
-// File -> allowed values of 'type'. Files without types don't allow the field.
+// File -> the lists its entries use. An entry needs at least one of them.
 const FILES = {
-  'companies.yaml': ['Company', 'Research'],
-  'standard-development-organizations.yaml': null,
-  'open-source.yaml': null,
+  'industry.yaml': ['products', 'contributions'],
+  'standard-development-organizations.yaml': ['projects'],
+  'open-source.yaml': ['projects'],
+  'research.yaml': ['projects'],
 };
-const ALLOWED_FIELDS = ['name', 'type', 'projects', 'meetups', 'sources'];
+const COMMON_FIELDS = ['name', 'meetups', 'sources'];
 const HTTP_RE = /^https?:\/\/\S+$/;
 
-// Same folder naming as Adopters/meetups.js: "0", "01" to "09", then "10" onwards.
-function meetupFolder(number) {
-  return path.join(MEETUPS_DIR, number === 0 ? '0' : String(number).padStart(2, '0'));
+const isText = v => typeof v === 'string' && v.trim() !== '';
+
+// Same folder names as Adopters/meetups.js.
+function meetupFolder(n) {
+  return path.join(MEETUPS_DIR, n === 0 ? '0' : String(n).padStart(2, '0'));
 }
 
-const isNonEmptyString = value => typeof value === 'string' && value.trim() !== '';
+function validateItems(list, field, errors) {
+  if (!Array.isArray(list) || list.length === 0) {
+    errors.push(`'${field}' must be a non-empty list`);
+    return;
+  }
+  list.forEach((p, i) => {
+    if (!p || typeof p !== 'object') { errors.push(`${field}[${i}] must be a mapping with a 'title'`); return; }
+    if (!isText(p.title)) errors.push(`${field}[${i}] missing 'title'`);
+    if ('description' in p && !isText(p.description)) errors.push(`${field}[${i}].description must be a non-empty string`);
+    for (const key of Object.keys(p)) {
+      if (key !== 'title' && key !== 'description') errors.push(`${field}[${i}] has unknown field '${key}'`);
+    }
+  });
+}
 
-function validateEntry(entry, types) {
-  const errors = [];
+function validateEntry(entry, listFields) {
   if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return ['must be a mapping'];
+  const errors = [];
 
   for (const key of Object.keys(entry)) {
-    if (!ALLOWED_FIELDS.includes(key)) errors.push(`unknown field '${key}'`);
+    if (!COMMON_FIELDS.includes(key) && !listFields.includes(key)) errors.push(`unknown field '${key}'`);
   }
 
-  if (!isNonEmptyString(entry.name)) errors.push("'name' must be a non-empty string");
+  if (!isText(entry.name)) errors.push("'name' must be a non-empty string");
 
-  if (types) {
-    if (!types.includes(entry.type)) errors.push(`'type' must be one of ${types.join(', ')}, got: '${entry.type}'`);
-  } else if ('type' in entry) {
-    errors.push("'type' is only used in companies.yaml");
-  }
-
-  if (!Array.isArray(entry.projects) || entry.projects.length === 0) {
-    errors.push("'projects' must be a non-empty list");
-  } else {
-    entry.projects.forEach((p, i) => {
-      if (!p || typeof p !== 'object') { errors.push(`projects[${i}] must be a mapping with a 'title'`); return; }
-      if (!isNonEmptyString(p.title)) errors.push(`projects[${i}] missing 'title'`);
-      if ('description' in p && !isNonEmptyString(p.description))
-        errors.push(`projects[${i}].description must be a non-empty string`);
-      for (const key of Object.keys(p)) {
-        if (key !== 'title' && key !== 'description') errors.push(`projects[${i}] has unknown field '${key}'`);
-      }
-    });
-  }
+  const lists = listFields.filter(f => f in entry);
+  if (lists.length === 0) errors.push(`needs ${listFields.map(f => `'${f}'`).join(' or ')}`);
+  for (const field of lists) validateItems(entry[field], field, errors);
 
   if ('meetups' in entry) {
     if (!Array.isArray(entry.meetups) || entry.meetups.length === 0) {
@@ -71,90 +71,92 @@ function validateEntry(entry, types) {
     } else {
       entry.sources.forEach((s, i) => {
         if (!s || typeof s !== 'object') { errors.push(`sources[${i}] must be a mapping with 'label' and 'link'`); return; }
-        if (!isNonEmptyString(s.label)) errors.push(`sources[${i}] missing 'label'`);
+        if (!isText(s.label)) errors.push(`sources[${i}] missing 'label'`);
         if (!HTTP_RE.test(String(s.link ?? ''))) errors.push(`sources[${i}].link must be an http(s) URL, got: '${s.link}'`);
       });
     }
   }
 
-  // Every adopter needs evidence: a meetup or another source.
-  if (!('meetups' in entry) && !('sources' in entry)) errors.push("needs 'meetups', 'sources' or both");
-
   return errors;
+}
+
+function validateBinding(b) {
+  if (!b || typeof b !== 'object' || !isText(b.name)) return ["'name' must be a non-empty string"];
+  const errors = [];
+  if (!HTTP_RE.test(String(b.link ?? ''))) errors.push(`'link' must be an http(s) URL, got: '${b.link}'`);
+  for (const key of Object.keys(b)) {
+    if (key !== 'name' && key !== 'link') errors.push(`unknown field '${key}'`);
+  }
+  return errors;
+}
+
+// Returns the list in a data file, or null after printing why it couldn't be read.
+function loadList(file) {
+  let list;
+  try {
+    list = yaml.load(fs.readFileSync(path.join(DATA_DIR, file), 'utf8'));
+  } catch (e) {
+    console.log(`FAIL  ${file}\n      - ${e.message}`);
+    return null;
+  }
+  if (!Array.isArray(list)) {
+    console.log(`FAIL  ${file}\n      - file must contain a list`);
+    return null;
+  }
+  return list;
+}
+
+function report(file, errors, summary) {
+  if (errors.length > 0) {
+    console.log(`FAIL  ${file}`);
+    errors.forEach(m => console.log(`      - ${m}`));
+    return false;
+  }
+  console.log(`OK    ${file} (${summary})`);
+  return true;
 }
 
 let allValid = true;
 let total = 0;
+// Names must be unique across all files.
 const seenNames = new Map();
 
-for (const [file, types] of Object.entries(FILES)) {
-  const filePath = path.join(DATA_DIR, file);
-  let entries;
-  try {
-    entries = yaml.load(fs.readFileSync(filePath, 'utf8'));
-  } catch (e) {
-    console.log(`FAIL  ${file}\n      - ${e.message}`);
-    allValid = false;
-    continue;
-  }
-  if (!Array.isArray(entries)) {
-    console.log(`FAIL  ${file}\n      - file must contain a list of adopters`);
-    allValid = false;
-    continue;
-  }
+for (const [file, listFields] of Object.entries(FILES)) {
+  const entries = loadList(file);
+  if (!entries) { allValid = false; continue; }
 
-  const fileErrors = [];
+  const errors = [];
   entries.forEach((entry, i) => {
-    const label = entry && entry.name ? entry.name : `entry ${i + 1}`;
-    for (const message of validateEntry(entry, types)) fileErrors.push(`${label}: ${message}`);
+    const label = isText(entry?.name) ? entry.name : `entry ${i + 1}`;
+    for (const m of validateEntry(entry, listFields)) errors.push(`${label}: ${m}`);
 
-    if (entry && isNonEmptyString(entry.name)) {
+    if (isText(entry?.name)) {
       const key = entry.name.trim().toLowerCase();
-      if (seenNames.has(key)) fileErrors.push(`${label}: duplicate name, already in ${seenNames.get(key)}`);
+      if (seenNames.has(key)) errors.push(`${label}: duplicate name, already in ${seenNames.get(key)}`);
       else seenNames.set(key, file);
     }
   });
   total += entries.length;
-
-  if (fileErrors.length > 0) {
-    console.log(`FAIL  ${file}`);
-    fileErrors.forEach(m => console.log(`      - ${m}`));
-    allValid = false;
-  } else {
-    console.log(`OK    ${file} (${entries.length} adopters)`);
-  }
+  if (!report(file, errors, `${entries.length} adopters`)) allValid = false;
 }
 
-// bindings.yaml: a list of { name }, shown in file order.
-{
-  const file = 'bindings.yaml';
-  let bindings;
-  try {
-    bindings = yaml.load(fs.readFileSync(path.join(DATA_DIR, file), 'utf8'));
-  } catch (e) {
-    bindings = e;
-  }
+const bindings = loadList('bindings.yaml');
+if (!bindings) {
+  allValid = false;
+} else {
   const errors = [];
-  if (bindings instanceof Error) errors.push(bindings.message);
-  else if (!Array.isArray(bindings)) errors.push('file must contain a list of bindings');
-  else {
-    const seen = new Set();
-    bindings.forEach((b, i) => {
-      if (!b || typeof b !== 'object' || !isNonEmptyString(b.name)) { errors.push(`entry ${i + 1}: 'name' must be a non-empty string`); return; }
-      for (const key of Object.keys(b)) if (key !== 'name') errors.push(`${b.name}: unknown field '${key}'`);
-      const key = b.name.trim().toLowerCase();
-      if (seen.has(key)) errors.push(`${b.name}: duplicate name`);
-      seen.add(key);
-    });
-  }
+  const seen = new Set();
+  bindings.forEach((b, i) => {
+    const label = isText(b?.name) ? b.name : `entry ${i + 1}`;
+    for (const m of validateBinding(b)) errors.push(`${label}: ${m}`);
 
-  if (errors.length > 0) {
-    console.log(`FAIL  ${file}`);
-    errors.forEach(m => console.log(`      - ${m}`));
-    allValid = false;
-  } else {
-    console.log(`OK    ${file} (${bindings.length} bindings)`);
-  }
+    if (isText(b?.name)) {
+      const key = b.name.trim().toLowerCase();
+      if (seen.has(key)) errors.push(`${label}: duplicate name`);
+      seen.add(key);
+    }
+  });
+  if (!report('bindings.yaml', errors, `${bindings.length} bindings`)) allValid = false;
 }
 
 if (!allValid) {

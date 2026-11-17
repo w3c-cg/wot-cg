@@ -1,40 +1,23 @@
-// Tile labels and logo initials derived from adopter names. No DOM access.
+// Tile labels and the initials shown in place of a logo.
 
-/**
- * Splits off a trailing "(...)":
- *   "Industrial Digital Twin Association (IDTA)"  ->  { main: "Industrial Digital Twin Association", bracket: "IDTA" }
- *   "Siemens"                                     ->  { main: "Siemens", bracket: null }
- */
-function splitTrailingBracket(text) {
-  const match = text.match(/^(.*?)\s*\(([^()]*)\)$/);
-  return match ? { main: match[1], bracket: match[2] } : { main: text, bracket: null };
-}
-
-// Words skipped when building initials, e.g. "University of Bath" -> "UB".
+// Skipped for initials, e.g. "University of Bath" -> "UB".
 const FILLER_WORDS = new Set(['of', 'the', 'and', 'for', 'de']);
 
-function significantWords(text) {
-  return text
-    .split(/[\s/]+/)
-    .filter(word => /\p{L}/u.test(word) && !FILLER_WORDS.has(word.toLowerCase()));
+function words(text) {
+  return text.split(/[\s/]+/).filter(w => /\p{L}/u.test(w) && !FILLER_WORDS.has(w.toLowerCase()));
 }
 
-/**
- * Returns the tile label. A trailing acronym that matches the name replaces it;
- * any other trailing bracket is removed:
- *   "Industrial Digital Twin Association (IDTA)"  ->  "IDTA"
- *   "Bosch (Bosch.IO)"                            ->  "Bosch"
- */
+// A trailing bracket is dropped, unless it is the acronym of the name, then only that is used:
+// "Industrial Digital Twin Association (IDTA)" -> "IDTA", "Bosch (Bosch.IO)" -> "Bosch"
 export function tileLabel(name) {
-  const { main, bracket } = splitTrailingBracket(name);
-  const acronym = significantWords(main).map(word => word[0]).join('').toUpperCase();
+  const match = name.match(/^(.*?)\s*\(([^()]*)\)$/);
+  if (!match) return name;
+  const [, main, bracket] = match;
+  const acronym = words(main).map(w => w[0]).join('').toUpperCase();
   return bracket === acronym ? bracket : main;
 }
 
-/**
- * Returns up to two initials for the logo placeholder:
- *   "Eclipse Thingweb"  ->  "ET",   "Siemens"  ->  "S"
- */
+// Up to two letters, e.g. "Eclipse Thingweb" -> "ET"
 export function initials(label) {
-  return significantWords(label).slice(0, 2).map(word => word[0]).join('').toUpperCase() || '?';
+  return words(label).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
 }

@@ -1,11 +1,24 @@
 # Standards WoT can integrate with, shown in the Bindings section in this order.
+# Links are from the Publications section of https://github.com/w3c/wot-binding-templates
 # Field reference: Adopters/README.md
 
 - name: HTTP
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/http/index.html
 - name: CoAP
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/coap/index.html
 - name: MQTT
-- name: WebSockets
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/mqtt/index.html
 - name: Modbus
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/modbus/index.html
 - name: BACnet
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/bacnet/index.html
+- name: PROFINET
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/profinet/index.html
+- name: EtherNet/IP
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/ethernetip/index.html
+- name: S7Comm
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/s7comm/index.html
+- name: LoRaWAN
+  link: https://w3c.github.io/wot-binding-templates/bindings/protocols/lorawan/index.html
 - name: OPC UA
-- name: ECHONET Lite
+  link: https://reference.opcfoundation.org/specs/OPC-10101

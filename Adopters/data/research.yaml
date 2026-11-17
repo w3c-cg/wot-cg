@@ -1,0 +1,78 @@
+# Research organizations that use WoT. Field reference: Adopters/README.md
+
+- name: Technical University of Munich
+  projects:
+    - title: Things for the Thing Description reports
+      description: Flask, MicroPython, MQTT, Hue
+    - title: Robot digital twins
+    - title: Mixed reality
+    - title: Multi-agent systems
+  meetups: [12, 24, 33]
+  sources:
+    - label: Thing Description 1.0 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report.html
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+
+- name: University of Bologna
+  projects:
+    - title: Digital twins for monitoring
+    - title: ZONIA zero-trust blockchain oracle
+  meetups: [18, 32]
+
+- name: Universidad Politécnica de Madrid
+  projects:
+    - title: WoT digital twin ontology
+  meetups: [16]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: University of Bremen
+  projects:
+    - title: dart_wot
+    - title: Delegated device authorization
+  meetups: [4]
+  sources:
+    - label: dart_wot repository (maintainer)
+      link: https://github.com/eclipse-thingweb/dart_wot
+
+- name: University of St. Gallen
+  projects:
+    - title: Web-scale agents and no-code IoT
+      description: IntellIoT
+  meetups: [7]
+
+- name: University of Bath
+  projects:
+    - title: OpenFlexure microscope and LabThings
+  meetups: [13]
+  sources:
+    - label: TPAC 2024 WoT adoption demos
+      link: https://www.w3.org/2024/09/TPAC/demo-wot-summary.html
+
+- name: FAU Erlangen-Nürnberg
+  projects:
+    - title: BLAST visual programming for WoT devices
+  meetups: [27]
+  sources:
+    - label: FAU announcement, Apr 2025
+      link: https://www.ti.rw.fau.de/2025/04/blast-is-now-public/
+
+- name: Fraunhofer
+  projects:
+    - title: WoT + Solid integration
+  meetups: [17]
+  sources:
+    - label: Thing Description 1.1 implementation report
+      link: https://w3c.github.io/wot-thing-description/testing/report11.html
+    - label: Discovery implementation report
+      link: https://w3c.github.io/wot-discovery/testing/report.html
+
+- name: National Technical University of Athens (NETMODE)
+  projects:
+    - title: VOStack / VO-WoT IoT virtualization stack
+      description: NEPHELE project
+  meetups: [28]

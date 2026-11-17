@@ -57,25 +57,6 @@
     - label: W3C WoT developer tools
       link: https://www.w3.org/WoT/developers/tools
 
-- name: SANE WoT Servient
-  projects:
-    - title: Java WoT runtime
-  sources:
-    - label: Repository on GitHub
-      link: https://github.com/sane-city/wot-servient
-    - label: W3C WoT developer tools
-      link: https://www.w3.org/WoT/developers/tools
-
-- name: SIFIS-Home wot crates
-  projects:
-    - title: Rust crates
-      description: wot-td, wot-serve, wot-discovery
-  sources:
-    - label: wot-serve on docs.rs
-      link: https://docs.rs/crate/wot-serve/latest
-    - label: W3C WoT developer tools
-      link: https://www.w3.org/WoT/developers/tools
-
 - name: WebThings Gateway
   projects:
     - title: Open-source smart building gateway
@@ -122,11 +103,6 @@
     - label: W3C WoT developer tools
       link: https://www.w3.org/WoT/developers/tools
 
-- name: ZONIA
-  projects:
-    - title: Zero-trust oracle network for blockchain IoT
-  meetups: [32]
-
 - name: BLAST
   projects:
     - title: Block-based visual programming for WoT devices
@@ -136,33 +112,6 @@
       link: https://github.com/wintechis/blast
     - label: FAU announcement, Apr 2025
       link: https://www.ti.rw.fau.de/2025/04/blast-is-now-public/
-    - label: W3C WoT developer tools
-      link: https://www.w3.org/WoT/developers/tools
-
-- name: WoT Hive
-  projects:
-    - title: Thing Directory with Semantic Web features
-  sources:
-    - label: Repository on GitHub
-      link: https://github.com/oeg-upm/wot-hive
-    - label: Thing Description 1.1 implementation report
-      link: https://w3c.github.io/wot-thing-description/testing/report11.html
-    - label: Discovery implementation report
-      link: https://w3c.github.io/wot-discovery/testing/report.html
-    - label: W3C WoT developer tools
-      link: https://www.w3.org/WoT/developers/tools
-
-- name: TinyIoT Thing Directory
-  projects:
-    - title: Lightweight Thing Description directory
-      description: LinkSmart heritage
-  sources:
-    - label: Repository on GitHub
-      link: https://github.com/TinyIoT/thing-directory
-    - label: Thing Description 1.1 implementation report
-      link: https://w3c.github.io/wot-thing-description/testing/report11.html
-    - label: Discovery implementation report
-      link: https://w3c.github.io/wot-discovery/testing/report.html
     - label: W3C WoT developer tools
       link: https://www.w3.org/WoT/developers/tools
 

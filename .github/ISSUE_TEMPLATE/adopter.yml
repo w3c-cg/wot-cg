@@ -1,0 +1,119 @@
+# Issue form for the WoT Adopters page (https://w3c.github.io/wot-cg/adopters/).
+# Syntax: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
+name: Become a WoT adopter
+description: Get your company, organization or project listed on the WoT Adopters page.
+title: "[Adopter]: "
+labels: ["adopter"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for using the Web of Things! Fill in this form and we will add you to the [WoT Adopters page](https://w3c.github.io/wot-cg/adopters/).
+
+        This issue is public and stays visible on GitHub. Only enter information about your organization or project that is already public. Don't include personal data (such as names, emails or phone numbers) or confidential information.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: Your company, organization or open-source project, as it should appear on the page.
+      placeholder: e.g. Siemens
+    validations:
+      required: true
+
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section
+      description: Where you should be listed.
+      options:
+        - Industry (company)
+        - Research (university or research institute)
+        - Standard development organization
+        - Open-source project
+    validations:
+      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      placeholder: https://
+    validations:
+      required: false
+
+  - type: textarea
+    id: products
+    attributes:
+      label: Products
+      description: |
+        Companies only. Products, services or platforms that use WoT, one per line. Add a short description after a colon if useful.
+      placeholder: |
+        Building X: onboards devices from Thing Descriptions
+        sayWoT!
+    validations:
+      required: false
+
+  - type: textarea
+    id: contributions
+    attributes:
+      label: Contributions
+      description: |
+        Companies only. Work given to the WoT ecosystem, such as open-source code, specifications or test implementations, one per line.
+      placeholder: |
+        node-wot
+        Thing Model Catalog
+    validations:
+      required: false
+
+  - type: textarea
+    id: projects
+    attributes:
+      label: Projects
+      description: |
+        Research, standard development organizations and open-source projects. How you use WoT, one per line.
+      placeholder: |
+        WoT digital twin ontology
+    validations:
+      required: false
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: |
+        Public links that show your WoT use, such as documentation, a repository, a blog post, a paper or a press release.
+      placeholder: |
+        https://
+    validations:
+      required: true
+
+  - type: input
+    id: meetups
+    attributes:
+      label: Related WoT CG meetups
+      description: If you presented at a [WoT CG meetup](https://github.com/w3c-cg/wot-cg/tree/main/Meetups), the meetup numbers.
+      placeholder: e.g. 6, 29
+    validations:
+      required: false
+
+  - type: textarea
+    id: logo
+    attributes:
+      label: Logo
+      description: Drag an image file here (SVG or PNG with a transparent background preferred), or paste a link to one. Only add a logo you are allowed to share.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      description: We check your sources before listing you. A listing shows that you use the Web of Things; it isn't a W3C certification of your products. You can ask to be removed at any time by opening an issue.
+      options:
+        - label: I am authorized to submit this on behalf of the named organization or project.
+          required: true
+        - label: The information above is accurate and public, and doesn't include anything confidential.
+          required: true
+        - label: The WoT Community Group may show the name, logo and information above on the WoT Adopters page to list this organization or project as a WoT adopter. Ownership of the name and logo stays with the organization or project.
+          required: true

@@ -1,38 +1,31 @@
-// Builds the adopters page from the files in data/ and handles user interaction.
-
 import { load as parseYaml } from './vendor/js-yaml.mjs';
 import { tileLabel, initials } from './labels.js';
 import { loadMeetup, meetupFolderUrl, formatMonth } from './meetups.js';
 
-// ---------- settings ----------
-
-// Section (data-group in index.html) -> data file.
-const FILE_OF_GROUP = {
-  companies: 'data/companies.yaml',
+// data-group in index.html -> data file
+const FILES = {
+  industry: 'data/industry.yaml',
   sdo: 'data/standard-development-organizations.yaml',
   oss: 'data/open-source.yaml',
+  research: 'data/research.yaml',
 };
 const BINDINGS_FILE = 'data/bindings.yaml';
-// Written by adopters-deploy.yml, so it doesn't exist locally.
+// Written on deploy (adopters-deploy.yml), missing when running locally.
 const LAST_UPDATED_FILE = 'data/last-updated.txt';
 
-// Popup subtitle: the adopter's type in companies.yaml, otherwise the section.
-const TYPE_LABELS = {
-  Company: 'Company',
-  Research: 'Research organization',
-};
 const GROUP_LABELS = {
+  industry: 'Company',
   sdo: 'Standard development organization',
   oss: 'Open-source project',
+  research: 'Research organization',
 };
 
 const isEmbedded = window.parent !== window;
-
-// ---------- small helpers ----------
-
 const byId = id => document.getElementById(id);
+const popup = byId('detail');
+const tooltip = byId('tip');
+let tooltipButton = null;
 
-/** Returns a copy of the first element in a <template>. */
 function fromTemplate(id) {
   return byId(id).content.firstElementChild.cloneNode(true);
 }
@@ -41,42 +34,33 @@ function sectionOf(group) {
   return document.querySelector(`.panel[data-group="${group}"]`);
 }
 
-// ---------- loading the data ----------
-
-/** Returns the list in a data file. */
 async function loadList(file) {
-  const response = await fetch(file);
-  if (!response.ok) throw new Error(`${file}: ${response.status}`);
-  return parseYaml(await response.text()) ?? [];
+  const res = await fetch(file);
+  if (!res.ok) throw new Error(`${file}: ${res.status}`);
+  return parseYaml(await res.text()) ?? [];
 }
 
-/** Shows the date of the last data change in the footer, e.g. "2026-11-07" -> "November 2026". */
-async function showLastUpdated() {
-  try {
-    const response = await fetch(LAST_UPDATED_FILE);
-    if (!response.ok) return;
-    const [year, month] = (await response.text()).trim().split('-').map(Number);
-    if (!year || !month) return;
-    byId('updated').textContent = new Date(year, month - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    byId('updated-note').hidden = false;
-  } catch {
-    // leave the note hidden
-  }
-}
-
-/** Returns the adopters of a section, sorted by tile label. */
 async function loadAdopters(group) {
-  const adopters = await loadList(FILE_OF_GROUP[group]);
+  const adopters = await loadList(FILES[group]);
   return adopters.sort((a, b) => tileLabel(a.name).localeCompare(tileLabel(b.name), undefined, { sensitivity: 'base' }));
 }
 
-// ---------- tiles ----------
+// "2026-11-07" -> "November 2026"
+async function showLastUpdated() {
+  try {
+    const res = await fetch(LAST_UPDATED_FILE);
+    if (!res.ok) return;
+    const [year, month] = (await res.text()).trim().split('-').map(Number);
+    if (!year || !month) return;
+    byId('updated').textContent = new Date(year, month - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    byId('updated-note').hidden = false;
+  } catch {}
+}
 
 function createTile(adopter, group) {
   const tile = fromTemplate('tile-template');
   const label = tileLabel(adopter.name);
-
-  tile.title = adopter.name;   // full name on hover
+  tile.title = adopter.name;
   tile.querySelector('.tile-logo').textContent = initials(label);
   tile.querySelector('.tile-name').textContent = label;
   tile.addEventListener('click', () => openPopup(adopter, group));
@@ -84,83 +68,77 @@ function createTile(adopter, group) {
 }
 
 function fillSection(group, adopters) {
-  sectionOf(group).querySelector('.grid').append(...adopters.map(adopter => createTile(adopter, group)));
+  sectionOf(group).querySelector('.grid').append(...adopters.map(a => createTile(a, group)));
 }
 
-/** Bindings are plain cards in file order, without a popup. */
 function fillBindings(bindings) {
-  const cards = bindings.map(binding => {
-    const card = document.createElement('div');
+  const cards = bindings.map(b => {
+    const card = document.createElement('a');
     card.className = 'binding';
-    card.textContent = binding.name;
+    card.href = b.link;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.textContent = b.name;
     return card;
   });
   sectionOf('bindings').querySelector('.grid').append(...cards);
 }
 
-/** Sets each section's count badge to its number of tiles. */
 function updateCounts() {
   for (const section of document.querySelectorAll('.panel')) {
     section.querySelector('.count').textContent = section.querySelector('.grid').children.length;
   }
 }
 
-// ---------- collapsing sections ----------
-// The animation is in styles.css; this only toggles the is-collapsed class.
+// Collapsing sections. The animation is done in CSS.
 
 function toggleSection(section) {
   const collapsed = section.classList.toggle('is-collapsed');
   section.querySelector('.chev').setAttribute('aria-expanded', String(!collapsed));
-  section.querySelector('.panel-body').inert = collapsed;   // removes hidden tiles from the tab order
+  // inert keeps the hidden tiles out of the tab order
+  section.querySelector('.panel-body').inert = collapsed;
   hideTooltip();
   updatePairLayout();
 }
 
-// In the side-by-side pair, a collapsed section next to an open one is shown as a vertical strip.
+// In the side-by-side pair, a collapsed section next to an open one becomes a vertical strip.
 function updatePairLayout() {
   const pair = [...document.querySelectorAll('.pair > .panel')];
-  const anyOpen = pair.some(section => !section.classList.contains('is-collapsed'));
-  for (const section of pair) {
-    section.classList.toggle('is-strip', anyOpen && section.classList.contains('is-collapsed'));
-  }
+  const anyOpen = pair.some(s => !s.classList.contains('is-collapsed'));
+  for (const s of pair) s.classList.toggle('is-strip', anyOpen && s.classList.contains('is-collapsed'));
 }
 
 function setUpSectionHeaders() {
   for (const header of document.querySelectorAll('.panel-head')) {
-    header.addEventListener('click', event => {
-      // Clicks on the info button or the header link don't toggle the section.
-      if (event.target.closest('.info, a')) return;
+    header.addEventListener('click', e => {
+      if (e.target.closest('.info, a')) return;
       toggleSection(header.closest('.panel'));
     });
   }
 }
 
-// ---------- tooltips ----------
-// All info buttons share one tooltip element.
-
-const tooltip = byId('tip');
-let activeInfoButton = null;
+// Tooltip for the "?" buttons. All buttons share one element.
 
 function showTooltip(button) {
-  activeInfoButton = button;
+  tooltipButton = button;
   tooltip.textContent = button.dataset.tip;
   tooltip.hidden = false;
 
-  // Center below the button, keep within the viewport, and move above if there is no room below.
+  // Below the button and inside the viewport, or above it if there is no room below.
   const gap = 8;
-  const buttonBox = button.getBoundingClientRect();
+  const box = button.getBoundingClientRect();
   const maxLeft = window.innerWidth - tooltip.offsetWidth - gap;
-  const left = Math.min(Math.max(gap, buttonBox.left + buttonBox.width / 2 - tooltip.offsetWidth / 2), maxLeft);
-  let top = buttonBox.bottom + gap;
+  const left = Math.min(Math.max(gap, box.left + box.width / 2 - tooltip.offsetWidth / 2), maxLeft);
+  let top = box.bottom + gap;
   if (top + tooltip.offsetHeight > window.innerHeight - gap) {
-    top = Math.max(gap, buttonBox.top - tooltip.offsetHeight - gap);
+    top = Math.max(gap, box.top - tooltip.offsetHeight - gap);
   }
   tooltip.style.left = `${left}px`;
   tooltip.style.top = `${top}px`;
 }
 
 function hideTooltip() {
-  activeInfoButton = null;
+  tooltipButton = null;
   tooltip.hidden = true;
 }
 
@@ -171,35 +149,30 @@ function setUpTooltips() {
     button.addEventListener('mouseleave', hideTooltip);
     button.addEventListener('focus', () => showTooltip(button));
     button.addEventListener('blur', hideTooltip);
-    // Keyboard activation (detail 0) toggles the tooltip; pointer clicks always show it.
-    button.addEventListener('click', event => {
-      const fromKeyboard = event.detail === 0;
-      if (fromKeyboard && activeInfoButton === button) hideTooltip();
+    // Enter/Space (detail is 0) toggles it, a mouse click always shows it.
+    button.addEventListener('click', e => {
+      if (e.detail === 0 && tooltipButton === button) hideTooltip();
       else showTooltip(button);
     });
   }
-
-  // Hide on Escape, outside clicks, scroll and resize.
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') hideTooltip(); });
-  document.addEventListener('click', event => { if (!event.target.closest('.info')) hideTooltip(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') hideTooltip(); });
+  document.addEventListener('click', e => { if (!e.target.closest('.info')) hideTooltip(); });
   window.addEventListener('scroll', hideTooltip, { passive: true });
   window.addEventListener('resize', hideTooltip);
 }
 
-// ---------- popup ----------
+// Popup
 
-const popup = byId('detail');
-
-function createProjectCard(project) {
-  const card = fromTemplate('project-template');
-  card.querySelector('.project-title').textContent = project.title;
-  const description = card.querySelector('.project-desc');
-  description.textContent = project.description ?? '';
-  description.hidden = !project.description;
-  return card;
+function createProject(project) {
+  const item = fromTemplate('project-template');
+  item.querySelector('.project-title').textContent = project.title;
+  const desc = item.querySelector('.project-desc');
+  desc.textContent = project.description ?? '';
+  desc.hidden = !project.description;
+  return item;
 }
 
-function createSourceLink(source) {
+function createSource(source) {
   const item = fromTemplate('source-template');
   const link = item.querySelector('a');
   link.href = source.link;
@@ -207,54 +180,51 @@ function createSourceLink(source) {
   return item;
 }
 
-/**
- * Creates a meetup row that links to the meetup folder. The title, date and
- * video link are added once the meetup's metadata.yaml has loaded.
- */
-function createMeetupRow(number) {
-  const row = fromTemplate('meetup-template');
-  const link = row.querySelector('.meetup');
+// Links to the meetup folder until metadata.yaml has loaded, then to the video.
+function createMeetup(number) {
+  const item = fromTemplate('meetup-template');
+  const link = item.querySelector('.meetup');
   link.href = meetupFolderUrl(number);
-  row.querySelector('.meetup-number').textContent = `Meetup ${number}`;
+  item.querySelector('.meetup-number').textContent = `Meetup ${number}`;
 
   loadMeetup(number).then(meetup => {
     if (!meetup) return;
-    if (meetup.title) row.querySelector('.meetup-name').textContent = ` · ${meetup.title}`;
-    row.querySelector('.meetup-date').textContent = formatMonth(meetup.date);
+    if (meetup.title) item.querySelector('.meetup-name').textContent = ` · ${meetup.title}`;
+    item.querySelector('.meetup-date').textContent = formatMonth(meetup.date);
     if (meetup.url) link.href = meetup.url;
   });
-  return row;
+  return item;
 }
 
-/** Fills a popup list and hides its section when there are no items. */
-function fillPopupList(sectionId, items) {
-  const section = byId(sectionId);
+// Empty lists hide their section.
+function fillPopupList(id, items) {
+  const section = byId(id);
   section.querySelector('ul').replaceChildren(...items);
   section.hidden = items.length === 0;
 }
 
 function openPopup(adopter, group) {
-  popup.dataset.group = group;   // sets the accent color
+  popup.dataset.group = group;
   byId('detail-logo').textContent = initials(tileLabel(adopter.name));
   byId('detail-name').textContent = adopter.name;
-  byId('detail-type').textContent = TYPE_LABELS[adopter.type] ?? GROUP_LABELS[group];
+  byId('detail-type').textContent = GROUP_LABELS[group];
 
-  fillPopupList('detail-projects', (adopter.projects ?? []).map(createProjectCard));
-  fillPopupList('detail-meetups', (adopter.meetups ?? []).map(createMeetupRow));
-  fillPopupList('detail-sources', (adopter.sources ?? []).map(createSourceLink));
+  fillPopupList('detail-products', (adopter.products ?? []).map(createProject));
+  fillPopupList('detail-contributions', (adopter.contributions ?? []).map(createProject));
+  fillPopupList('detail-projects', (adopter.projects ?? []).map(createProject));
+  fillPopupList('detail-meetups', (adopter.meetups ?? []).map(createMeetup));
+  fillPopupList('detail-sources', (adopter.sources ?? []).map(createSource));
 
   hideTooltip();
-  popup.showModal();   // centered, with backdrop and Escape to close
+  popup.showModal();
   byId('detail-body').scrollTop = 0;
-  if (isEmbedded) placePopupOnScreen();
+  if (isEmbedded) placePopup();
 }
 
-// ---------- popup position when embedded ----------
-// The iframe is as tall as the page content, so a centered popup can end up outside the
-// visible area. IntersectionObserver returns the part of the page that is visible in the
-// top-level viewport (also for cross-origin iframes); the popup is placed within it.
-
-function visiblePartOfPage() {
+// When embedded, the iframe is as tall as the page, so a centered popup can be off screen.
+// IntersectionObserver gives the part of the page that is visible (also cross-origin),
+// and the popup is placed in there.
+function visibleRect() {
   return new Promise(resolve => {
     const observer = new IntersectionObserver(([entry]) => {
       observer.disconnect();
@@ -264,9 +234,9 @@ function visiblePartOfPage() {
   });
 }
 
-async function placePopupOnScreen() {
+async function placePopup() {
   const gap = 16;
-  const visible = await visiblePartOfPage();
+  const visible = await visibleRect();
   popup.style.maxHeight = `${Math.min(760, Math.max(240, visible.height - 2 * gap))}px`;
   const top = Math.max(visible.top + gap, visible.top + (visible.height - popup.offsetHeight) / 2);
   popup.style.margin = `${top}px auto auto`;
@@ -274,45 +244,35 @@ async function placePopupOnScreen() {
 
 function setUpPopup() {
   byId('detail-close').addEventListener('click', () => popup.close());
-  // Backdrop clicks target the <dialog> element itself.
-  popup.addEventListener('click', event => { if (event.target === popup) popup.close(); });
+  // A click on the backdrop has the dialog itself as target.
+  popup.addEventListener('click', e => { if (e.target === popup) popup.close(); });
 }
 
-// ---------- iframe support ----------
-// When embedded, the content height is posted to the parent window so it can resize
-// the iframe (see the README).
-
-function reportHeightToParent() {
-  const content = document.querySelector('.wrap');
-  // Measure .wrap, not the document: the document is never shorter than the iframe.
-  const height = Math.ceil(content.getBoundingClientRect().height);
+// Lets the parent page resize the iframe, see the README.
+// .wrap is measured because the document is never shorter than the iframe.
+function postHeight() {
+  const height = Math.ceil(document.querySelector('.wrap').getBoundingClientRect().height);
   window.parent.postMessage({ type: 'wot-adopters:height', height }, '*');
 }
-
-// ---------- start ----------
 
 async function start() {
   showLastUpdated();
   if (isEmbedded) document.documentElement.classList.add('is-embedded');
 
-  const groups = Object.keys(FILE_OF_GROUP);
-  let adoptersByGroup, bindings;
+  const groups = Object.keys(FILES);
+  let bindings, adopters;
   try {
-    [bindings, ...adoptersByGroup] = await Promise.all([loadList(BINDINGS_FILE), ...groups.map(loadAdopters)]);
+    [bindings, ...adopters] = await Promise.all([loadList(BINDINGS_FILE), ...groups.map(loadAdopters)]);
   } catch {
     byId('load-msg').textContent =
       'Could not load the adopter data. If you opened index.html directly, serve the folder with a local web server instead.';
     return;
   }
 
-  let total = 0;
-  groups.forEach((group, i) => {
-    fillSection(group, adoptersByGroup[i]);
-    total += adoptersByGroup[i].length;
-  });
+  groups.forEach((group, i) => fillSection(group, adopters[i]));
   fillBindings(bindings);
   updateCounts();
-  byId('total').textContent = total;
+  byId('total').textContent = adopters.flat().length;
 
   setUpSectionHeaders();
   setUpTooltips();
@@ -321,9 +281,7 @@ async function start() {
   byId('load-msg').hidden = true;
   byId('sections').hidden = false;
 
-  if (isEmbedded) {
-    new ResizeObserver(reportHeightToParent).observe(document.querySelector('.wrap'));
-  }
+  if (isEmbedded) new ResizeObserver(postHeight).observe(document.querySelector('.wrap'));
 }
 
 start();
